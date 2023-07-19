@@ -1,0 +1,2 @@
+Installazione nestjs: npm i -g @nestjs/cli
+Creazione progetto: nest new <project_name>
