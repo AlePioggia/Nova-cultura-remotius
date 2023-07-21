@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsString,
 } from '@nestjs/class-validator';
+import { IsStrongPassword } from 'class-validator';
 
 export interface IUserDto {
   email: string;
@@ -11,6 +12,7 @@ export interface IUserDto {
   lastName: string;
   age: number;
   address: string;
+  password: string;
 }
 
 export class UserDto implements IUserDto {
@@ -33,4 +35,8 @@ export class UserDto implements IUserDto {
   @IsString()
   @IsNotEmpty()
   address: string;
+
+  @IsStrongPassword()
+  @IsNotEmpty()
+  password: string;
 }
