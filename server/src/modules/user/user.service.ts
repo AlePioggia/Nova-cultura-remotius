@@ -4,10 +4,12 @@ import { UsersRepository } from 'src/repositories/users.repository';
 import { User } from 'src/schemas/user.schema';
 import { v4 as uuidv4 } from 'uuid';
 import * as argon from 'argon2';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly usersRepository: UsersRepository) { }
+    constructor(private readonly usersRepository: UsersRepository, private configService: ConfigService, private jwtService: JwtService) { }
 
     async getUserById(userId: string): Promise<User> {
         return this.usersRepository.findOne({ userId });
@@ -24,10 +26,13 @@ export class UserService {
         age: number,
         address: string,
         password: string
-    ): Promise<User> {
+    ) {
         const hash = await argon.hash(password);
         try {
-            const user = this.usersRepository.create({
+            const check = (await this.usersRepository.find({})).find(x => x.mail === mail)
+            if (check)
+                return
+            const user = await this.usersRepository.create({
                 id: uuidv4(),
                 mail: mail,
                 firstName: firstName,
@@ -36,7 +41,7 @@ export class UserService {
                 address: address,
                 hash: hash
             });
-            return user;
+            return await this.signtoken(user.id, user.mail);
         } catch (error) {
             throw error
         }
@@ -51,7 +56,25 @@ export class UserService {
         if (!pwMatches) {
             throw new ForbiddenException('Credentials incorrect')
         }
-        return "Utente autenticato";
+        return this.signtoken(user.id, user.mail);
+    }
+
+    async signtoken(userId: string, mail: string): Promise<{ access_token: string }> {
+        const payload = {
+            sub: userId,
+            mail
+        }
+
+        const secret = await this.configService.get('JWT_SECRET');
+
+        const token = await this.jwtService.signAsync(payload, {
+            expiresIn: '15m',
+            secret: secret
+        });
+
+        return {
+            access_token: token
+        };
     }
 
     // async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
