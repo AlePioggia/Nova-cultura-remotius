@@ -1,16 +1,22 @@
-<dx-form #form [formData]="login" labelLocation="top">
+<dx-form #form [formData]="user" labelLocation="top">
   <dxi-item dataField="username" [isRequired]="true">
     <dx-text-box placeholder="Username"></dx-text-box>
   </dxi-item>
   <dxi-item dataField="password" [isRequired]="true">
     <dx-text-box mode="password" placeholder="Password"></dx-text-box>
   </dxi-item>
+  <dxi-item dataField="confirmPassword" [isRequired]="true">
+    <dx-text-box mode="password" placeholder="Confirm Password"></dx-text-box>
+  </dxi-item>
   <dxi-item>
     <dx-button
-      text="Log in"
+      text="Register"
       type="success"
       [useSubmitBehavior]="true"
       (onClick)="onFormSubmit(form)"
     ></dx-button>
+  </dxi-item>
+  <dxi-item>
+    <a routerLink="../">Already have an account? Log in</a>
   </dxi-item>
 </dx-form>

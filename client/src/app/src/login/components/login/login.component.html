@@ -1,0 +1,23 @@
+<dx-form #form [(formData)]="authenticationRequest">
+  <dxi-item dataField="email" [isRequired]="true">
+    <dx-text-box
+      placeholder="Email"
+      (onValueChanged)="setEmail($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item dataField="password" [isRequired]="true">
+    <dx-text-box
+      mode="password"
+      placeholder="Password"
+      (onValueChanged)="setPassword($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item>
+    <dx-button
+      text="Log in"
+      type="success"
+      [useSubmitBehavior]="true"
+      (onClick)="onFormSubmit($event)"
+    ></dx-button>
+  </dxi-item>
+</dx-form>
