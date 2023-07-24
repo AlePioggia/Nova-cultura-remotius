@@ -1,9 +1,40 @@
 <dx-form #form [formData]="user" labelLocation="top">
-  <dxi-item dataField="username" [isRequired]="true">
-    <dx-text-box placeholder="Username"></dx-text-box>
+  <dxi-item dataField="email" [isRequired]="true">
+    <dx-text-box
+      placeholder="Email"
+      (onValueChanged)="setEmail($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item dataField="firstName" [isRequired]="true">
+    <dx-text-box
+      placeholder="Nome"
+      (onValueChanged)="setFirstName($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item dataField="lastName" [isRequired]="true">
+    <dx-text-box
+      placeholder="Cognome"
+      (onValueChanged)="setLastName($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item dataField="age" [isRequired]="true">
+    <dx-text-box
+      placeholder="Età"
+      (onValueChanged)="setAge($event)"
+    ></dx-text-box>
+  </dxi-item>
+  <dxi-item dataField="address" [isRequired]="true">
+    <dx-text-box
+      placeholder="Indirizzo"
+      (onValueChanged)="setAddress($event)"
+    ></dx-text-box>
   </dxi-item>
   <dxi-item dataField="password" [isRequired]="true">
-    <dx-text-box mode="password" placeholder="Password"></dx-text-box>
+    <dx-text-box
+      mode="password"
+      placeholder="Password"
+      (onValueChanged)="setPassword($event)"
+    ></dx-text-box>
   </dxi-item>
   <dxi-item dataField="confirmPassword" [isRequired]="true">
     <dx-text-box mode="password" placeholder="Confirm Password"></dx-text-box>
