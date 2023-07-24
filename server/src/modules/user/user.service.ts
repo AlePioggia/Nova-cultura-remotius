@@ -12,7 +12,7 @@ export class UserService {
     constructor(private readonly usersRepository: UsersRepository, private configService: ConfigService, private jwtService: JwtService) { }
 
     async getUserById(userId: string): Promise<User> {
-        return this.usersRepository.findOne({ userId });
+        return await this.usersRepository.findOne({ id: userId });
     }
 
     async getUsers(): Promise<User[]> {
