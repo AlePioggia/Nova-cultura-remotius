@@ -9,7 +9,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class UserController {
     constructor(private readonly usersService: UserService) { }
 
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Get(':id')
     async getOne(@Param('id') id: string): Promise<User> {
         return this.usersService.getUserById(id);
