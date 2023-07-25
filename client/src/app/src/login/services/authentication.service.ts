@@ -2,7 +2,7 @@ import { ICreateUserRequest, CreateUserRequest } from './../../../interfaces/use
 import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/app/constants';
 import { IAuthenticationRequest } from 'src/app/interfaces/user.interface';
-import { HelperService } from 'src/app/services/service-helper/service-helper.service';
+import { HelperService } from 'src/app/shared/services/service-helper.service';
 
 @Injectable({
   providedIn: 'root'

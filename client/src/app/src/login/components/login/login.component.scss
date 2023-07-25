@@ -1,0 +1,54 @@
+$primary-color: #ffffff;
+$secondary-color: #dddddd;
+$text-color: #333333;
+$success-color: #4caf50;
+
+body {
+  background-color: $primary-color;
+  color: $text-color;
+  font-family: "Arial", sans-serif;
+}
+
+dx-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+
+  dxi-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    dx-text-box {
+      background-color: $secondary-color;
+      border-radius: 4px;
+      width: 300px;
+    }
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+    }
+
+    dx-button {
+      background-color: $success-color;
+      border: none;
+      color: $primary-color;
+      cursor: pointer;
+      width: 300px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($success-color, 10%);
+      }
+    }
+  }
+}

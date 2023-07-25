@@ -1,0 +1,40 @@
+// :host {
+//   display: block;
+//   border-top: 1px solid rgba(0, 0, 0, 0.1);
+//   padding-top: 20px;
+//   padding-bottom: 24px;
+// }
+$footer-background: #f8f9fa;
+$footer-color: #333333;
+$footer-link-color: #007bff;
+
+footer {
+  background-color: $footer-background;
+  color: $footer-color;
+  font-family: "Arial", sans-serif;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: $footer-link-color;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: darken($footer-link-color, 15%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+
+    > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}

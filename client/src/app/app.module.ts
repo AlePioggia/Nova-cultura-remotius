@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginModule } from './src/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { SideNavOuterToolbarModule } from './layouts';
+import { ScreenService } from './shared/services/screen.service';
+import { FooterModule } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,11 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserModule,
     LoginModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SideNavOuterToolbarModule,
+    FooterModule
   ],
-  providers: [],
+  providers: [ScreenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
