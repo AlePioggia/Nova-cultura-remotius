@@ -1,4 +1,5 @@
-@import "../../../../../src/dx-styles.scss";
+@import "../../../../themes/generated/variables.base.scss";
+@import "../../../../dx-styles.scss";
 
 :host {
   flex: 0 0 auto;
@@ -10,7 +11,7 @@
     .dx-toolbar-item.menu-button
     > .dx-toolbar-item-content
     .dx-icon {
-    color: "blue";
+    color: $base-accent;
   }
 }
 
