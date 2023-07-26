@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './components/login/login.component';
-import { DxButtonModule, DxFormModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxButtonModule, DxFormModule, DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 
@@ -17,7 +17,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     LoginRoutingModule,
     DxFormModule,
     DxButtonModule,
-    DxTextBoxModule
+    DxTextBoxModule,
+    DxSelectBoxModule
   ],
   exports: [
     LoginComponent

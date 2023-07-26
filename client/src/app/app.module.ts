@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavOuterToolbarModule } from './layouts';
 import { ScreenService } from './shared/services/screen.service';
 import { FooterModule } from './shared/components/footer/footer.component';
+import { DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [

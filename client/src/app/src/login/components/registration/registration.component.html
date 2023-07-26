@@ -1,4 +1,12 @@
 <dx-form #form [formData]="user" labelLocation="top">
+  <dxi-item dataField="isTeacher" [isRequired]="true">
+    <dx-select-box
+      [dataSource]="roles"
+      valueExpr="id"
+      displayExpr="role"
+      (onValueChanged)="setRole($event)"
+    ></dx-select-box>
+  </dxi-item>
   <dxi-item dataField="email" [isRequired]="true">
     <dx-text-box
       placeholder="Email"
@@ -35,9 +43,6 @@
       placeholder="Password"
       (onValueChanged)="setPassword($event)"
     ></dx-text-box>
-  </dxi-item>
-  <dxi-item dataField="confirmPassword" [isRequired]="true">
-    <dx-text-box mode="password" placeholder="Confirm Password"></dx-text-box>
   </dxi-item>
   <dxi-item>
     <dx-button

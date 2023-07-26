@@ -28,7 +28,8 @@ export class UserController {
             dto.email,
             dto.age,
             dto.address,
-            dto.password
+            dto.password,
+            dto.roleId
         );
     }
 

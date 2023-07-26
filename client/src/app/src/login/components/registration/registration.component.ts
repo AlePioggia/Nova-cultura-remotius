@@ -1,4 +1,4 @@
-import { AuthenticationService } from './../../services/authentication.service';
+import { AuthenticationService, Role } from './../../services/authentication.service';
 import { Component } from '@angular/core';
 import { CreateUserRequest } from 'src/app/interfaces/user.interface';
 
@@ -11,7 +11,9 @@ export class RegistrationComponent {
 
   user = {};
 
-  createUserRequest: CreateUserRequest = new CreateUserRequest("", "", "", 0, "", "");
+  roles: Role[] = this.authenticationService.getRoles();
+
+  createUserRequest: CreateUserRequest = new CreateUserRequest("", "", "", 0, "", "", 0);
 
   constructor(private authenticationService: AuthenticationService) {
   }
@@ -42,8 +44,11 @@ export class RegistrationComponent {
     this.createUserRequest.address = e.value;
   }
 
+  setRole(e: any) {
+    this.createUserRequest.roleId = e.value;
+  }
+
   setPassword(e: any) {
     this.createUserRequest.password = e.value;
   }
-
 }

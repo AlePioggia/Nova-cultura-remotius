@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, NgModule, OnInit, Output } from "@angul
 import { Router } from "@angular/router";
 import { DxButtonModule, DxToolbarModule } from "devextreme-angular";
 import { UserPanelModule } from "../user-panel/user-panel.component";
+import { AuthenticationService } from "src/app/src/login/services/authentication.service";
 
 @Component({
   selector: 'app-header',
@@ -31,10 +32,13 @@ export class HeaderComponent implements OnInit {
   },
   {
     text: 'Logout',
-    icon: 'runner'
+    icon: 'runner',
+    onClick: () => {
+      this.authenticationService.logOut();
+    }
   }];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
   }

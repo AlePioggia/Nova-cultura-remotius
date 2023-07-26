@@ -13,6 +13,7 @@ export interface IUserDto {
   age: number;
   address: string;
   password: string;
+  roleId: number; //0-studente, 1-insegnante
 }
 
 export class UserDto implements IUserDto {
@@ -39,4 +40,7 @@ export class UserDto implements IUserDto {
   @IsStrongPassword()
   @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  roleId: number;
 }
