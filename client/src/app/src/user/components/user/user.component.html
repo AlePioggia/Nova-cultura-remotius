@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="my-4">Profilo Insegnante</h1>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-center mb-4">
+        <div class="profile-image-border">
+          <dx-gallery
+            [dataSource]="[teacher.imageUrl]"
+            [height]="200"
+            [width]="200"
+            [loop]="false"
+            [showNavButtons]="false"
+          ></dx-gallery>
+        </div>
+      </div>
+      <h3 class="card-title">{{ teacher.name }}</h3>
+      <p class="card-text">{{ teacher.bio }}</p>
+      <dx-form [formData]="teacher" colCount="2">
+        <dxi-item dataField="email" caption="Email"></dxi-item>
+        <dxi-item dataField="subject" caption="Materia"></dxi-item>
+      </dx-form>
+    </div>
+  </div>
+</div>

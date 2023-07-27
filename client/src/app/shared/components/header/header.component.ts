@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     text: 'Profile',
     icon: 'user',
     onClick: () => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/bio']);
     }
   },
   {
@@ -36,7 +36,9 @@ export class HeaderComponent implements OnInit {
     onClick: () => {
       this.authenticationService.logOut();
     }
-  }];
+  },
+
+  ];
 
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
