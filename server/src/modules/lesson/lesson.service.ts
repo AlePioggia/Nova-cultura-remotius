@@ -15,8 +15,6 @@ export class LessonService {
     }
 
     async createLesson(
-        teacherMail: string,
-        studentMail: string,
         startTime: Date,
         endTime: Date,
         subject: string,
@@ -25,8 +23,8 @@ export class LessonService {
         try {
             await this.lessonsRepository.create({
                 id: uuidv4(),
-                teacherMail: teacherMail,
-                studentMail: studentMail,
+                teacherMail: 'alexpioggia@gmail.com',
+                studentMail: '',
                 startTime: startTime,
                 endTime: endTime,
                 subject: subject,

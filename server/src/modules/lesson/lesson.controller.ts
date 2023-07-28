@@ -21,8 +21,6 @@ export class LessonController {
     @Post('create')
     async createOne(@Body() dto: LessonDto) {
         return this.lessonService.createLesson(
-            dto.teacherMail,
-            dto.studentMail,
             dto.startTime,
             dto.endTime,
             dto.subject,
