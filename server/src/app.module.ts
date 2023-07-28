@@ -1,3 +1,4 @@
+import { LessonModule } from './modules/lesson/lesson.module';
 import { PassportModule } from '@nestjs/passport';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/auth/auth.module';
@@ -7,11 +8,12 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    LessonModule,
     AuthModule,
     UserModule,
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/nova-cultura-remotius'),
     ConfigModule.forRoot(),
-    PassportModule
+    PassportModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
