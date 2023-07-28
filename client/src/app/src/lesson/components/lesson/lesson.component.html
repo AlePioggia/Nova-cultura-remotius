@@ -1,17 +1,17 @@
 <dx-form id="form" [formData]="lesson">
-  <dxi-item dataField="name" caption="Nome Lezione"></dxi-item>
-  <dxi-item dataField="start" caption="Data Inizio" editorType="dxDateBox">
+  <dxi-item dataField="startTime" caption="Data Inizio" editorType="dxDateBox">
     <dxi-validation-rule
       type="required"
       message="Data Inizio è richiesta"
     ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="end" caption="Data Fine" editorType="dxDateBox">
+  <dxi-item dataField="endTime" caption="Data Fine" editorType="dxDateBox">
     <dxi-validation-rule
       type="required"
       message="Data Fine è richiesta"
     ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="description" caption="Descrizione"></dxi-item>
+  <dxi-item dataField="subject" caption="Materia"></dxi-item>
+  <dxi-item dataField="notes" caption="Note"></dxi-item>
 </dx-form>
 <dx-button class="btn btn-primary" (click)="submitForm()">Submit</dx-button>

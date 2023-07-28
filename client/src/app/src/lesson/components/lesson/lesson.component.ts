@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import {
+  ILessonRequest,
+  LessonRequest,
+} from 'src/app/interfaces/lesson.interface';
+import { LessonService } from '../../services/lesson.service';
 
 @Component({
   selector: 'app-lesson',
@@ -6,15 +11,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./lesson.component.css'],
 })
 export class LessonComponent {
-  lesson: any = {
-    name: '',
-    start: '',
-    end: '',
-    description: '',
-  };
+  lesson: ILessonRequest = new LessonRequest();
+
+  constructor(private lessonService: LessonService) {}
 
   submitForm() {
-    // Aggiungi qui la logica per inviare i dati del modulo
-    console.log(this.lesson);
+    this.lessonService.createLesson(this.lesson);
   }
 }
