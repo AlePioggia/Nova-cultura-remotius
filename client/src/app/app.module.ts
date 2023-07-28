@@ -8,21 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavOuterToolbarModule } from './layouts';
 import { ScreenService } from './shared/services/screen.service';
 import { FooterModule } from './shared/components/footer/footer.component';
-import { DxSelectBoxModule } from 'devextreme-angular';
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     LoginModule,
     AppRoutingModule,
     HttpClientModule,
     SideNavOuterToolbarModule,
-    FooterModule
+    FooterModule,
   ],
   providers: [ScreenService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

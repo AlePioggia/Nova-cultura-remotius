@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
   teacher = {
@@ -11,11 +12,14 @@ export class UserComponent {
     bio: 'Sono un insegnante appassionato con 10 anni di esperienza',
     email: 'mario.rossi@gmail.com',
     subject: 'Matematica',
-    imageUrl: 'assets/idiot.jpg'
+    imageUrl: 'assets/idiot.jpg',
   };
 
-  constructor() { }
+  constructor(private routerService: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  addLesson() {
+    this.routerService.navigate(['../lesson']);
   }
 }

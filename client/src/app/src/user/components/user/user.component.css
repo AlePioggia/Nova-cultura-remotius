@@ -1,14 +1,16 @@
 .container {
   margin-top: 30px;
   margin-bottom: 450px;
-  margin-left: 40px;
-  margin-right: 40px;
 }
 
 .profile-image-border {
   width: 200px;
   height: 200px;
-  border: 5px solid #007bff; /* cambia colore come desideri */
+  border: 5px solid #000000; /* cambia colore come desideri */
   border-radius: 50%;
   overflow: hidden;
+}
+
+.dx-button {
+  margin: 20px;
 }

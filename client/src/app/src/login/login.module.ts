@@ -3,25 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './components/login/login.component';
-import { DxButtonModule, DxFormModule, DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxFormModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+} from 'devextreme-angular';
 import { RegistrationComponent } from './components/registration/registration.component';
 
-
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegistrationComponent
-  ],
+  declarations: [LoginComponent, RegistrationComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,
     DxFormModule,
     DxButtonModule,
     DxTextBoxModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
   ],
-  exports: [
-    LoginComponent
-  ]
+  exports: [LoginComponent, RegistrationComponent],
 })
-export class LoginModule { }
+export class LoginModule {}
