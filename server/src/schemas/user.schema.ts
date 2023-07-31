@@ -34,6 +34,9 @@ export class User {
 
     @Prop()
     roleId: number;
+
+    @Prop()
+    subjects: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -37,6 +37,7 @@ export class UserService {
         address: string,
         password: string,
         roleId: number,
+        subjects: string[],
     ) {
         const hash = await argon.hash(password);
         try {
@@ -53,6 +54,7 @@ export class UserService {
                 address: address,
                 hash: hash,
                 roleId: roleId,
+                subjects: subjects,
             });
             return await this.signtoken(user.id, user.mail);
         } catch (error) {

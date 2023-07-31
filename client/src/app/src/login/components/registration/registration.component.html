@@ -1,48 +1,115 @@
-<dx-form #form [formData]="user" labelLocation="top">
-  <dxi-item dataField="isTeacher" [isRequired]="true">
-    <dx-select-box
-      [dataSource]="roles"
-      valueExpr="id"
-      displayExpr="role"
-      (onValueChanged)="setRole($event)"
-    ></dx-select-box>
+<dx-form
+  #form
+  [formData]="createUserRequest"
+  labelLocation="top"
+  [showValidationSummary]="false"
+>
+  <dxi-item
+    dataField="roleId"
+    editorType="dxSelectBox"
+    [isRequired]="true"
+    [editorOptions]="{
+      dataSource: roles,
+      valueExpr: 'id',
+      displayExpr: 'role'
+    }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Role is required"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="email" [isRequired]="true">
-    <dx-text-box
-      placeholder="Email"
-      (onValueChanged)="setEmail($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="email"
+    editorType="dxTextBox"
+    [isRequired]="true"
+    [editorOptions]="{ placeholder: 'Email' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Email is required"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="email"
+      message="Email is invalid"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="firstName" [isRequired]="true">
-    <dx-text-box
-      placeholder="Nome"
-      (onValueChanged)="setFirstName($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="firstName"
+    editorType="dxTextBox"
+    [isRequired]="true"
+    [editorOptions]="{ placeholder: 'Nome' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="First name is required"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="lastName" [isRequired]="true">
-    <dx-text-box
-      placeholder="Cognome"
-      (onValueChanged)="setLastName($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="lastName"
+    editorType="dxTextBox"
+    [isRequired]="true"
+    [editorOptions]="{ placeholder: 'Cognome' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Last name is required"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="age" [isRequired]="true">
-    <dx-text-box
-      placeholder="Età"
-      (onValueChanged)="setAge($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="age"
+    editorType="dxNumberBox"
+    [isRequired]="true"
+    [editorOptions]="{ placeholder: 'Età' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Age is required"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="range"
+      [min]="18"
+      [max]="100"
+      message="Age must be between 18 and 100"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="address" [isRequired]="true">
-    <dx-text-box
-      placeholder="Indirizzo"
-      (onValueChanged)="setAddress($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="address"
+    editorType="dxTextBox"
+    [isRequired]="true"
+    [editorOptions]="{ placeholder: 'Indirizzo' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Address is required"
+    ></dxi-validation-rule>
   </dxi-item>
-  <dxi-item dataField="password" [isRequired]="true">
-    <dx-text-box
-      mode="password"
-      placeholder="Password"
-      (onValueChanged)="setPassword($event)"
-    ></dx-text-box>
+  <dxi-item
+    dataField="subjects"
+    editorType="dxTextBox"
+    [isRequired]="false"
+    [editorOptions]="{ placeholder: 'Subjects' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Subjects is required"
+    ></dxi-validation-rule>
+  </dxi-item>
+  <dxi-item
+    dataField="password"
+    editorType="dxTextBox"
+    [isRequired]="true"
+    [editorOptions]="{ mode: 'password', placeholder: 'Password' }"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Password is required"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="8"
+      message="Password must be at least 8 characters long"
+    ></dxi-validation-rule>
   </dxi-item>
   <dxi-item>
     <dx-button
@@ -52,7 +119,7 @@
       (onClick)="onFormSubmit(form)"
     ></dx-button>
   </dxi-item>
-  <dxi-item>
+  <dxi-item template="link">
     <a routerLink="../">Already have an account? Log in</a>
   </dxi-item>
 </dx-form>

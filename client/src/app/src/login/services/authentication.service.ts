@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   ICreateUserRequest,
   CreateUserRequest,
@@ -36,7 +36,13 @@ export class AuthenticationService {
   }
 
   async getUserById(id: string) {
-    return this.http.get(`${this.baseUrl}single/${id}`).toPromise();
+    const headers = new HttpHeaders({
+      Authorization: sessionStorage.getItem('access_token'),
+    });
+
+    return this.http
+      .get(`${this.baseUrl}single/${id}`, { headers: headers })
+      .toPromise();
   }
 
   //metodo statico

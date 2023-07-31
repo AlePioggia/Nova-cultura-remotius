@@ -13,11 +13,11 @@
           ></dx-gallery>
         </div>
       </div>
-      <h3 class="card-title">{{ user.firstName + " " + user.lastName }}</h3>
+      <h3 class="card-title">{{ user?.firstName }} {{ user?.lastName }}</h3>
       <p class="card-text">{{ teacher.bio }}</p>
       <dx-form [formData]="user" colCount="2">
         <dxi-item dataField="mail" caption="Email"></dxi-item>
-        <dxi-item dataField="subject" caption="Materia"></dxi-item>
+        <dxi-item dataField="subjects" caption="Materie"></dxi-item>
       </dx-form>
       <dx-button
         class="btn btn-primary btn-sm"

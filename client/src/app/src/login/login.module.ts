@@ -6,8 +6,10 @@ import { LoginComponent } from './components/login/login.component';
 import {
   DxButtonModule,
   DxFormModule,
+  DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import { RegistrationComponent } from './components/registration/registration.component';
 
@@ -20,6 +22,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     DxButtonModule,
     DxTextBoxModule,
     DxSelectBoxModule,
+    DxValidatorModule,
+    DxNumberBoxModule,
   ],
   exports: [LoginComponent, RegistrationComponent],
 })

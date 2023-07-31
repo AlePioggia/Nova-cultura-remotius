@@ -30,6 +30,7 @@ export class UserComponent {
   async ngOnInit(): Promise<void> {
     const result = await this.authenticationService.getAllUserInformations();
     this.user = result;
+    console.log(this.user);
   }
 
   addLesson() {

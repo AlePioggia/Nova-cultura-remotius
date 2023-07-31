@@ -1,54 +1,32 @@
-import { AuthenticationService, Role } from './../../services/authentication.service';
-import { Component } from '@angular/core';
-import { CreateUserRequest } from 'src/app/interfaces/user.interface';
+import {
+  AuthenticationService,
+  Role,
+} from './../../services/authentication.service';
+import { Component, ViewChild } from '@angular/core';
+import { DxFormComponent } from 'devextreme-angular';
+import {
+  CreateUserRequest,
+  ICreateUserRequest,
+} from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-
-  user = {};
+  @ViewChild(DxFormComponent, { static: false }) form: DxFormComponent;
 
   roles: Role[] = this.authenticationService.getRoles();
 
-  createUserRequest: CreateUserRequest = new CreateUserRequest("", "", "", 0, "", "", 0);
+  createUserRequest: ICreateUserRequest = new CreateUserRequest();
 
-  constructor(private authenticationService: AuthenticationService) {
-  }
+  constructor(private authenticationService: AuthenticationService) {}
 
   onFormSubmit = (e: any) => {
-    if (this.createUserRequest) {
+    if (this.form.instance.validate().isValid) {
+      console.log(this.createUserRequest);
       this.authenticationService.createUser(this.createUserRequest);
     }
-  }
-
-  setEmail(e: any) {
-    this.createUserRequest.email = e.value;
-  }
-
-  setFirstName(e: any) {
-    this.createUserRequest.firstName = e.value;
-  }
-
-  setLastName(e: any) {
-    this.createUserRequest.lastName = e.value;
-  }
-
-  setAge(e: any) {
-    this.createUserRequest.age = +e.value;
-  }
-
-  setAddress(e: any) {
-    this.createUserRequest.address = e.value;
-  }
-
-  setRole(e: any) {
-    this.createUserRequest.roleId = e.value;
-  }
-
-  setPassword(e: any) {
-    this.createUserRequest.password = e.value;
-  }
+  };
 }

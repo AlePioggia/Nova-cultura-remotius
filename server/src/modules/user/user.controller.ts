@@ -15,13 +15,15 @@ export class UserController {
         return await this.usersService.getUserById(id);
     }
 
+    // @UseGuards(AuthGuard('jwt'))
     @Get('email/:email')
     async getByEmail(@Param('email') email: string): Promise<User> {
         const res = await this.usersService.getUserByEmail(email);
-        console.log(res);
+
         return res;
     }
 
+    // @UseGuards(AuthGuard('jwt'))
     @Get()
     async getMany(): Promise<User[]> {
         return this.usersService.getUsers();
@@ -37,6 +39,7 @@ export class UserController {
             dto.address,
             dto.password,
             dto.roleId,
+            dto.subjects,
         );
     }
 
