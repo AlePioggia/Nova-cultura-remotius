@@ -7,12 +7,19 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('Users')
 export class UserController {
-    constructor(private readonly usersService: UserService) { }
+    constructor(private readonly usersService: UserService) {}
 
     // @UseGuards(AuthGuard('jwt'))
-    @Get(':id')
+    @Get('single/:id')
     async getOne(@Param('id') id: string): Promise<User> {
-        return this.usersService.getUserById(id);
+        return await this.usersService.getUserById(id);
+    }
+
+    @Get('email/:email')
+    async getByEmail(@Param('email') email: string): Promise<User> {
+        const res = await this.usersService.getUserByEmail(email);
+        console.log(res);
+        return res;
     }
 
     @Get()
@@ -22,20 +29,20 @@ export class UserController {
 
     @Post('create')
     async createOne(@Body() dto: UserDto) {
-        return this.usersService.createUser(
+        return await this.usersService.createUser(
             dto.firstName,
             dto.lastName,
             dto.email,
             dto.age,
             dto.address,
             dto.password,
-            dto.roleId
+            dto.roleId,
         );
     }
 
     @Post('sign-user')
     async signUserIn(@Body() dto: Auth) {
-        return this.usersService.signUserIn(dto);
+        return await this.usersService.signUserIn(dto);
     }
 
     // @Patch(':id')

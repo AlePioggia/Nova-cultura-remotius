@@ -9,10 +9,20 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly usersRepository: UsersRepository, private configService: ConfigService, private jwtService: JwtService) { }
+    constructor(
+        private readonly usersRepository: UsersRepository,
+        private configService: ConfigService,
+        private jwtService: JwtService,
+    ) {}
 
     async getUserById(userId: string): Promise<User> {
         return await this.usersRepository.findOne({ id: userId });
+    }
+
+    async getUserByEmail(mail: string) {
+        return (await this.usersRepository.find({})).find(
+            (x) => x.mail === mail,
+        );
     }
 
     async getUsers(): Promise<User[]> {
@@ -26,13 +36,14 @@ export class UserService {
         age: number,
         address: string,
         password: string,
-        roleId: number
+        roleId: number,
     ) {
         const hash = await argon.hash(password);
         try {
-            const check = (await this.usersRepository.find({})).find(x => x.mail === mail)
-            if (check)
-                return
+            const check = (await this.usersRepository.find({})).find(
+                (x) => x.mail === mail,
+            );
+            if (check) return;
             const user = await this.usersRepository.create({
                 id: uuidv4(),
                 mail: mail,
@@ -41,41 +52,44 @@ export class UserService {
                 age: age,
                 address: address,
                 hash: hash,
-                roleId: roleId
+                roleId: roleId,
             });
             return await this.signtoken(user.id, user.mail);
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 
     async signUserIn(dto: Auth) {
-        const user: User = await (await this.usersRepository.find({})).find(x => x.mail === dto.email)
-        if (!user) throw new ForbiddenException(
-            'Credential incorrect'
-        )
-        const pwMatches = await argon.verify(user.hash, dto.password)
+        const user: User = await (
+            await this.usersRepository.find({})
+        ).find((x) => x.mail === dto.email);
+        if (!user) throw new ForbiddenException('Credential incorrect');
+        const pwMatches = await argon.verify(user.hash, dto.password);
         if (!pwMatches) {
-            throw new ForbiddenException('Credentials incorrect')
+            throw new ForbiddenException('Credentials incorrect');
         }
         return this.signtoken(user.id, user.mail);
     }
 
-    async signtoken(userId: string, mail: string): Promise<{ access_token: string }> {
+    async signtoken(
+        userId: string,
+        mail: string,
+    ): Promise<{ access_token: string }> {
         const payload = {
             sub: userId,
-            mail
-        }
+            mail,
+        };
 
         const secret = await this.configService.get('JWT_SECRET');
 
         const token = await this.jwtService.signAsync(payload, {
             expiresIn: '15m',
-            secret: secret
+            secret: secret,
         });
 
         return {
-            access_token: token
+            access_token: token,
         };
     }
 

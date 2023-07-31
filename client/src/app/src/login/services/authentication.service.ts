@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   ICreateUserRequest,
   CreateUserRequest,
@@ -18,7 +19,7 @@ export type Role = {
 export class AuthenticationService {
   baseUrl: string = '';
 
-  constructor(private helperService: HelperService) {
+  constructor(private helperService: HelperService, private http: HttpClient) {
     this.baseUrl = BASE_URL + 'users/';
   }
 
@@ -32,6 +33,10 @@ export class AuthenticationService {
 
   createUser(signInRequest: ICreateUserRequest) {
     this.helperService.post(this.baseUrl + 'create', signInRequest);
+  }
+
+  async getUserById(id: string) {
+    return this.http.get(`${this.baseUrl}single/${id}`).toPromise();
   }
 
   //metodo statico
@@ -56,6 +61,16 @@ export class AuthenticationService {
 
   private getUser(token: string) {
     return JSON.parse(atob(token.split('.')[1])) as ICreateUserRequest;
+  }
+
+  async getAllUserInformations(): Promise<any> {
+    const token = sessionStorage.getItem('access_token');
+    const userId = JSON.parse(atob(token.split('.')[1])).sub ?? '';
+    return userId ? await this.getUserById(userId) : null;
+  }
+
+  async getUserByEmail(email: string) {
+    await this.helperService.get(this.baseUrl + `email/${email}`);
   }
 
   isUserLoggedIn(): boolean {

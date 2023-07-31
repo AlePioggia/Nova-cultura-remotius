@@ -1,5 +1,10 @@
+import { AuthenticationService } from './../../../login/services/authentication.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  CreateUserRequest,
+  ICreateUserRequest,
+} from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-user',
@@ -15,9 +20,17 @@ export class UserComponent {
     imageUrl: 'assets/idiot.jpg',
   };
 
-  constructor(private routerService: Router) {}
+  user: ICreateUserRequest;
 
-  ngOnInit(): void {}
+  constructor(
+    private routerService: Router,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    const result = await this.authenticationService.getAllUserInformations();
+    this.user = result;
+  }
 
   addLesson() {
     this.routerService.navigate(['../lesson']);
