@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { DxButtonModule, DxDrawerModule, DxFormModule, DxListModule, DxScrollViewComponent, DxScrollViewModule, DxToolbarModule } from 'devextreme-angular';
-
-
+import {
+  DxButtonModule,
+  DxDrawerModule,
+  DxFormModule,
+  DxGalleryModule,
+  DxListModule,
+  DxScrollViewComponent,
+  DxScrollViewModule,
+  DxToolbarModule,
+} from 'devextreme-angular';
+import { CardComponent } from './components/card/card.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [
-    HomepageComponent
-  ],
+  declarations: [HomepageComponent, CardComponent, SearchComponent],
   imports: [
     CommonModule,
     DxFormModule,
@@ -16,10 +23,9 @@ import { DxButtonModule, DxDrawerModule, DxFormModule, DxListModule, DxScrollVie
     DxButtonModule,
     DxDrawerModule,
     DxScrollViewModule,
-    DxListModule
+    DxListModule,
+    DxGalleryModule,
   ],
-  exports: [
-    HomepageComponent
-  ]
+  exports: [HomepageComponent, CardComponent, SearchComponent],
 })
-export class HomepageModule { }
+export class HomepageModule {}

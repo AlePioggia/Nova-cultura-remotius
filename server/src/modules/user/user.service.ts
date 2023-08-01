@@ -29,6 +29,12 @@ export class UserService {
         return this.usersRepository.find({});
     }
 
+    async getTeachers(): Promise<User[]> {
+        return (await this.usersRepository.find({})).filter(
+            (x) => x.roleId === 1,
+        );
+    }
+
     async createUser(
         firstName: string,
         lastName: string,

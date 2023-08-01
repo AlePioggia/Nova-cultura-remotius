@@ -29,8 +29,14 @@ export class UserController {
         return this.usersService.getUsers();
     }
 
+    @Get('teachers')
+    async getTeachers(): Promise<User[]> {
+        return this.usersService.getTeachers();
+    }
+
     @Post('create')
     async createOne(@Body() dto: UserDto) {
+        console.log(dto);
         return await this.usersService.createUser(
             dto.firstName,
             dto.lastName,

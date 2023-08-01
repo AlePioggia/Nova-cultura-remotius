@@ -31,6 +31,16 @@ export class AuthenticationService {
     sessionStorage.setItem('access_token', response['access_token']);
   }
 
+  async getTeachers(): Promise<any> {
+    const headers = new HttpHeaders({
+      Authorization: sessionStorage.getItem('access_token'),
+    });
+
+    return this.http
+      .get(`${this.baseUrl}teachers`, { headers: headers })
+      .toPromise();
+  }
+
   createUser(signInRequest: ICreateUserRequest) {
     this.helperService.post(this.baseUrl + 'create', signInRequest);
   }

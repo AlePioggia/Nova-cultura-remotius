@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavOuterToolbarModule } from './layouts';
 import { ScreenService } from './shared/services/screen.service';
 import { FooterModule } from './shared/components/footer/footer.component';
+import { HomepageModule } from './src/homepage/homepage.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,6 +18,7 @@ import { FooterModule } from './shared/components/footer/footer.component';
     HttpClientModule,
     SideNavOuterToolbarModule,
     FooterModule,
+    HomepageModule,
   ],
   providers: [ScreenService],
   bootstrap: [AppComponent],

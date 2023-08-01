@@ -1,14 +1,9 @@
-<header>
-  <dx-toolbar class="header-toolbar">
-    <!-- ... -->
-    <dxi-item
-      location="after"
-      widget="dxButton"
-      [options]="{
-        icon: 'search',
-      }"
-    >
-    </dxi-item>
-    <!-- ... -->
-  </dx-toolbar>
-</header>
+<!-- app.component.html -->
+<div class="container">
+  <app-search (query)="onSearch($event)"></app-search>
+  <div class="row">
+    <div class="col-lg-6" *ngFor="let item of filteredData">
+      <app-card [data]="[item]"></app-card>
+    </div>
+  </div>
+</div>

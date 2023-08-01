@@ -14,6 +14,7 @@ export interface IUserDto {
     address: string;
     password: string;
     roleId: number; //0-studente, 1-insegnante
+    subjects: string[];
 }
 
 export class UserDto implements IUserDto {
@@ -44,5 +45,6 @@ export class UserDto implements IUserDto {
     @IsNotEmpty()
     roleId: number;
 
+    @IsNotEmpty()
     subjects: string[];
 }
