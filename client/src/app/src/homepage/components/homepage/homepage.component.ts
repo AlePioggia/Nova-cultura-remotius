@@ -23,7 +23,6 @@ export class HomepageComponent implements OnInit {
   }
 
   onSearch(query: string) {
-    console.log(this.filteredData);
     this.filteredData = this.data.filter((item) =>
       (item.firstName + ' ' + item.lastName).includes(query)
     );

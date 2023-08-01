@@ -9,4 +9,12 @@ import { ICreateUserRequest } from 'src/app/interfaces/user.interface';
 export class CardComponent {
   @Input() data: ICreateUserRequest[];
   imageUrl: string = 'assets/idiot.jpg';
+
+  openChat() {
+    console.log('Functionality not yet implemented');
+  }
+
+  makeReservation() {
+    console.log('Functionality not yet implemented');
+  }
 }

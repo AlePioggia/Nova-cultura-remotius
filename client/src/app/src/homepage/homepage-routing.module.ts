@@ -4,7 +4,11 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { AuthorizationGuard } from 'src/app/authorization.guard';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent, canActivate: [AuthorizationGuard] },
+  {
+    path: '',
+    component: HomepageComponent,
+    canActivate: [AuthorizationGuard],
+  },
 ];
 
 @NgModule({

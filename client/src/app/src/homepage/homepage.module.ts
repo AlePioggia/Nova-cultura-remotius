@@ -13,6 +13,7 @@ import {
 } from 'devextreme-angular';
 import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
+import { HomepageRoutingModule } from './homepage-routing.module';
 
 @NgModule({
   declarations: [HomepageComponent, CardComponent, SearchComponent],
@@ -25,6 +26,7 @@ import { SearchComponent } from './components/search/search.component';
     DxScrollViewModule,
     DxListModule,
     DxGalleryModule,
+    HomepageRoutingModule,
   ],
   exports: [HomepageComponent, CardComponent, SearchComponent],
 })

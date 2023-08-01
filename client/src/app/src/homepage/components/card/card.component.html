@@ -17,12 +17,28 @@
       <h5>{{ itemData.subjects }}</h5>
       <p>
         <span class="font-weight-bold text-uppercase text-secondary">Email</span
-        ><br /><span>{{ itemData?.mail }}</span>
+        ><br /><span class="text-dark">{{ itemData?.mail }}</span>
       </p>
       <p>
         <span class="font-weight-bold text-uppercase text-secondary">Età</span
-        ><br /><span>{{ itemData?.age }}</span>
+        ><br /><span class="text-dark">{{ itemData?.age }}</span>
       </p>
+      <div class="d-flex justify-content-around mt-4">
+        <dx-button
+          text="Prenota"
+          type="default"
+          [width]="160"
+          [stylingMode]="'contained'"
+          (onClick)="makeReservation()"
+        ></dx-button>
+        <dx-button
+          text="Chiedi info"
+          type="default"
+          [width]="160"
+          [stylingMode]="'contained'"
+          (onClick)="openChat()"
+        ></dx-button>
+      </div>
     </div>
   </div>
 </dx-list>
