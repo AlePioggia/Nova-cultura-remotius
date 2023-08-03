@@ -1,28 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LessonService } from '../../services/lesson.service';
+import { ILessonRequest } from 'src/app/interfaces/lesson.interface';
+import { ActivatedRoute } from '@angular/router';
+import { confirm } from 'devextreme/ui/dialog';
 
 @Component({
   selector: 'app-lesson-planner',
   templateUrl: './lesson-planner.component.html',
   styleUrls: ['./lesson-planner.component.css'],
 })
-export class LessonPlannerComponent {
-  lessonsData: any[] = [
-    {
-      text: 'Lezione di Matematica',
-      startDate: new Date(2023, 7, 4, 9, 30),
-      endDate: new Date(2023, 7, 4, 11, 30),
-    },
-    {
-      text: 'Lezione di Fisica',
-      startDate: new Date(2023, 7, 5, 12, 0),
-      endDate: new Date(2023, 7, 5, 14, 0),
-    },
-  ];
+export class LessonPlannerComponent implements OnInit {
+  lessonsData: ILessonRequest[] = [];
   currentDate: Date = new Date();
+  teacherMail: string;
+
+  constructor(
+    private lessonService: LessonService,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.teacherMail = params['email'];
+    });
+  }
+
+  async ngOnInit(): Promise<void> {
+    const data: ILessonRequest[] =
+      await this.lessonService.getLessonsByTeacherMail(this.teacherMail);
+    this.lessonsData = data;
+  }
 
   onAppointmentClick(e) {
-    if (confirm('Vuoi prenotare questa lezione?')) {
-      console.log('Lezione prenotata:', e.appointmentData);
-    }
+    confirm('Do you want to book this lesson?', 'Confirmation').then(
+      (result) => {
+        result
+          ? console.log('va bene')
+          : console.log('eh allora perché hai cliccato?');
+      }
+    );
   }
+
+  titleDisplayExpression = (subjects: string[]): string => {
+    console.log(subjects.toString());
+    return subjects.toString();
+  };
 }

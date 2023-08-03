@@ -29,6 +29,13 @@ export class LessonController {
         return this.lessonService.getLessons();
     }
 
+    @Get('email/:teacherMail')
+    async getLessonsByTeacherEmail(
+        @Param('teacherMail') teacherMail: string,
+    ): Promise<Lesson[]> {
+        return this.lessonService.getLessonsByTeacherMail(teacherMail);
+    }
+
     @Post('create')
     async createOne(@Body() dto: LessonDto) {
         return this.lessonService.createLesson(dto);

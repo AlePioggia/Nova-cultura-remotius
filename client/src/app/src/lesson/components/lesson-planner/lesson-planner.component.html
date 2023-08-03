@@ -3,7 +3,12 @@
   [currentDate]="currentDate"
   [startDayHour]="9"
   [endDayHour]="20"
+  startDateExpr="startTime"
+  endDateExpr="endTime"
+  textExpr="subject"
+  descriptionExpr="notes"
   [height]="600"
+  [editing]="false"
   (onAppointmentClick)="onAppointmentClick($event)"
 >
   <dxi-view type="day" [cellDuration]="60"> </dxi-view>

@@ -17,8 +17,9 @@ export class CardComponent {
     console.log('Functionality not yet implemented');
   }
 
-  makeReservation(itemData: any) {
-    console.log(itemData);
-    this.routerService.navigate(['../lesson/planner']);
+  makeReservation(itemData: ICreateUserRequest) {
+    this.routerService.navigate(['../lesson/planner'], {
+      queryParams: { email: itemData.mail },
+    });
   }
 }

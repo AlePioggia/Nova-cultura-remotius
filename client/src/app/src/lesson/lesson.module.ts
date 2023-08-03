@@ -6,6 +6,7 @@ import { LessonComponent } from './components/lesson/lesson.component';
 import {
   DxButtonModule,
   DxFormModule,
+  DxPopupModule,
   DxSchedulerModule,
   DxTemplateModule,
   DxValidationGroupModule,
@@ -16,9 +17,10 @@ import {
   DxoValidationModule,
 } from 'devextreme-angular/ui/nested';
 import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
+import { PopupComponent } from './components/lesson-planner/popup/popup.component';
 
 @NgModule({
-  declarations: [LessonComponent, LessonPlannerComponent],
+  declarations: [LessonComponent, LessonPlannerComponent, PopupComponent],
   imports: [
     CommonModule,
     LessonRoutingModule,

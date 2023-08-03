@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/app/constants';
 import { ILessonRequest } from 'src/app/interfaces/lesson.interface';
@@ -14,7 +14,8 @@ export class LessonService {
 
   constructor(
     private helperService: HelperService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private http: HttpClient
   ) {
     this.baseUrl = BASE_URL + 'lessons/';
   }
@@ -31,5 +32,15 @@ export class LessonService {
     lessonRequest.studentMail = '';
 
     this.helperService.post(this.baseUrl + 'create', lessonRequest, headers);
+  }
+
+  async getLessonsByTeacherMail(teacherMail: string): Promise<any> {
+    const headers = new HttpHeaders({
+      Authorization: sessionStorage.getItem('access_token'),
+    });
+
+    return this.http
+      .get(`${this.baseUrl}email/${teacherMail}`, { headers: headers })
+      .toPromise();
   }
 }

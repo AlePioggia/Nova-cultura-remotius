@@ -1,14 +1,14 @@
 export interface IAuthenticationRequest {
-  mail: string;
+  email: string;
   password: string;
 }
 
 export class AuthenticationRequest implements IAuthenticationRequest {
-  mail: string;
+  email: string;
   password: string;
 
   constructor(email: string, password: string) {
-    this.mail = email;
+    this.email = email;
     this.password = password;
   }
 }

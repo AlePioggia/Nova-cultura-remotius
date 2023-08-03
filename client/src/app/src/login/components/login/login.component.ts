@@ -30,7 +30,7 @@ export class LoginComponent {
   }
 
   setEmail(e: any) {
-    this.authenticationRequest.mail = e.value;
+    this.authenticationRequest.email = e.value;
   }
 
   setPassword(e: any) {

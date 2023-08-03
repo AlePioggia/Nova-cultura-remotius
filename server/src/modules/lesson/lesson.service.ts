@@ -30,4 +30,14 @@ export class LessonService {
             throw error;
         }
     }
+
+    async getLessonsByTeacherMail(teacherMail: string) {
+        try {
+            return (await this.lessonsRepository.find({})).filter(
+                (x) => x.teacherMail === teacherMail,
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
 }
