@@ -1,0 +1,18 @@
+<dx-scheduler
+  [dataSource]="lessonsData"
+  [currentDate]="currentDate"
+  [startDayHour]="9"
+  [endDayHour]="20"
+  [height]="600"
+  (onAppointmentClick)="onAppointmentClick($event)"
+>
+  <dxi-view type="day" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="week" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="workWeek" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="month"> </dxi-view>
+  <dxi-view type="timelineDay" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="timelineWeek" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="timelineWorkWeek" [cellDuration]="60"> </dxi-view>
+  <dxi-view type="timelineMonth"> </dxi-view>
+  <dxi-view type="agenda"> </dxi-view>
+</dx-scheduler>

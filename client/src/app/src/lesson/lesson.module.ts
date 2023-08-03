@@ -6,13 +6,19 @@ import { LessonComponent } from './components/lesson/lesson.component';
 import {
   DxButtonModule,
   DxFormModule,
+  DxSchedulerModule,
+  DxTemplateModule,
   DxValidationGroupModule,
   DxValidatorModule,
 } from 'devextreme-angular';
-import { DxoValidationModule } from 'devextreme-angular/ui/nested';
+import {
+  DxiViewModule,
+  DxoValidationModule,
+} from 'devextreme-angular/ui/nested';
+import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
 
 @NgModule({
-  declarations: [LessonComponent],
+  declarations: [LessonComponent, LessonPlannerComponent],
   imports: [
     CommonModule,
     LessonRoutingModule,
@@ -21,6 +27,9 @@ import { DxoValidationModule } from 'devextreme-angular/ui/nested';
     DxValidatorModule,
     DxValidationGroupModule,
     DxButtonModule,
+    DxSchedulerModule,
+    DxiViewModule,
+    DxTemplateModule,
   ],
   exports: [LessonComponent],
 })
