@@ -43,4 +43,14 @@ export class LessonService {
       .get(`${this.baseUrl}email/${teacherMail}`, { headers: headers })
       .toPromise();
   }
+
+  async bookLesson(lessonId: string, studentMail: string) {
+    const headers = new HttpHeaders({
+      Authorization: sessionStorage.getItem('access_token'),
+    });
+
+    return this.http.patch(`${this.baseUrl}email/${lessonId}`, studentMail, {
+      headers: headers,
+    });
+  }
 }

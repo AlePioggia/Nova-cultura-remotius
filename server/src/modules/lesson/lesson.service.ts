@@ -34,7 +34,18 @@ export class LessonService {
     async getLessonsByTeacherMail(teacherMail: string) {
         try {
             return (await this.lessonsRepository.find({})).filter(
-                (x) => x.teacherMail === teacherMail,
+                (x) => x.teacherMail === teacherMail && x.studentMail === '',
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async bookLesson(lessonId: string, studentMail: string) {
+        try {
+            return await this.lessonsRepository.findOneAndUpdate(
+                { id: lessonId },
+                { studentMail: studentMail },
             );
         } catch (error) {
             throw error;

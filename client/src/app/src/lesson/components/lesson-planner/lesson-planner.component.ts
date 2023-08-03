@@ -13,6 +13,7 @@ export class LessonPlannerComponent implements OnInit {
   lessonsData: ILessonRequest[] = [];
   currentDate: Date = new Date();
   teacherMail: string;
+  studentMail: string;
 
   constructor(
     private lessonService: LessonService,
@@ -20,6 +21,7 @@ export class LessonPlannerComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params) => {
       this.teacherMail = params['email'];
+      this.studentMail = params['studentMail'];
     });
   }
 
@@ -29,18 +31,14 @@ export class LessonPlannerComponent implements OnInit {
     this.lessonsData = data;
   }
 
-  onAppointmentClick(e) {
+  onAppointmentClick(e: any) {
+    const lessonId = e.appointmentData.id;
     confirm('Do you want to book this lesson?', 'Confirmation').then(
-      (result) => {
+      async (result) => {
         result
-          ? console.log('va bene')
-          : console.log('eh allora perché hai cliccato?');
+          ? await this.lessonService.bookLesson(lessonId, this.studentMail)
+          : alert('peggio per te');
       }
     );
   }
-
-  titleDisplayExpression = (subjects: string[]): string => {
-    console.log(subjects.toString());
-    return subjects.toString();
-  };
 }
