@@ -1,6 +1,7 @@
 import { LessonsRepository } from 'src/repositories/lessons.repository';
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
+import { LessonDto } from 'src/dto/lesson.dto';
 
 @Injectable()
 export class LessonService {
@@ -14,21 +15,16 @@ export class LessonService {
         return this.lessonsRepository.find({});
     }
 
-    async createLesson(
-        startTime: Date,
-        endTime: Date,
-        subject: string,
-        notes: string,
-    ) {
+    async createLesson(dto: LessonDto) {
         try {
             await this.lessonsRepository.create({
                 id: uuidv4(),
-                teacherMail: 'alexpioggia@gmail.com',
+                teacherMail: dto.teacherMail,
                 studentMail: '',
-                startTime: startTime,
-                endTime: endTime,
-                subject: subject,
-                notes: notes,
+                startTime: dto.startTime,
+                endTime: dto.endTime,
+                subject: dto.subject,
+                notes: dto.notes,
             });
         } catch (error) {
             throw error;

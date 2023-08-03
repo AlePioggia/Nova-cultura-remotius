@@ -1,4 +1,6 @@
 export interface ILessonRequest {
+  teacherMail: string;
+  studentMail: string;
   startTime: Date;
   endTime: Date;
   subject: string;
@@ -6,6 +8,8 @@ export interface ILessonRequest {
 }
 
 export class LessonRequest implements ILessonRequest {
+  teacherMail: string;
+  studentMail: string;
   startTime: Date;
   endTime: Date;
   subject: string;

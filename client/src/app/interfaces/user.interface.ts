@@ -1,20 +1,20 @@
 export interface IAuthenticationRequest {
-  email: string;
+  mail: string;
   password: string;
 }
 
 export class AuthenticationRequest implements IAuthenticationRequest {
-  email: string;
+  mail: string;
   password: string;
 
   constructor(email: string, password: string) {
-    this.email = email;
+    this.mail = email;
     this.password = password;
   }
 }
 
 export interface ICreateUserRequest {
-  email: string;
+  mail: string;
   firstName: string;
   lastName: string;
   age: number;
@@ -25,7 +25,7 @@ export interface ICreateUserRequest {
 }
 
 export class CreateUserRequest implements ICreateUserRequest {
-  email: string;
+  mail: string;
   firstName: string;
   lastName: string;
   age: number;
@@ -46,7 +46,7 @@ export class CreateUserRequest implements ICreateUserRequest {
     roleId: number = 0,
     subjects: string[]
   ) {
-    this.email = email;
+    this.mail = email;
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;

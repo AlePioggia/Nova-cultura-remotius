@@ -6,6 +6,7 @@ import {
     Patch,
     Post,
     UseGuards,
+    Headers,
 } from '@nestjs/common';
 import { LessonDto } from 'src/dto/lesson.dto';
 import { Lesson } from 'src/schemas/lesson.schema';
@@ -30,12 +31,7 @@ export class LessonController {
 
     @Post('create')
     async createOne(@Body() dto: LessonDto) {
-        return this.lessonService.createLesson(
-            dto.startTime,
-            dto.endTime,
-            dto.subject,
-            dto.notes,
-        );
+        return this.lessonService.createLesson(dto);
     }
 
     @Patch(':id')

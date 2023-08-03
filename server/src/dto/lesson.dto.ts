@@ -1,6 +1,8 @@
-import { IsDate, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export interface ILessonDto {
+    teacherMail: string;
+    studentMail: string;
     startTime: Date;
     endTime: Date;
     subject: string;
@@ -8,6 +10,12 @@ export interface ILessonDto {
 }
 
 export class LessonDto implements ILessonDto {
+    @IsEmail()
+    @IsNotEmpty()
+    teacherMail: string;
+
+    studentMail: string;
+
     @IsNotEmpty()
     startTime: Date;
 
