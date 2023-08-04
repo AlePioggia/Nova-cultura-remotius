@@ -1,13 +1,27 @@
-import { Component, NgModule, Output, Input, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { DxTreeViewModule, DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
-import { navigation } from '../../../app-navigation';
+import {
+  Component,
+  NgModule,
+  Output,
+  Input,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
+import {
+  DxTreeViewModule,
+  DxTreeViewComponent,
+} from 'devextreme-angular/ui/tree-view';
+import { studentNavigation, teacherNavigation } from '../../../app-navigation';
 
 import * as events from 'devextreme/events';
+import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
 
 @Component({
   selector: 'app-side-navigation-menu',
   templateUrl: './side-navigation-menu.component.html',
-  styleUrls: ['./side-navigation-menu.component.scss']
+  styleUrls: ['./side-navigation-menu.component.scss'],
 })
 export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DxTreeViewComponent, { static: true })
@@ -30,19 +44,19 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     this.menu.instance.selectItem(value);
   }
 
-  private _items;
-  get items() {
-    if (!this._items) {
-      this._items = navigation.map((item) => {
-        if (item.path && !(/^\//.test(item.path))) {
-          item.path = `/${item.path}`;
-        }
-        return { ...item, expanded: !this._compactMode }
-      });
-    }
+  _items: any[]; // Make _items a regular property
+  // get items() {
+  //   if (!this._items) {
+  //     this._items = studentNavigation.map((item) => {
+  //       if (item.path && !/^\//.test(item.path)) {
+  //         item.path = `/${item.path}`;
+  //       }
+  //       return { ...item, expanded: !this._compactMode };
+  //     });
+  //   }
 
-    return this._items;
-  }
+  //   return this._items;
+  // }
 
   private _compactMode = false;
   @Input()
@@ -63,7 +77,23 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(
+    private elementRef: ElementRef,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit() {
+    this.authenticationService.isPippo$.subscribe((isTeacher) => {
+      const navigation = isTeacher ? teacherNavigation : studentNavigation;
+      console.log(isTeacher);
+      this._items = navigation.map((item) => {
+        if (item.path && !/^\//.test(item.path)) {
+          item.path = `/${item.path}`;
+        }
+        return { ...item, expanded: !this._compactMode };
+      });
+    });
+  }
 
   onItemClick(event) {
     this.selectedItemChanged.emit(event);
@@ -83,6 +113,6 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 @NgModule({
   imports: [DxTreeViewModule],
   declarations: [SideNavigationMenuComponent],
-  exports: [SideNavigationMenuComponent]
+  exports: [SideNavigationMenuComponent],
 })
-export class SideNavigationMenuModule { }
+export class SideNavigationMenuModule {}

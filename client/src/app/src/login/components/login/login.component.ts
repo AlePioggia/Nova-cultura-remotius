@@ -1,5 +1,6 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AuthenticationRequest,
   IAuthenticationRequest,
@@ -21,11 +22,19 @@ export class LoginComponent {
     useSubmitBehavior: true,
   };
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
 
   onFormSubmit(e: any) {
-    if (this.authenticationRequest) {
-      this.authenticationService.logIn(this.authenticationRequest);
+    try {
+      if (this.authenticationRequest) {
+        this.authenticationService.logIn(this.authenticationRequest);
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      throw error;
     }
   }
 

@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/app/constants';
 import { IAuthenticationRequest } from 'src/app/interfaces/user.interface';
 import { HelperService } from 'src/app/shared/services/service-helper.service';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export type Role = {
   id: number;
@@ -18,9 +19,14 @@ export type Role = {
 })
 export class AuthenticationService {
   baseUrl: string = '';
+  private _isPippo = new BehaviorSubject<boolean>(false);
+
+  isPippo$ = this._isPippo.asObservable();
 
   constructor(private helperService: HelperService, private http: HttpClient) {
     this.baseUrl = BASE_URL + 'users/';
+    const isPippo = localStorage.getItem('isTeacher') === '1';
+    this._isPippo.next(isPippo);
   }
 
   async logIn(authenticationRequest: IAuthenticationRequest) {
@@ -29,6 +35,10 @@ export class AuthenticationService {
       authenticationRequest
     );
     sessionStorage.setItem('access_token', response['access_token']);
+    const data = this.getUser(response['access_token']);
+    const user: ICreateUserRequest = await this.getUserById(data.sub);
+    await localStorage.setItem('isTeacher', user.roleId.toString());
+    location.reload();
   }
 
   async getTeachers(): Promise<any> {
@@ -45,7 +55,7 @@ export class AuthenticationService {
     this.helperService.post(this.baseUrl + 'create', signInRequest);
   }
 
-  async getUserById(id: string) {
+  async getUserById(id: string): Promise<any> {
     const headers = new HttpHeaders({
       Authorization: sessionStorage.getItem('access_token'),
     });
@@ -68,15 +78,14 @@ export class AuthenticationService {
     sessionStorage.removeItem('access_token');
   }
 
-  isTeacher(): boolean {
-    const user: ICreateUserRequest = this.getUser(
-      sessionStorage.getItem('access_token')
-    );
+  async isTeacher(): Promise<boolean> {
+    const data: any = this.getUser(sessionStorage.getItem('access_token'));
+    const user: ICreateUserRequest = await this.getUserById(data.sub);
     return user.roleId === 1;
   }
 
   private getUser(token: string) {
-    return JSON.parse(atob(token.split('.')[1])) as ICreateUserRequest;
+    return JSON.parse(atob(token.split('.')[1]));
   }
 
   async getAllUserInformations(): Promise<any> {
@@ -91,5 +100,9 @@ export class AuthenticationService {
 
   isUserLoggedIn(): boolean {
     return sessionStorage.getItem('access_token') !== null;
+  }
+
+  isTeacherToken(): boolean {
+    return sessionStorage.getItem('access_token') === '1';
   }
 }

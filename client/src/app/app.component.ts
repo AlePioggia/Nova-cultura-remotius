@@ -9,9 +9,15 @@ import { AuthenticationService } from './src/login/services/authentication.servi
 export class AppComponent {
   title = 'client';
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) {
+    localStorage.setItem('isTeacher', '0');
+  }
 
   isAuthenticated() {
     return this.authenticationService.isUserLoggedIn();
+  }
+
+  isTeacher() {
+    return this.authenticationService.isTeacher();
   }
 }

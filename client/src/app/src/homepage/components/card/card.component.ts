@@ -12,6 +12,7 @@ export class CardComponent implements OnInit {
   @Input() data: ICreateUserRequest[];
   imageUrl: string = 'assets/idiot.jpg';
   studentMail: string;
+  isTeacher: boolean;
 
   constructor(
     private routerService: Router,
@@ -22,6 +23,8 @@ export class CardComponent implements OnInit {
     const user: ICreateUserRequest =
       await this.authenticationService.getAllUserInformations();
     this.studentMail = user.mail;
+    const teacher = await this.authenticationService.isTeacher();
+    this.isTeacher = teacher;
   }
 
   openChat() {

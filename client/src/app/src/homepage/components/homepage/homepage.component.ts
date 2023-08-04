@@ -27,4 +27,9 @@ export class HomepageComponent implements OnInit {
       (item.firstName + ' ' + item.lastName).includes(query)
     );
   }
+
+  async isTeacher(): Promise<boolean> {
+    console.log(this.authenticationService.isTeacher());
+    return await this.authenticationService.isTeacher();
+  }
 }

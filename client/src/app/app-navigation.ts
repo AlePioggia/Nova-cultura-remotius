@@ -1,4 +1,4 @@
-export const navigation = [
+export const studentNavigation = [
   {
     text: 'Home',
     path: '/home',
@@ -9,9 +9,23 @@ export const navigation = [
     icon: 'folder',
     items: [
       {
-        text: 'Register',
-        path: '/register',
+        text: 'Chat',
+        path: '',
       },
+    ],
+  },
+];
+
+export const teacherNavigation = [
+  {
+    text: 'Home',
+    path: '/home',
+    icon: 'home',
+  },
+  {
+    text: 'Menu',
+    icon: 'folder',
+    items: [
       {
         text: 'Lessons',
         path: '/lesson',

@@ -1,7 +1,10 @@
 import { SideNavigationMenuModule } from './../../shared/components/side-navigation-menu/side-navigation-menu.component';
 import { Component, OnInit, NgModule, Input, ViewChild } from '@angular/core';
 import { DxDrawerModule } from 'devextreme-angular/ui/drawer';
-import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
+import {
+  DxScrollViewModule,
+  DxScrollViewComponent,
+} from 'devextreme-angular/ui/scroll-view';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { HeaderModule } from 'src/app/shared/components';
@@ -10,29 +13,30 @@ import { ScreenService } from 'src/app/shared/services/screen.service';
 @Component({
   selector: 'app-side-nav-outer-toolbar',
   templateUrl: './side-nav-outer-toolbar.component.html',
-  styleUrls: ['./side-nav-outer-toolbar.component.scss']
+  styleUrls: ['./side-nav-outer-toolbar.component.scss'],
 })
 export class SideNavOuterToolbarComponent implements OnInit {
-  @ViewChild(DxScrollViewComponent, { static: true }) scrollView: DxScrollViewComponent;
+  @ViewChild(DxScrollViewComponent, { static: true })
+  scrollView: DxScrollViewComponent;
   selectedRoute = '';
 
   menuOpened: boolean;
   temporaryMenuOpened;
 
   @Input()
-  title: string = "";
+  title: string = '';
 
   menuMode = 'shrink';
   menuRevealMode = 'expand';
   minMenuSize = 0;
   shaderEnabled = false;
 
-  constructor(private screen: ScreenService, private router: Router) { }
+  constructor(private screen: ScreenService, private router: Router) {}
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
-    this.router.events.subscribe(val => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.selectedRoute = val.urlAfterRedirects.split('?')[0];
       }
@@ -92,8 +96,14 @@ export class SideNavOuterToolbarComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule],
+  imports: [
+    SideNavigationMenuModule,
+    DxDrawerModule,
+    HeaderModule,
+    DxScrollViewModule,
+    CommonModule,
+  ],
   exports: [SideNavOuterToolbarComponent],
-  declarations: [SideNavOuterToolbarComponent]
+  declarations: [SideNavOuterToolbarComponent],
 })
-export class SideNavOuterToolbarModule { }
+export class SideNavOuterToolbarModule {}
