@@ -48,4 +48,9 @@ export class LessonController {
     ) {
         return this.lessonService.bookLesson(id, studentMail);
     }
+
+    @Patch(':id')
+    async patchLesson(@Param('id') id: string, @Body() dto: LessonDto) {
+        return this.lessonService.patchLesson(id, dto);
+    }
 }

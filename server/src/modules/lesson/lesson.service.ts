@@ -41,6 +41,22 @@ export class LessonService {
         }
     }
 
+    async patchLesson(lessonId: string, dto: LessonDto) {
+        try {
+            return await this.lessonsRepository.findOneAndUpdate(
+                { id: lessonId },
+                {
+                    startTime: dto.startTime,
+                    endTime: dto.endTime,
+                    subject: dto.subject,
+                    notes: dto.notes,
+                },
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async bookLesson(lessonId: string, studentMail: string) {
         try {
             return await this.lessonsRepository.findOneAndUpdate(
