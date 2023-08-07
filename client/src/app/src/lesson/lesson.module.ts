@@ -19,15 +19,15 @@ import {
   DxoValidationModule,
 } from 'devextreme-angular/ui/nested';
 import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
-import { PopupComponent } from './components/lesson-planner/popup/popup.component';
 import { LessonGridComponent } from './components/lesson/data-grid/lesson-grid/lesson-grid.component';
+import { TeacherPlannerComponent } from './components/teacher-planner/teacher-planner.component';
 
 @NgModule({
   declarations: [
     LessonComponent,
     LessonPlannerComponent,
-    PopupComponent,
     LessonGridComponent,
+    TeacherPlannerComponent,
   ],
   imports: [
     CommonModule,

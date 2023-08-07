@@ -1,0 +1,23 @@
+<dx-scheduler
+  [dataSource]="lessons"
+  [currentDate]="currentDate"
+  [startDayHour]="7"
+  [endDayHour]="20"
+  (onAppointmentAdding)="onLessonAdding($event)"
+  (onAppointmentUpdating)="onLessonUpdating($event)"
+  (onAppointmentDeleting)="onLessonDeleting($event)"
+  startDateExpr="startTime"
+  endDateExpr="endTime"
+  allDayExpr="AllDay"
+  (onAppointmentFormOpening)="onAppointmentFormOpening($event)"
+  textExpr="subject"
+  descriptionExpr="notes"
+  [height]="600"
+>
+  <dxo-editing
+    [allowAdding]="true"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+  >
+  </dxo-editing>
+</dx-scheduler>

@@ -29,7 +29,6 @@ export class HomepageComponent implements OnInit {
   }
 
   async isTeacher(): Promise<boolean> {
-    console.log(this.authenticationService.isTeacher());
     return await this.authenticationService.isTeacher();
   }
 }
