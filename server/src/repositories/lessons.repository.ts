@@ -29,4 +29,8 @@ export class LessonsRepository {
     ) {
         return this.lessonModel.findOneAndUpdate(lessonFilterQuery, lesson);
     }
+
+    async deleteOne(filter: any): Promise<any> {
+        return this.lessonModel.deleteOne(filter);
+    }
 }

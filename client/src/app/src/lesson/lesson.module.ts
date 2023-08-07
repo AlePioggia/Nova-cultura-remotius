@@ -5,6 +5,7 @@ import { LessonRoutingModule } from './lesson-routing.module';
 import { LessonComponent } from './components/lesson/lesson.component';
 import {
   DxButtonModule,
+  DxDataGridModule,
   DxFormModule,
   DxPopupModule,
   DxSchedulerModule,
@@ -14,13 +15,20 @@ import {
 } from 'devextreme-angular';
 import {
   DxiViewModule,
+  DxoTextsModule,
   DxoValidationModule,
 } from 'devextreme-angular/ui/nested';
 import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
 import { PopupComponent } from './components/lesson-planner/popup/popup.component';
+import { LessonGridComponent } from './components/lesson/data-grid/lesson-grid/lesson-grid.component';
 
 @NgModule({
-  declarations: [LessonComponent, LessonPlannerComponent, PopupComponent],
+  declarations: [
+    LessonComponent,
+    LessonPlannerComponent,
+    PopupComponent,
+    LessonGridComponent,
+  ],
   imports: [
     CommonModule,
     LessonRoutingModule,
@@ -32,6 +40,8 @@ import { PopupComponent } from './components/lesson-planner/popup/popup.componen
     DxSchedulerModule,
     DxiViewModule,
     DxTemplateModule,
+    DxDataGridModule,
+    DxoTextsModule,
   ],
   exports: [LessonComponent],
 })

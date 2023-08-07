@@ -29,3 +29,25 @@ export class LessonDto implements ILessonDto {
     @IsString()
     notes: string;
 }
+
+export interface ILessonRequestDto {
+    startTime: Date;
+    endTime: Date;
+    subject: string;
+    notes: string;
+}
+
+export class LessonRequestDto implements ILessonRequestDto {
+    @IsNotEmpty()
+    startTime: Date;
+
+    @IsNotEmpty()
+    endTime: Date;
+
+    @IsString()
+    @IsNotEmpty()
+    subject: string;
+
+    @IsString()
+    notes: string;
+}

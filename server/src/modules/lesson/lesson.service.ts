@@ -1,7 +1,7 @@
 import { LessonsRepository } from 'src/repositories/lessons.repository';
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-import { LessonDto } from 'src/dto/lesson.dto';
+import { ILessonRequestDto, LessonDto } from 'src/dto/lesson.dto';
 
 @Injectable()
 export class LessonService {
@@ -31,26 +31,30 @@ export class LessonService {
         }
     }
 
-    async getLessonsByTeacherMail(teacherMail: string) {
+    async getLessonsByTeacherMail(
+        teacherMail: string,
+        excludeStudent: boolean = false,
+    ) {
         try {
-            return (await this.lessonsRepository.find({})).filter(
-                (x) => x.teacherMail === teacherMail && x.studentMail === '',
-            );
+            if (excludeStudent)
+                return (await this.lessonsRepository.find({})).filter(
+                    (x) =>
+                        x.teacherMail === teacherMail && x.studentMail === '',
+                );
+            else
+                return (await this.lessonsRepository.find({})).filter(
+                    (x) => x.teacherMail === teacherMail,
+                );
         } catch (error) {
             throw error;
         }
     }
 
-    async patchLesson(lessonId: string, dto: LessonDto) {
+    async patchLesson(lessonId: string, dto: ILessonRequestDto) {
         try {
             return await this.lessonsRepository.findOneAndUpdate(
                 { id: lessonId },
-                {
-                    startTime: dto.startTime,
-                    endTime: dto.endTime,
-                    subject: dto.subject,
-                    notes: dto.notes,
-                },
+                dto,
             );
         } catch (error) {
             throw error;
@@ -63,6 +67,14 @@ export class LessonService {
                 { id: lessonId },
                 { studentMail: studentMail },
             );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deleteLesson(lessonId: string) {
+        try {
+            await this.lessonsRepository.deleteOne({ id: lessonId });
         } catch (error) {
             throw error;
         }

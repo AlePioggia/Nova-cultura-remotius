@@ -1,0 +1,49 @@
+<dx-data-grid
+  [dataSource]="lessons"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [rowAlternationEnabled]="true"
+  (onRowUpdating)="rowUpdating($event)"
+  (onRowRemoving)="rowRemoving($event)"
+  (onRowInserted)="rowInserted($event)"
+>
+  <dxi-column dataField="studentMail" caption="Student Mail"></dxi-column>
+  <dxi-column dataField="teacherMail" caption="Teacher Mail"></dxi-column>
+  <dxi-column
+    dataField="startTime"
+    caption="Start Time"
+    dataType="datetime"
+  ></dxi-column>
+  <dxi-column
+    dataField="endTime"
+    caption="End Time"
+    dataType="datetime"
+  ></dxi-column>
+  <dxi-column dataField="subject" caption="Subjects"></dxi-column>
+  <dxi-column dataField="notes" caption="Note" [visible]="false"></dxi-column>
+
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true"
+    [useIcons]="true"
+  >
+    <dxo-form>
+      <dxi-item dataField="startTime" [isRequired]="true"></dxi-item>
+      <dxi-item dataField="endTime" [isRequired]="true"></dxi-item>
+      <dxi-item
+        dataField="subject"
+        editorType="dxTextBox"
+        [isRequired]="true"
+      ></dxi-item>
+      <dxi-item
+        dataField="notes"
+        editorType="dxTextBox"
+        [isRequired]="true"
+      ></dxi-item>
+    </dxo-form>
+  </dxo-editing>
+</dx-data-grid>

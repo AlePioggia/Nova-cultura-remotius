@@ -7,8 +7,11 @@ import {
     Post,
     UseGuards,
     Headers,
+    ParseBoolPipe,
+    Query,
+    Delete,
 } from '@nestjs/common';
-import { LessonDto } from 'src/dto/lesson.dto';
+import { ILessonRequestDto, LessonDto } from 'src/dto/lesson.dto';
 import { Lesson } from 'src/schemas/lesson.schema';
 import { User } from 'src/schemas/user.schema';
 import { LessonService } from './lesson.service';
@@ -32,8 +35,12 @@ export class LessonController {
     @Get('email/:teacherMail')
     async getLessonsByTeacherEmail(
         @Param('teacherMail') teacherMail: string,
+        @Query('excludeStudent', new ParseBoolPipe()) isApproved: boolean,
     ): Promise<Lesson[]> {
-        return this.lessonService.getLessonsByTeacherMail(teacherMail);
+        return this.lessonService.getLessonsByTeacherMail(
+            teacherMail,
+            isApproved,
+        );
     }
 
     @Post('create')
@@ -50,7 +57,12 @@ export class LessonController {
     }
 
     @Patch(':id')
-    async patchLesson(@Param('id') id: string, @Body() dto: LessonDto) {
+    async patchLesson(@Param('id') id: string, @Body() dto: ILessonRequestDto) {
         return this.lessonService.patchLesson(id, dto);
+    }
+
+    @Delete(':id')
+    async deleteLesson(@Param('id') id: string) {
+        return await this.lessonService.deleteLesson(id);
     }
 }

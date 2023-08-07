@@ -15,3 +15,17 @@ export class LessonRequest implements ILessonRequest {
   subject: string;
   notes: string;
 }
+
+export interface ILessonSimpleRequest {
+  startTime: Date;
+  endTime: Date;
+  subject: string;
+  notes: string;
+}
+
+export class LessonSimpleRequest implements ILessonSimpleRequest {
+  startTime: Date;
+  endTime: Date;
+  subject: string;
+  notes: string;
+}
