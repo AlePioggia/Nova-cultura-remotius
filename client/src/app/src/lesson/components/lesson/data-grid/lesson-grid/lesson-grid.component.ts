@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ILessonRequest,
   ILessonSimpleRequest,
@@ -16,7 +17,8 @@ export class LessonGridComponent implements OnInit {
 
   constructor(
     private lessonService: LessonService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private routerService: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -31,7 +33,6 @@ export class LessonGridComponent implements OnInit {
       ...(e.oldData as ILessonSimpleRequest),
       ...(e.newData as ILessonSimpleRequest),
     };
-    console.log(data);
     await this.lessonService.patchLesson(e.oldData.id, data);
   }
 
@@ -43,5 +44,9 @@ export class LessonGridComponent implements OnInit {
     const data: ILessonRequest = e.data;
     console.log(data);
     await this.lessonService.createLesson(data);
+  }
+
+  toggleView() {
+    this.routerService.navigate(['../lesson/teacher-planner']);
   }
 }

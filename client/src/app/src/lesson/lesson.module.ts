@@ -9,6 +9,7 @@ import {
   DxFormModule,
   DxPopupModule,
   DxSchedulerModule,
+  DxSwitchModule,
   DxTemplateModule,
   DxValidationGroupModule,
   DxValidatorModule,
@@ -42,6 +43,7 @@ import { TeacherPlannerComponent } from './components/teacher-planner/teacher-pl
     DxTemplateModule,
     DxDataGridModule,
     DxoTextsModule,
+    DxSwitchModule,
   ],
   exports: [LessonComponent],
 })

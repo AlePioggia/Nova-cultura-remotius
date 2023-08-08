@@ -5,6 +5,7 @@ import {
   ILessonRequest,
   ILessonSimpleRequest,
 } from 'src/app/interfaces/lesson.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-planner',
@@ -17,7 +18,8 @@ export class TeacherPlannerComponent implements OnInit {
 
   constructor(
     private lessonService: LessonService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private routerService: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -91,5 +93,9 @@ export class TeacherPlannerComponent implements OnInit {
         },
       },
     ]);
+  }
+
+  toggleView() {
+    this.routerService.navigate(['../lesson']);
   }
 }

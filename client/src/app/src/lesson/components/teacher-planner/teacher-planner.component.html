@@ -13,6 +13,7 @@
   textExpr="subject"
   descriptionExpr="notes"
   [height]="600"
+  timeZone="Europe/Rome"
 >
   <dxo-editing
     [allowAdding]="true"
@@ -21,3 +22,12 @@
   >
   </dxo-editing>
 </dx-scheduler>
+
+<div class="d-flex justify-content-end align-items-center mt-3 mb-3">
+  <dx-button
+    text="Visualizza griglia"
+    width="200px"
+    height="50px"
+    (onClick)="toggleView()"
+  ></dx-button>
+</div>
