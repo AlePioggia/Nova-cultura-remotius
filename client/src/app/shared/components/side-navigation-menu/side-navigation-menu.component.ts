@@ -85,7 +85,6 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   ngOnInit() {
     this.authenticationService.isPippo$.subscribe((isTeacher) => {
       const navigation = isTeacher ? teacherNavigation : studentNavigation;
-      console.log(isTeacher);
       this._items = navigation.map((item) => {
         if (item.path && !/^\//.test(item.path)) {
           item.path = `/${item.path}`;

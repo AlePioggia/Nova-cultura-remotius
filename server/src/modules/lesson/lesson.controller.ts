@@ -28,11 +28,13 @@ export class LessonController {
         return this.lessonService.getLessonById(id);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     async getMany(): Promise<Lesson[]> {
         return this.lessonService.getLessons();
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get('email/:teacherMail')
     async getLessonsByTeacherEmail(
         @Param('teacherMail') teacherMail: string,
@@ -54,6 +56,7 @@ export class LessonController {
         return this.lessonService.createLesson(dto, token);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Patch(':id/book')
     async bookLesson(
         @Param('id') id: string,
@@ -62,11 +65,13 @@ export class LessonController {
         return this.lessonService.bookLesson(id, studentMail);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
     async patchLesson(@Param('id') id: string, @Body() dto: ILessonRequestDto) {
         return this.lessonService.patchLesson(id, dto);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     async deleteLesson(@Param('id') id: string) {
         return await this.lessonService.deleteLesson(id);

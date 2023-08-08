@@ -25,7 +25,6 @@ export class RegistrationComponent {
 
   onFormSubmit = (e: any) => {
     if (this.form.instance.validate().isValid) {
-      console.log(this.createUserRequest);
       this.authenticationService.createUser(this.createUserRequest);
     }
   };

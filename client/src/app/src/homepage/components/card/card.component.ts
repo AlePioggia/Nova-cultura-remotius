@@ -59,7 +59,6 @@ export class CardComponent implements OnInit {
   }
 
   submitReview() {
-    console.log(this.review);
     // Handle form submission logic here
     this.hideReviewPopup();
   }

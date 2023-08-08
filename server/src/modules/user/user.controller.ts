@@ -9,13 +9,13 @@ import { AuthGuard } from '@nestjs/passport';
 export class UserController {
     constructor(private readonly usersService: UserService) {}
 
-    // @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'))
     @Get('single/:id')
     async getOne(@Param('id') id: string): Promise<User> {
         return await this.usersService.getUserById(id);
     }
 
-    // @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'))
     @Get('email/:email')
     async getByEmail(@Param('email') email: string): Promise<User> {
         const res = await this.usersService.getUserByEmail(email);
@@ -23,20 +23,21 @@ export class UserController {
         return res;
     }
 
-    // @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     async getMany(): Promise<User[]> {
         return this.usersService.getUsers();
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get('teachers')
     async getTeachers(): Promise<User[]> {
         return this.usersService.getTeachers();
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Post('create')
     async createOne(@Body() dto: UserDto) {
-        console.log(dto);
         return await this.usersService.createUser(
             dto.firstName,
             dto.lastName,

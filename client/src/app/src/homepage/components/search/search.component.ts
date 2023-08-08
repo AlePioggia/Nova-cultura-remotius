@@ -9,7 +9,6 @@ export class SearchComponent {
   @Output() query = new EventEmitter<string>();
 
   onSearch(event: any) {
-    console.log(event.target.value);
     const query = event.target.value;
     this.query.emit(query);
   }

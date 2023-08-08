@@ -42,7 +42,6 @@ export class LessonGridComponent implements OnInit {
 
   async rowInserted(e) {
     const data: ILessonRequest = e.data;
-    console.log(data);
     await this.lessonService.createLesson(data);
   }
 
