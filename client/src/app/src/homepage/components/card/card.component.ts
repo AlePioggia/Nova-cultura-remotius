@@ -14,6 +14,15 @@ export class CardComponent implements OnInit {
   studentMail: string;
   isTeacher: boolean;
 
+  isPopupVisible = false;
+  review = {
+    title: '',
+    studentMail: '',
+    teacherMail: '',
+    vote: 0,
+    description: '',
+  };
+
   constructor(
     private routerService: Router,
     private authenticationService: AuthenticationService
@@ -35,5 +44,23 @@ export class CardComponent implements OnInit {
     this.routerService.navigate(['../lesson/planner'], {
       queryParams: { email: itemData.mail, studentMail: this.studentMail },
     });
+  }
+
+  setVote(vote: number) {
+    this.review.vote = vote;
+  }
+
+  showReviewPopup() {
+    this.isPopupVisible = true;
+  }
+
+  hideReviewPopup() {
+    this.isPopupVisible = false;
+  }
+
+  submitReview() {
+    console.log(this.review);
+    // Handle form submission logic here
+    this.hideReviewPopup();
   }
 }

@@ -7,8 +7,10 @@ import {
   DxFormModule,
   DxGalleryModule,
   DxListModule,
+  DxPopupModule,
   DxScrollViewComponent,
   DxScrollViewModule,
+  DxTextAreaModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import { CardComponent } from './components/card/card.component';
@@ -27,6 +29,8 @@ import { HomepageRoutingModule } from './homepage-routing.module';
     DxListModule,
     DxGalleryModule,
     HomepageRoutingModule,
+    DxPopupModule,
+    DxTextAreaModule,
   ],
   exports: [HomepageComponent, CardComponent, SearchComponent],
 })

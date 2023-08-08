@@ -43,8 +43,56 @@
           type="default"
           [width]="160"
           [stylingMode]="'contained'"
+          (onClick)="showReviewPopup()"
         ></dx-button>
       </div>
     </div>
   </div>
 </dx-list>
+
+<dx-popup
+  [visible]="isPopupVisible"
+  title="Inserisci una recensione"
+  (onHiding)="hideReviewPopup()"
+  height="300"
+  class="p-3 border rounded custom-popup"
+>
+  <dx-form [formData]="review" class="form-group">
+    <dxi-item>
+      <div
+        dataField="vote"
+        class="stars-container my-2 d-flex align-items-center"
+      >
+        <label class="vote-label">Valutazione: </label>
+        <span
+          *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+          class="fa-star"
+          [ngClass]="{
+            'fas selected-star': review.vote >= star,
+            far: review.vote < star
+          }"
+          (click)="setVote(star)"
+        >
+        </span>
+      </div>
+    </dxi-item>
+    <dxi-item
+      dataField="title"
+      [isRequired]="true"
+      class="my-2 border-bottom"
+    ></dxi-item>
+    <dxi-item
+      dataField="description"
+      editorType="dxTextArea"
+      [isRequired]="true"
+      class="my-2 border-bottom"
+    ></dxi-item>
+  </dx-form>
+  <div class="d-flex justify-content-center">
+    <dx-button
+      text="Invia"
+      (onClick)="submitReview()"
+      class="btn btn-primary mt-3 custom-button"
+    ></dx-button>
+  </div>
+</dx-popup>
