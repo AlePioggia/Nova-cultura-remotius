@@ -15,11 +15,11 @@ export class LessonService {
         return this.lessonsRepository.find({});
     }
 
-    async createLesson(dto: LessonDto) {
+    async createLesson(dto: LessonDto, token: any) {
         try {
             await this.lessonsRepository.create({
                 id: uuidv4(),
-                teacherMail: dto.teacherMail,
+                teacherMail: token?.mail ?? '',
                 studentMail: '',
                 startTime: dto.startTime,
                 endTime: dto.endTime,

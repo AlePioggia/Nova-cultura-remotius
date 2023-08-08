@@ -92,6 +92,13 @@ export class TeacherPlannerComponent implements OnInit {
           disabled: true,
         },
       },
+      {
+        label: {
+          text: 'Notes',
+        },
+        dataField: 'notes',
+        editorType: 'dxTextBox',
+      },
     ]);
   }
 

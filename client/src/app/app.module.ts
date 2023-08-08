@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginModule } from './src/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavOuterToolbarModule } from './layouts';
 import { ScreenService } from './shared/services/screen.service';
 import { FooterModule } from './shared/components/footer/footer.component';
 import { HomepageModule } from './src/homepage/homepage.module';
+import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,7 +21,10 @@ import { HomepageModule } from './src/homepage/homepage.module';
     FooterModule,
     HomepageModule,
   ],
-  providers: [ScreenService],
+  providers: [
+    ScreenService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

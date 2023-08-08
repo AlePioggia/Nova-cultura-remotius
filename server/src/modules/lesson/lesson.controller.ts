@@ -16,6 +16,7 @@ import { Lesson } from 'src/schemas/lesson.schema';
 import { User } from 'src/schemas/user.schema';
 import { LessonService } from './lesson.service';
 import { AuthGuard } from '@nestjs/passport';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('Lessons')
 export class LessonController {
@@ -43,9 +44,14 @@ export class LessonController {
         );
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Post('create')
-    async createOne(@Body() dto: LessonDto) {
-        return this.lessonService.createLesson(dto);
+    async createOne(
+        @Body() dto: LessonDto,
+        @Headers('authorization') authHeader: string,
+    ) {
+        const token = jwt.decode(authHeader);
+        return this.lessonService.createLesson(dto, token);
     }
 
     @Patch(':id/book')

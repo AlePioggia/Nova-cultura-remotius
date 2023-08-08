@@ -42,13 +42,7 @@ export class AuthenticationService {
   }
 
   async getTeachers(): Promise<any> {
-    const headers = new HttpHeaders({
-      Authorization: sessionStorage.getItem('access_token'),
-    });
-
-    return this.http
-      .get(`${this.baseUrl}teachers`, { headers: headers })
-      .toPromise();
+    return this.http.get(`${this.baseUrl}teachers`).toPromise();
   }
 
   createUser(signInRequest: ICreateUserRequest) {
@@ -56,13 +50,7 @@ export class AuthenticationService {
   }
 
   async getUserById(id: string): Promise<any> {
-    const headers = new HttpHeaders({
-      Authorization: sessionStorage.getItem('access_token'),
-    });
-
-    return this.http
-      .get(`${this.baseUrl}single/${id}`, { headers: headers })
-      .toPromise();
+    return this.http.get(`${this.baseUrl}single/${id}`).toPromise();
   }
 
   //metodo statico
