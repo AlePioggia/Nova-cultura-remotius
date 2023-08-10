@@ -25,6 +25,7 @@ export class ReviewController {
         @Headers('authorization') authHeader: string,
     ) {
         const token = jwt.decode(authHeader);
+        console.log(authHeader);
         return this.reviewsService.create(createReviewDto, token);
     }
 
@@ -34,7 +35,7 @@ export class ReviewController {
         return this.reviewsService.update(id, review);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Get('teacher/:teacherMail')
     findByTeacher(@Param('teacherMail') teacherMail: string) {
         return this.reviewsService.findByTeacher(teacherMail);

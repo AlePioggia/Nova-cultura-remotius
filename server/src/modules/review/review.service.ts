@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReviewDto } from 'src/dto/review.dto';
 import { ReviewsRepository } from 'src/repositories/reviews.repository';
-import { Review } from 'src/schemas/reviews.repository';
+import { Review } from 'src/schemas/reviews.schema';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
@@ -10,6 +10,7 @@ export class ReviewService {
     constructor(private readonly reviewsRepository: ReviewsRepository) {}
 
     create(reviewDto: CreateReviewDto, token: any) {
+        console.log(token);
         return this.reviewsRepository.create({
             id: uuidv4(),
             teacherMail: reviewDto.teacherMail,

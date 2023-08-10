@@ -37,6 +37,12 @@ export class CardComponent implements OnInit {
     });
   }
 
+  showReviews(itemData: ICreateUserRequest) {
+    this.routerService.navigate(['../review/show'], {
+      queryParams: { email: itemData.mail },
+    });
+  }
+
   makeReservation(itemData: ICreateUserRequest) {
     this.routerService.navigate(['../lesson/planner'], {
       queryParams: { email: itemData.mail, studentMail: this.studentMail },

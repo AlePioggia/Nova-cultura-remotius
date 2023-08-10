@@ -51,7 +51,7 @@ export class LessonController {
         @Body() dto: LessonDto,
         @Headers('authorization') authHeader: string,
     ) {
-        const token = jwt.decode(authHeader);
+        const token = jwt.decode(authHeader.split(' ')[1]);
         return this.lessonService.createLesson(dto, token);
     }
 

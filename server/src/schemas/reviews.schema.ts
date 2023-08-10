@@ -11,10 +11,7 @@ export class Review {
     })
     id: string;
 
-    @Prop({
-        required: true,
-        unique: true,
-    })
+    @Prop()
     teacherMail: string;
 
     @Prop()

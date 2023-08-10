@@ -6,12 +6,15 @@ import { InsertPopupComponent } from './components/insert-popup/insert-popup.com
 import {
   DxButtonModule,
   DxFormModule,
+  DxListModule,
   DxPopupModule,
+  DxTextBoxModule,
 } from 'devextreme-angular';
 import { HomepageModule } from '../homepage/homepage.module';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 
 @NgModule({
-  declarations: [InsertPopupComponent],
+  declarations: [InsertPopupComponent, ReviewListComponent],
   imports: [
     CommonModule,
     ReviewRoutingModule,
@@ -19,6 +22,8 @@ import { HomepageModule } from '../homepage/homepage.module';
     DxFormModule,
     DxButtonModule,
     HomepageModule,
+    DxListModule,
+    DxTextBoxModule,
   ],
   exports: [InsertPopupComponent],
 })
