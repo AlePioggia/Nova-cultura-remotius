@@ -1,0 +1,53 @@
+.stars-container {
+  display: flex;
+  cursor: pointer;
+  font-size: 2rem; /* Aumenta ulteriormente la dimensione del font delle stelle */
+}
+
+.vote-label {
+  margin-right: 15px;
+  font-size: 2rem; /* Aumenta ulteriormente la dimensione del font delle label */
+}
+
+.selected-star {
+  color: black;
+}
+
+.dx-popup.custom-popup {
+  border-color: #ced4da !important;
+  border-width: 1px !important;
+  border-radius: 0.25rem !important;
+  width: fit-content !important;
+  padding: 20px !important;
+  position: relative;
+}
+
+.dx-button.custom-button {
+  width: 250px !important; /* Aumenta ulteriormente la larghezza del pulsante */
+  margin-top: 250px;
+}
+
+.dx-item {
+  width: 300px;
+}
+
+/* Stile per aumentare la dimensione delle caselle di inserimento */
+.form-control-xl {
+  font-size: 1.5rem;
+  padding: 1.5rem 1rem;
+}
+
+.content-container {
+  padding: 0 10%; /* Aggiungiamo un po' di padding laterale per non avere il contenuto troppo spalmato sullo schermo */
+}
+
+.custom-dxi-item {
+  /* Per modificare la dimensione del contenitore dell'elemento */
+  width: 1000px;
+  height: 50px;
+}
+
+.custom-dxi-item .dx-texteditor-input {
+  /* Per modificare la dimensione dell'input all'interno dell'elemento, se necessario */
+  font-size: 100px;
+}

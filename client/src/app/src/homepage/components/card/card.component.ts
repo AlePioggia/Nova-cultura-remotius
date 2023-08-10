@@ -14,15 +14,6 @@ export class CardComponent implements OnInit {
   studentMail: string;
   isTeacher: boolean;
 
-  isPopupVisible = false;
-  review = {
-    title: '',
-    studentMail: '',
-    teacherMail: '',
-    vote: 0,
-    description: '',
-  };
-
   constructor(
     private routerService: Router,
     private authenticationService: AuthenticationService
@@ -40,26 +31,15 @@ export class CardComponent implements OnInit {
     console.log('Functionality not yet implemented');
   }
 
+  openPopup(itemData: ICreateUserRequest) {
+    this.routerService.navigate(['../review/insert'], {
+      queryParams: { email: itemData.mail },
+    });
+  }
+
   makeReservation(itemData: ICreateUserRequest) {
     this.routerService.navigate(['../lesson/planner'], {
       queryParams: { email: itemData.mail, studentMail: this.studentMail },
     });
-  }
-
-  setVote(vote: number) {
-    this.review.vote = vote;
-  }
-
-  showReviewPopup() {
-    this.isPopupVisible = true;
-  }
-
-  hideReviewPopup() {
-    this.isPopupVisible = false;
-  }
-
-  submitReview() {
-    // Handle form submission logic here
-    this.hideReviewPopup();
   }
 }

@@ -9,11 +9,11 @@ import { v4 as uuidv4 } from 'uuid';
 export class ReviewService {
     constructor(private readonly reviewsRepository: ReviewsRepository) {}
 
-    create(reviewDto: CreateReviewDto) {
+    create(reviewDto: CreateReviewDto, token: any) {
         return this.reviewsRepository.create({
             id: uuidv4(),
             teacherMail: reviewDto.teacherMail,
-            studentMail: reviewDto.studentMail,
+            studentMail: token?.mail ?? '',
             description: reviewDto.description,
             vote: reviewDto.vote,
             title: reviewDto.title,

@@ -7,10 +7,12 @@ import {
     Post,
     Put,
     UseGuards,
+    Headers,
 } from '@nestjs/common';
 import { CreateReviewDto } from 'src/dto/review.dto';
 import { ReviewService } from './review.service';
 import { AuthGuard } from '@nestjs/passport';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('reviews')
 export class ReviewController {
@@ -18,8 +20,12 @@ export class ReviewController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post()
-    create(@Body() createReviewDto: CreateReviewDto) {
-        return this.reviewsService.create(createReviewDto);
+    create(
+        @Body() createReviewDto: CreateReviewDto,
+        @Headers('authorization') authHeader: string,
+    ) {
+        const token = jwt.decode(authHeader);
+        return this.reviewsService.create(createReviewDto, token);
     }
 
     @UseGuards(AuthGuard('jwt'))

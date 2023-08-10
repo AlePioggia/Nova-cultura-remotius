@@ -13,7 +13,6 @@ import {
 } from '@nestjs/common';
 import { ILessonRequestDto, LessonDto } from 'src/dto/lesson.dto';
 import { Lesson } from 'src/schemas/lesson.schema';
-import { User } from 'src/schemas/user.schema';
 import { LessonService } from './lesson.service';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';

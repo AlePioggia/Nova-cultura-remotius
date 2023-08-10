@@ -10,6 +10,7 @@ import { ScreenService } from './shared/services/screen.service';
 import { FooterModule } from './shared/components/footer/footer.component';
 import { HomepageModule } from './src/homepage/homepage.module';
 import { AuthInterceptor } from './auth.interceptor';
+import { ReviewModule } from './src/review/review.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,6 +21,7 @@ import { AuthInterceptor } from './auth.interceptor';
     SideNavOuterToolbarModule,
     FooterModule,
     HomepageModule,
+    ReviewModule,
   ],
   providers: [
     ScreenService,

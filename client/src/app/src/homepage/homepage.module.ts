@@ -16,6 +16,7 @@ import {
 import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
 import { HomepageRoutingModule } from './homepage-routing.module';
+import { ReviewModule } from '../review/review.module';
 
 @NgModule({
   declarations: [HomepageComponent, CardComponent, SearchComponent],
