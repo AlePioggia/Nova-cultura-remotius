@@ -10,7 +10,6 @@ export class ReviewService {
     constructor(private readonly reviewsRepository: ReviewsRepository) {}
 
     create(reviewDto: CreateReviewDto, token: any) {
-        console.log(token);
         return this.reviewsRepository.create({
             id: uuidv4(),
             teacherMail: reviewDto.teacherMail,

@@ -24,8 +24,7 @@ export class ReviewController {
         @Body() createReviewDto: CreateReviewDto,
         @Headers('authorization') authHeader: string,
     ) {
-        const token = jwt.decode(authHeader);
-        console.log(authHeader);
+        const token = jwt.decode(authHeader.split(' ')[1]);
         return this.reviewsService.create(createReviewDto, token);
     }
 

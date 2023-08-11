@@ -6,6 +6,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { ReviewModule } from './modules/review/review.module';
+import { WalletModule } from './modules/wallet/wallet.module';
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { ReviewModule } from './modules/review/review.module';
         ConfigModule.forRoot(),
         PassportModule,
         ReviewModule,
+        WalletModule,
     ],
 })
 export class AppModule {}
