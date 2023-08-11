@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/src/review/review.module').then((m) => m.ReviewModule),
   },
+  {
+    path: 'wallet',
+    loadChildren: () =>
+      import('src/app/src/wallet/wallet.module').then((m) => m.WalletModule),
+  },
 ];
 
 @NgModule({

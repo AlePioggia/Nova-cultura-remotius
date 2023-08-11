@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-wallet"></i> Il tuo Portafoglio
+    </div>
+    <div class="card-body">
+      <!-- Mostra l'indirizzo email del portafoglio -->
+      <h6 class="mb-4">Email: {{ wallet.mail }}</h6>
+
+      <h5 class="card-title">Saldo: €{{ wallet.balance }}</h5>
+
+      <div class="row">
+        <div class="col-md-6">
+          <dx-number-box
+            [(value)]="wallet.balance"
+            [min]="0"
+            placeholder="Importo"
+          >
+          </dx-number-box>
+        </div>
+        <div class="col-md-6">
+          <!-- Dato che le funzioni deposit e withdraw sono commentate, i bottoni potrebbero non eseguire alcuna azione ora -->
+          <dx-button
+            text="Deposita"
+            icon="fas fa-arrow-down"
+            type="success"
+            (onClick)="deposit(wallet.balance)"
+          >
+          </dx-button>
+
+          <dx-button
+            text="Ritira"
+            icon="fas fa-arrow-up"
+            type="danger"
+            [disabled]="wallet.balance <= 0"
+            (onClick)="withdraw(wallet.balance)"
+          >
+          </dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { FooterModule } from './shared/components/footer/footer.component';
 import { HomepageModule } from './src/homepage/homepage.module';
 import { AuthInterceptor } from './auth.interceptor';
 import { ReviewModule } from './src/review/review.module';
+import { WalletModule } from './src/wallet/wallet.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,6 +23,7 @@ import { ReviewModule } from './src/review/review.module';
     FooterModule,
     HomepageModule,
     ReviewModule,
+    WalletModule,
   ],
   providers: [
     ScreenService,

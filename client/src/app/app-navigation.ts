@@ -9,6 +9,10 @@ export const studentNavigation = [
     icon: 'folder',
     items: [
       {
+        text: 'Wallet',
+        path: '/wallet',
+      },
+      {
         text: 'Chat',
         path: '',
       },
