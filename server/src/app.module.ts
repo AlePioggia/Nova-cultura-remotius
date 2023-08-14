@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { ReviewModule } from './modules/review/review.module';
 import { WalletModule } from './modules/wallet/wallet.module';
+import { PurchaseModule } from './modules/purchase/purchase.module';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { WalletModule } from './modules/wallet/wallet.module';
         PassportModule,
         ReviewModule,
         WalletModule,
+        PurchaseModule,
     ],
 })
 export class AppModule {}

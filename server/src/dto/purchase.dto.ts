@@ -1,21 +1,19 @@
 import { IsString, IsNotEmpty, IsNumber, IsEmail } from 'class-validator';
 
 export interface ICreatePurchaseDTO {
-    id: string;
-    studentMail: string;
+    operationId: number;
     amount: number;
+    lessonId: number;
 }
 
 export class CreatePurchaseDTO implements ICreatePurchaseDTO {
     @IsNotEmpty()
-    @IsString()
-    id: string;
-
-    @IsNotEmpty()
-    @IsEmail()
-    studentMail: string;
+    @IsNumber()
+    operationId: number;
 
     @IsNotEmpty()
     @IsNumber()
     amount: number;
+
+    lessonId: number;
 }

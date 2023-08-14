@@ -34,7 +34,13 @@ export class LessonService {
   }
 
   async getLessonsByTeacherMail(teacherMail: string): Promise<any> {
-    return this.http.get(`${this.baseUrl}email/${teacherMail}`).toPromise();
+    const params = new HttpParams().set('excludeStudent', false);
+
+    return this.http
+      .get(`${this.baseUrl}email/${teacherMail}`, {
+        params: params,
+      })
+      .toPromise();
   }
 
   async getLessons(teacherMail: string): Promise<any> {

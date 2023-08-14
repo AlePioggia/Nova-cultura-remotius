@@ -11,14 +11,17 @@ export class Purchase {
     })
     id: string;
 
-    @Prop({
-        required: true,
-        unique: true,
-    })
+    @Prop()
     studentMail: string;
 
     @Prop()
+    operationId: number;
+
+    @Prop()
     amount: number;
+
+    @Prop()
+    lessonId: number;
 }
 
 export const PurchaseSchema = SchemaFactory.createForClass(Purchase);

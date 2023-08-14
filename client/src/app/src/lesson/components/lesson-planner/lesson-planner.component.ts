@@ -3,6 +3,8 @@ import { LessonService } from '../../services/lesson.service';
 import { ILessonRequest } from 'src/app/interfaces/lesson.interface';
 import { ActivatedRoute } from '@angular/router';
 import { confirm } from 'devextreme/ui/dialog';
+import { WalletService } from 'src/app/src/wallet/services/wallet.service';
+import { PurchaseService } from 'src/app/src/wallet/services/purchase.service';
 
 @Component({
   selector: 'app-lesson-planner',
@@ -17,7 +19,9 @@ export class LessonPlannerComponent implements OnInit {
 
   constructor(
     private lessonService: LessonService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private walletService: WalletService,
+    private purchaseService: PurchaseService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.teacherMail = params['email'];
@@ -33,12 +37,19 @@ export class LessonPlannerComponent implements OnInit {
 
   onAppointmentClick(e: any) {
     const lessonId = e.appointmentData.id;
-    confirm('Do you want to book this lesson?', 'Confirmation').then(
-      async (result) => {
-        result
-          ? await this.lessonService.bookLesson(lessonId, this.studentMail)
-          : alert('peggio per te');
-      }
-    );
+    confirm(
+      'Do you want to book this lesson? You will spend 1 token',
+      'Confirmation'
+    ).then(async (result) => {
+      result ? await this.bookLesson(lessonId) : alert('peggio per te');
+    });
+  }
+
+  async bookLesson(lessonId: any) {
+    try {
+      await this.purchaseService.buyLesson(+lessonId);
+      await this.walletService.withdraw(1);
+      await this.lessonService.bookLesson(lessonId, this.studentMail);
+    } catch (error) {}
   }
 }
