@@ -28,4 +28,24 @@ export class ReviewsRepository {
     ) {
         return this.reviewModel.findOneAndUpdate(reviewFilterQuery, review);
     }
+
+    async getAverageRatings(): Promise<any[]> {
+        return this.reviewModel
+            .aggregate([
+                {
+                    $group: {
+                        _id: '$teacherMail',
+                        averageRating: { $avg: '$vote' },
+                    },
+                },
+                {
+                    $project: {
+                        teacherMail: '$_id',
+                        averageRating: 1,
+                        _id: 0,
+                    },
+                },
+            ])
+            .exec();
+    }
 }

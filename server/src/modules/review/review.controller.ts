@@ -20,7 +20,7 @@ export class ReviewController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post()
-    create(
+    async create(
         @Body() createReviewDto: CreateReviewDto,
         @Headers('authorization') authHeader: string,
     ) {
@@ -30,19 +30,28 @@ export class ReviewController {
 
     @UseGuards(AuthGuard('jwt'))
     @Put(':id')
-    update(@Param('id') id: string, @Body() review: Partial<CreateReviewDto>) {
+    async update(
+        @Param('id') id: string,
+        @Body() review: Partial<CreateReviewDto>,
+    ) {
         return this.reviewsService.update(id, review);
     }
 
     // @UseGuards(AuthGuard('jwt'))
     @Get('teacher/:teacherMail')
-    findByTeacher(@Param('teacherMail') teacherMail: string) {
+    async findByTeacher(@Param('teacherMail') teacherMail: string) {
         return this.reviewsService.findByTeacher(teacherMail);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('student/:studentMail')
-    findByStudent(@Param('studentMail') studentMail: string) {
+    async findByStudent(@Param('studentMail') studentMail: string) {
         return this.reviewsService.findByStudent(studentMail);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('average')
+    async getAverageRatings(): Promise<any[]> {
+        return this.reviewsService.getAverageRatings();
     }
 }

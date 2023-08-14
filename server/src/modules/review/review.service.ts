@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class ReviewService {
     constructor(private readonly reviewsRepository: ReviewsRepository) {}
 
-    create(reviewDto: CreateReviewDto, token: any) {
+    async create(reviewDto: CreateReviewDto, token: any) {
         return this.reviewsRepository.create({
             id: uuidv4(),
             teacherMail: reviewDto.teacherMail,
@@ -20,15 +20,19 @@ export class ReviewService {
         });
     }
 
-    update(id: string, review: Partial<Review>) {
+    async update(id: string, review: Partial<Review>) {
         return this.reviewsRepository.findOneAndUpdate({ id }, review);
     }
 
-    findByTeacher(teacherMail: string) {
+    async findByTeacher(teacherMail: string) {
         return this.reviewsRepository.find({ teacherMail });
     }
 
-    findByStudent(studentMail: string) {
+    async findByStudent(studentMail: string) {
         return this.reviewsRepository.find({ studentMail });
+    }
+
+    async getAverageRatings(): Promise<any[]> {
+        return this.reviewsRepository.getAverageRatings();
     }
 }
