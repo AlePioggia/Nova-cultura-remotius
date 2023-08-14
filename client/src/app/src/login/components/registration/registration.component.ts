@@ -8,6 +8,7 @@ import {
   CreateUserRequest,
   ICreateUserRequest,
 } from 'src/app/interfaces/user.interface';
+import { WalletService } from 'src/app/src/wallet/services/wallet.service';
 
 @Component({
   selector: 'app-registration',
@@ -21,11 +22,22 @@ export class RegistrationComponent {
 
   createUserRequest: ICreateUserRequest = new CreateUserRequest();
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private walletService: WalletService
+  ) {}
 
-  onFormSubmit = (e: any) => {
+  onFormSubmit = async (e: any) => {
     if (this.form.instance.validate().isValid) {
-      this.authenticationService.createUser(this.createUserRequest);
+      try {
+        console.log(this.createUserRequest);
+        await this.authenticationService.createUser(this.createUserRequest);
+        await this.walletService.createWalletWithMail(
+          this.createUserRequest.mail
+        );
+      } catch (error) {
+        throw error;
+      }
     }
   };
 }

@@ -35,13 +35,12 @@ export class UserController {
         return this.usersService.getTeachers();
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Post('create')
     async createOne(@Body() dto: UserDto) {
         return await this.usersService.createUser(
             dto.firstName,
             dto.lastName,
-            dto.email,
+            dto.mail,
             dto.age,
             dto.address,
             dto.password,

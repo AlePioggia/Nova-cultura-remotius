@@ -35,4 +35,11 @@ export class WalletService {
       })
       .toPromise();
   }
+
+  createWalletWithMail(mail: string): Promise<any> {
+    console.log(mail);
+    return this.http
+      .post<any>(`${this.baseUrl}mail`, { mail: mail })
+      .toPromise();
+  }
 }

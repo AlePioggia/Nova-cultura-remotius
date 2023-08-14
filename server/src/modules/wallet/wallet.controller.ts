@@ -27,6 +27,11 @@ export class WalletController {
         return this.walletsService.createWallet(token.mail);
     }
 
+    @Post('/mail')
+    async createWalletWithMail(@Body('mail') mail) {
+        return this.walletsService.createWallet(mail);
+    }
+
     @Post('/deposit')
     async deposit(
         @Body('amount') amount: number,

@@ -7,7 +7,7 @@ import {
 import { IsStrongPassword } from 'class-validator';
 
 export interface IUserDto {
-    email: string;
+    mail: string;
     firstName: string;
     lastName: string;
     age: number;
@@ -20,7 +20,7 @@ export interface IUserDto {
 export class UserDto implements IUserDto {
     @IsEmail()
     @IsNotEmpty()
-    email: string;
+    mail: string;
 
     @IsString()
     @IsNotEmpty()
