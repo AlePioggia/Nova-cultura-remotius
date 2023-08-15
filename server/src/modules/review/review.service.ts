@@ -35,4 +35,10 @@ export class ReviewService {
     async getAverageRatings(): Promise<any[]> {
         return this.reviewsRepository.getAverageRatings();
     }
+
+    async getAll(): Promise<any> {
+        return (await this.reviewsRepository.find({})).map(
+            (x) => x.studentMail,
+        );
+    }
 }

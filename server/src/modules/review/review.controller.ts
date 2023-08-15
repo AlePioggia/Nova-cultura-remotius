@@ -50,6 +50,12 @@ export class ReviewController {
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @Get('all')
+    async getAllStudentReviews(): Promise<any> {
+        return this.reviewsService.getAll();
+    }
+
+    @UseGuards(AuthGuard('jwt'))
     @Get('average')
     async getAverageRatings(): Promise<any[]> {
         return this.reviewsService.getAverageRatings();
