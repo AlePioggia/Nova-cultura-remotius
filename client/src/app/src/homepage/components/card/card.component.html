@@ -14,7 +14,24 @@
     </div>
     <div class="text-center border p-3">
       <h3>{{ itemData?.firstName }} {{ itemData?.lastName }}</h3>
-      <h5>{{ itemData.subjects }}</h5>
+      <h5>
+        {{ itemData.subjects }}
+
+        <div *ngIf="getAverageRating(itemData?.mail) !== null">
+          <!-- Visualizzazione delle stelle basate sulla valutazione -->
+          <div class="ml-2 d-inline-block">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              class="fa fa-star"
+              [ngClass]="{
+                'fas selected-star': getAverageRating(itemData?.mail) >= star,
+                far: getAverageRating(itemData?.mail) < star
+              }"
+            >
+            </span>
+          </div>
+        </div>
+      </h5>
       <p>
         <span class="font-weight-bold text-uppercase text-secondary">Email</span
         ><br /><span class="text-dark">{{ itemData?.mail }}</span>

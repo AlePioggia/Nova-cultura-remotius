@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IReviewAverage } from 'src/app/interfaces/review.interface';
 import { ICreateUserRequest } from 'src/app/interfaces/user.interface';
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
 
@@ -9,7 +10,8 @@ import { AuthenticationService } from 'src/app/src/login/services/authentication
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
-  @Input() data: ICreateUserRequest[];
+  @Input() data: ICreateUserRequest[] = [];
+  @Input() reviews: IReviewAverage[] = [];
   imageUrl: string = 'assets/idiot.jpg';
   studentMail: string;
   isTeacher: boolean;
@@ -35,6 +37,11 @@ export class CardComponent implements OnInit {
     this.routerService.navigate(['../review/insert'], {
       queryParams: { email: itemData.mail },
     });
+  }
+
+  getAverageRating(mail: string): number {
+    const review = this.reviews.find((r) => r.teacherMail === mail);
+    return review ? +review.averageRating.toFixed() : null;
   }
 
   showReviews(itemData: ICreateUserRequest) {

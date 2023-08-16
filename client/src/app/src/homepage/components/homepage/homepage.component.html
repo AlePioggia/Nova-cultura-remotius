@@ -3,7 +3,7 @@
   <app-search (query)="onSearch($event)"></app-search>
   <div class="row">
     <div class="col-lg-6" *ngFor="let item of filteredData">
-      <app-card [data]="[item]"></app-card>
+      <app-card [data]="[item]" [reviews]="reviews"></app-card>
     </div>
   </div>
 </div>

@@ -27,3 +27,13 @@ export class ReviewResponse implements IReviewResponse {
   vote: number;
   description: string;
 }
+
+export interface IReviewAverage {
+  averageRating: number;
+  teacherMail: string;
+}
+
+export class ReviewAverage implements IReviewAverage {
+  averageRating: number;
+  teacherMail: string;
+}

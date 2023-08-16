@@ -28,4 +28,8 @@ export class ReviewService {
   async updateReview(reviewId: string, reviewRequest: IReviewRequest) {
     this.http.patch(`${this.baseUrl}${reviewId}`, reviewRequest).toPromise();
   }
+
+  async getAverageRatings(): Promise<any> {
+    return this.http.get(`${this.baseUrl}average`).toPromise();
+  }
 }
