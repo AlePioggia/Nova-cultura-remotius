@@ -1,0 +1,21 @@
+/* Spazio attorno al contenitore principale */
+.container {
+  padding: 2rem 0;
+}
+
+/* Separazione tra la barra di ricerca e il pulsante dei filtri */
+.flex-grow-1 {
+  flex: 1 1 auto; /* Cresce e si riduce in base allo spazio disponibile, mantenendo la base automatica */
+}
+
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+/* Stile per il div dei filtri */
+div[hidden="false"] {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,9 @@
+<div class="mt-3 mb-3">
+  <label for="ratingFilter" class="form-label">Filtro per valutazione</label>
+  <select id="ratingFilter" class="form-select" (change)="filterCards($event)">
+    <option value="">Tutte le valutazioni</option>
+    <option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">
+      {{ star }} Stelle
+    </option>
+  </select>
+</div>

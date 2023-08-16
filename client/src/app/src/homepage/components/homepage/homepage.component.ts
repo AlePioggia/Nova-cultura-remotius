@@ -1,11 +1,12 @@
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   CreateUserRequest,
   ICreateUserRequest,
 } from 'src/app/interfaces/user.interface';
 import { ReviewService } from 'src/app/src/review/services/review.service';
 import { IReviewAverage } from 'src/app/interfaces/review.interface';
+import { DxPopoverComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-homepage',
@@ -14,8 +15,12 @@ import { IReviewAverage } from 'src/app/interfaces/review.interface';
 })
 export class HomepageComponent implements OnInit {
   data: ICreateUserRequest[] = [];
-  filteredData: ICreateUserRequest[] = [];
   reviews: IReviewAverage[] = [];
+
+  filteredData: ICreateUserRequest[] = []; // i dati attualmente visualizzati
+  ratingFilter: number = null;
+  @ViewChild(DxPopoverComponent, { static: false }) popover: DxPopoverComponent;
+  showFilters = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -28,7 +33,6 @@ export class HomepageComponent implements OnInit {
     this.filteredData = [...this.data];
     const reviews = await this.reviewService.getAverageRatings();
     this.reviews = reviews;
-    console.log(this.reviews);
   }
 
   onSearch(query: string) {
@@ -39,5 +43,29 @@ export class HomepageComponent implements OnInit {
 
   async isTeacher(): Promise<boolean> {
     return await this.authenticationService.isTeacher();
+  }
+
+  onRatingFilter(rating: any) {
+    this.ratingFilter = rating;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    if (this.ratingFilter) {
+      this.filteredData = this.data.filter((item) => {
+        const rating = this.reviews
+          .find((x) => x.teacherMail === item.mail)
+          .averageRating.toFixed();
+        return +rating === this.ratingFilter;
+      });
+      console.log(this.filteredData);
+    } else {
+      // se non ci sono filtri, mostra tutti i dati
+      this.filteredData = [...this.data];
+    }
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
   }
 }

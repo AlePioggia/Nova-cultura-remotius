@@ -1,0 +1,23 @@
+/* Stile generale del popover */
+.dx-popover {
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per l'intestazione e il contenuto del popover */
+.dx-popover .dx-overlay-content {
+  padding: 10px;
+}
+
+/* Stile per il filtro all'interno del popover */
+.dx-popover .form-select {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  transition: border-color 0.3s;
+}
+
+.dx-popover .form-select:hover {
+  border-color: #007bff;
+}
