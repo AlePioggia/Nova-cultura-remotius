@@ -45,6 +45,10 @@ export class AuthenticationService {
     return this.http.get(`${this.baseUrl}teachers`).toPromise();
   }
 
+  async getStudents(): Promise<any> {
+    return this.http.get(`${this.baseUrl}students`).toPromise();
+  }
+
   createUser(signInRequest: ICreateUserRequest) {
     this.helperService.post(this.baseUrl + 'create', signInRequest);
   }

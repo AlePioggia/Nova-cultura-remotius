@@ -28,8 +28,13 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const teachers = await this.authenticationService.getTeachers();
-    this.data = teachers;
+    const isTeacher: boolean = await this.isTeacher();
+
+    const data = isTeacher
+      ? await this.authenticationService.getStudents()
+      : await this.authenticationService.getTeachers();
+
+    this.data = data;
     this.filteredData = [...this.data];
     const reviews = await this.reviewService.getAverageRatings();
     this.reviews = reviews;
@@ -42,7 +47,7 @@ export class HomepageComponent implements OnInit {
   }
 
   async isTeacher(): Promise<boolean> {
-    return await this.authenticationService.isTeacher();
+    return this.authenticationService.isTeacher();
   }
 
   onRatingFilter(rating: any) {
@@ -58,7 +63,6 @@ export class HomepageComponent implements OnInit {
           .averageRating.toFixed();
         return +rating === this.ratingFilter;
       });
-      console.log(this.filteredData);
     } else {
       // se non ci sono filtri, mostra tutti i dati
       this.filteredData = [...this.data];

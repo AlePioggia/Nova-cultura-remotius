@@ -1,5 +1,10 @@
 <!-- my-card-list.component.html -->
-<dx-list [dataSource]="data" height="100%" class="my-card-list">
+<dx-list
+  *ngIf="!isTeacher"
+  [dataSource]="data"
+  height="100%"
+  class="my-card-list"
+>
   <div *dxTemplate="let itemData of 'item'" class="my-card-list-item">
     <div class="d-flex justify-content-center mb-4">
       <div class="profile-image-border">
@@ -68,6 +73,47 @@
           [width]="200"
           [stylingMode]="'contained'"
           (onClick)="showReviews(itemData)"
+        ></dx-button>
+      </div>
+    </div>
+  </div>
+</dx-list>
+
+<!-- my-card-list.component.html -->
+<dx-list
+  *ngIf="isTeacher"
+  [dataSource]="data"
+  height="100%"
+  class="my-card-list"
+>
+  <div *dxTemplate="let itemData of 'item'" class="my-card-list-item">
+    <div class="d-flex justify-content-center mb-4">
+      <div class="profile-image-border">
+        <dx-gallery
+          [dataSource]="[imageUrl]"
+          [height]="200"
+          [width]="200"
+          [loop]="false"
+          [showNavButtons]="false"
+        ></dx-gallery>
+      </div>
+    </div>
+    <div class="text-center border p-3">
+      <h3>{{ itemData?.firstName }} {{ itemData?.lastName }}</h3>
+      <p>
+        <span class="font-weight-bold text-uppercase text-secondary">Email</span
+        ><br /><span class="text-dark">{{ itemData?.mail }}</span>
+      </p>
+      <p>
+        <span class="font-weight-bold text-uppercase text-secondary">Età</span
+        ><br /><span class="text-dark">{{ itemData?.age }}</span>
+      </p>
+      <div class="d-flex justify-content-around mt-4">
+        <dx-button
+          text="Chatta"
+          type="default"
+          [width]="160"
+          [stylingMode]="'contained'"
         ></dx-button>
       </div>
     </div>

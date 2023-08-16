@@ -9,13 +9,17 @@
       <!-- Aggiungi classi per larghezza flessibile -->
 
       <!-- Pulsante per mostrare/nascondere i filtri -->
-      <button class="btn btn-secondary" (click)="toggleFilters()">
+      <button
+        class="btn btn-secondary"
+        (click)="toggleFilters()"
+        *ngIf="!isTeacher"
+      >
         Filtri
       </button>
     </div>
 
     <!-- Filtri (visibili sotto la barra di ricerca) -->
-    <div [hidden]="!showFilters" class="mt-3">
+    <div [hidden]="!showFilters" class="mt-3" *ngIf="!isTeacher">
       <app-rating-filter
         (onFilter)="onRatingFilter($event)"
       ></app-rating-filter>

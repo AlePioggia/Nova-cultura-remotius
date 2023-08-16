@@ -35,6 +35,12 @@ export class UserService {
         );
     }
 
+    async getStudents(): Promise<User[]> {
+        return (await this.usersRepository.find({})).filter(
+            (x) => x.roleId === 0,
+        );
+    }
+
     async createUser(
         firstName: string,
         lastName: string,
