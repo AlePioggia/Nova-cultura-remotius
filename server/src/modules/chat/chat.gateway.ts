@@ -30,7 +30,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     handleDisconnect(client: Socket) {
         const userId = this.extractUserIdFromToken(
-            client.handshake.query.authorization as string,
+            client.handshake.headers.authorization as string,
         );
         delete this.users[userId];
     }
@@ -40,13 +40,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         client: Socket,
         payload: { recipientId: string; message: string },
     ): Promise<void> {
-        const sender: any = this.extractUserIdFromToken(
+        const senderId: any = this.extractUserIdFromToken(
             client.handshake.headers.authorization as string,
         );
-        const senderId = sender.mail;
         const { recipientId, message } = payload;
-
-        console.log(payload);
 
         // Salvare il messaggio nel database utilizzando il servizio
         await this.chatService.createMessage({
