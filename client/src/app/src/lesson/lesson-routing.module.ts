@@ -1,30 +1,36 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { LessonComponent } from "./components/lesson/lesson.component";
-import { AuthorizationGuard } from "src/app/authorization.guard";
-import { LessonPlannerComponent } from "./components/lesson-planner/lesson-planner.component";
-import { LessonGridComponent } from "./components/lesson/data-grid/lesson-grid/lesson-grid.component";
-import { TeacherPlannerComponent } from "./components/teacher-planner/teacher-planner.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LessonComponent } from './components/lesson/lesson.component';
+import { AuthorizationGuard } from 'src/app/authorization.guard';
+import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
+import { LessonGridComponent } from './components/lesson/data-grid/lesson-grid/lesson-grid.component';
+import { TeacherPlannerComponent } from './components/teacher-planner/teacher-planner.component';
+import { MyLessonsPlannerComponent } from './components/my-lessons-planner/my-lessons-planner.component';
 
 const routes: Routes = [
   {
-    path: "new",
+    path: 'new',
     component: LessonComponent,
     canActivate: [AuthorizationGuard],
   },
   {
-    path: "",
+    path: '',
     component: LessonGridComponent,
     canActivate: [AuthorizationGuard],
   },
   {
-    path: "planner",
+    path: 'planner',
     component: LessonPlannerComponent,
     canActivate: [AuthorizationGuard],
   },
   {
-    path: "teacher-planner",
+    path: 'teacher-planner',
     component: TeacherPlannerComponent,
+    canActivate: [AuthorizationGuard],
+  },
+  {
+    path: 'my-lessons-planner',
+    component: MyLessonsPlannerComponent,
     canActivate: [AuthorizationGuard],
   },
 ];

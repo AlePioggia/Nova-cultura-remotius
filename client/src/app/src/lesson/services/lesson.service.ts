@@ -43,6 +43,10 @@ export class LessonService {
       .toPromise();
   }
 
+  async getLessonsForLoggedInUser(): Promise<any> {
+    return this.http.get(`${this.baseUrl}my-lessons/list`).toPromise();
+  }
+
   async getLessons(teacherMail: string): Promise<any> {
     const params = new HttpParams().set('excludeStudent', false);
 

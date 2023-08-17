@@ -22,6 +22,7 @@ import {
 import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
 import { LessonGridComponent } from './components/lesson/data-grid/lesson-grid/lesson-grid.component';
 import { TeacherPlannerComponent } from './components/teacher-planner/teacher-planner.component';
+import { MyLessonsPlannerComponent } from './components/my-lessons-planner/my-lessons-planner.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TeacherPlannerComponent } from './components/teacher-planner/teacher-pl
     LessonPlannerComponent,
     LessonGridComponent,
     TeacherPlannerComponent,
+    MyLessonsPlannerComponent,
   ],
   imports: [
     CommonModule,

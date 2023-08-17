@@ -1,3 +1,4 @@
+import { ChatModule } from './modules/chat/chat.module';
 import { LessonModule } from './modules/lesson/lesson.module';
 import { PassportModule } from '@nestjs/passport';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -11,6 +12,7 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
 
 @Module({
     imports: [
+        ChatModule,
         LessonModule,
         AuthModule,
         UserModule,

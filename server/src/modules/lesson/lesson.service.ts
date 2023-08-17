@@ -12,7 +12,7 @@ export class LessonService {
     }
 
     async getLessons() {
-        return this.lessonsRepository.find({});
+        return await this.lessonsRepository.find({});
     }
 
     async createLesson(dto: LessonDto, token: any) {
@@ -25,6 +25,16 @@ export class LessonService {
                 endTime: dto.endTime,
                 subject: dto.subject,
                 notes: dto.notes,
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getLessonsForLoggedInUser(token: any) {
+        try {
+            return await this.lessonsRepository.find({
+                studentMail: token?.mail ?? '',
             });
         } catch (error) {
             throw error;

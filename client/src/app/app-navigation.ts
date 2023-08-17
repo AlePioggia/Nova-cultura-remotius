@@ -13,6 +13,10 @@ export const studentNavigation = [
         path: '/wallet',
       },
       {
+        text: 'My lessons',
+        path: 'lesson/my-lessons-planner',
+      },
+      {
         text: 'Chat',
         path: '',
       },
@@ -33,6 +37,10 @@ export const teacherNavigation = [
       {
         text: 'Lessons',
         path: '/lesson',
+      },
+      {
+        text: 'Wallet',
+        path: '/wallet',
       },
       {
         text: 'Chat',
