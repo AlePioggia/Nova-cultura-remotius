@@ -8,10 +8,12 @@ import {
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
+import { ChatService } from './chat.service';
+import { ChatMessage } from 'src/schemas/chat-message.schema';
 
 @WebSocketGateway({ namespace: '/chat' })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-    constructor() {}
+    constructor(private readonly chatService: ChatService) {}
 
     @WebSocketServer() server;
 
@@ -21,6 +23,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const userId = this.extractUserIdFromToken(
             client.handshake.headers.authorization as string,
         );
+        console.log();
         this.users[userId] = client.id;
         client.emit('connected', { userId, users: this.users });
     }
@@ -33,18 +36,31 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     @SubscribeMessage('privateMessage')
-    handlePrivateMessage(
+    async handlePrivateMessage(
         client: Socket,
         payload: { recipientId: string; message: string },
-    ): void {
+    ): Promise<void> {
+        const sender: any = this.extractUserIdFromToken(
+            client.handshake.headers.authorization as string,
+        );
+        const senderId = sender.mail;
         const { recipientId, message } = payload;
+
+        console.log(payload);
+
+        // Salvare il messaggio nel database utilizzando il servizio
+        await this.chatService.createMessage({
+            senderMail: senderId,
+            receiverMail: payload.recipientId,
+            message: payload.message,
+            timeStamp: new Date(), // se vuoi che il timestamp venga registrato quando viene inviato il messaggio
+        });
+
         const targetSocketId = this.users[recipientId];
         if (targetSocketId) {
             client.to(targetSocketId).emit('receivePrivateMessage', message);
         }
     }
-
-    // You might have other methods to handle different message types, group chats, etc.
 
     private extractUserIdFromToken(authHeader: string): string {
         const token: any = jwt.decode(authHeader.split(' ')[1]);
