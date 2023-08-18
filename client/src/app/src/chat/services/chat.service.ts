@@ -13,14 +13,14 @@ export class ChatService {
   }
 
   async getMessageByReceiver(): Promise<any> {
-    return this.http.get(`${this.baseUrl}receiver`);
+    return this.http.get(`${this.baseUrl}receiver`).toPromise();
   }
 
   async getMessageBySender(): Promise<any> {
-    return this.http.get(`${this.baseUrl}sender`);
+    return this.http.get(`${this.baseUrl}sender`).toPromise();
   }
 
   async getAllMessages(): Promise<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}`).toPromise();
   }
 }
