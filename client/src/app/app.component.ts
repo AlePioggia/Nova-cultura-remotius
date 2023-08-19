@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'client';
 
   constructor(private authenticationService: AuthenticationService) {
-    localStorage.setItem('isTeacher', '0');
+    sessionStorage.setItem('isTeacher', '0');
   }
 
   isAuthenticated() {

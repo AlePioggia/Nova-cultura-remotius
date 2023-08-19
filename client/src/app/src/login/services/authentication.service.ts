@@ -25,7 +25,7 @@ export class AuthenticationService {
 
   constructor(private helperService: HelperService, private http: HttpClient) {
     this.baseUrl = BASE_URL + 'users/';
-    const isPippo = localStorage.getItem('isTeacher') === '1';
+    const isPippo = sessionStorage.getItem('isTeacher') === '1';
     this._isPippo.next(isPippo);
   }
 
@@ -37,7 +37,7 @@ export class AuthenticationService {
     sessionStorage.setItem('access_token', response['access_token']);
     const data = this.getUser(response['access_token']);
     const user: ICreateUserRequest = await this.getUserById(data.sub);
-    await localStorage.setItem('isTeacher', user.roleId.toString());
+    await sessionStorage.setItem('isTeacher', user.roleId.toString());
     location.reload();
   }
 

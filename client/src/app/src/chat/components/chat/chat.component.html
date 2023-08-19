@@ -2,7 +2,7 @@
   <div dx-scroll-view class="messages-container">
     <div
       *ngFor="let message of messages"
-      [ngClass]="message.senderMail === currentUser ? 'sender' : 'receiver'"
+      [ngClass]="message.senderMail === currentUser ? 'receiver' : 'sender'"
     >
       {{ message.message }}
     </div>

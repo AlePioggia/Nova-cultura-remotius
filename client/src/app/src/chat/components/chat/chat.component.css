@@ -1,5 +1,5 @@
 .chat-container {
-  width: 90%; /* Ridotta al 80% della larghezza totale */
+  width: 85%; /* Ridotta al 80% della larghezza totale */
   max-width: 1000px; /* Larghezza massima di 600px per dispositivi grandi */
   height: 80vh; /* Ridotta all'80% dell'altezza della pagina */
   margin: 10vh auto; /* Centrata verticalmente e orizzontalmente */
