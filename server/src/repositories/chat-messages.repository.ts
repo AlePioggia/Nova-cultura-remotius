@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import {
     ChatMessage,
     ChatMessageDocument,
@@ -30,6 +30,12 @@ export class ChatMessageRepository {
 
     async findByReceiver(receiverMail: string): Promise<ChatMessageDocument[]> {
         return this.chatMessageModel.find({ receiverMail }).exec();
+    }
+
+    async find(
+        chatMessageFilterQuery: FilterQuery<ChatMessage>,
+    ): Promise<ChatMessage[]> {
+        return this.chatMessageModel.find(chatMessageFilterQuery);
     }
 
     async findOne(id: string): Promise<ChatMessageDocument> {

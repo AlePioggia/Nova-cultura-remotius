@@ -18,11 +18,29 @@ export class ChatService {
         return this.chatMessageRepository.findAll();
     }
 
-    async getMessagesBySender(senderMail: string): Promise<ChatMessage[]> {
+    async getMessagesBySender(
+        senderMail: string,
+        receiver?: string,
+    ): Promise<ChatMessage[]> {
+        if (receiver) {
+            return this.chatMessageRepository.find({
+                senderMail: senderMail,
+                receiverMail: receiver,
+            });
+        }
         return this.chatMessageRepository.findBySender(senderMail);
     }
 
-    async getMessagesByReceiver(receiverMail: string): Promise<ChatMessage[]> {
+    async getMessagesByReceiver(
+        receiverMail: string,
+        sender?: string,
+    ): Promise<ChatMessage[]> {
+        if (sender) {
+            return this.chatMessageRepository.find({
+                receiverMail: receiverMail,
+                senderMail: sender,
+            });
+        }
         return this.chatMessageRepository.findByReceiver(receiverMail);
     }
 

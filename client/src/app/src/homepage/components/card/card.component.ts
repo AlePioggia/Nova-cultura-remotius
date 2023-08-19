@@ -29,8 +29,10 @@ export class CardComponent implements OnInit {
     this.isTeacher = teacher;
   }
 
-  openChat() {
-    console.log('Functionality not yet implemented');
+  openChat(itemData: ICreateUserRequest) {
+    this.routerService.navigate(['../chat'], {
+      queryParams: { email: itemData.mail },
+    });
   }
 
   openPopup(itemData: ICreateUserRequest) {

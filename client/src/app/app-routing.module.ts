@@ -34,6 +34,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/src/wallet/wallet.module').then((m) => m.WalletModule),
   },
+  {
+    path: 'chat',
+    loadChildren: () =>
+      import('src/app/src/chat/chat.module').then((m) => m.ChatModule),
+  },
 ];
 
 @NgModule({

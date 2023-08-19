@@ -8,6 +8,7 @@ import {
     Param,
     Headers,
     NotFoundException,
+    Query,
 } from '@nestjs/common';
 import { ChatService } from './chat.service'; // Modifica il percorso in base alla tua struttura
 import { ChatMessage } from 'src/schemas/chat-message.schema';
@@ -35,17 +36,19 @@ export class ChatController {
     @Get('messages/sender')
     async getMessagesBySender(
         @Headers('Authorization') authHeader: string,
+        @Query('receiver') receiver: string,
     ): Promise<ChatMessage[]> {
         const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.chatService.getMessagesBySender(token?.mail);
+        return this.chatService.getMessagesBySender(token?.mail, receiver);
     }
 
     @Get('messages/receiver')
     async getMessagesByReceiver(
         @Headers('Authorization') authHeader: string,
+        @Query('sender') sender: string,
     ): Promise<ChatMessage[]> {
         const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.chatService.getMessagesByReceiver(token?.mail);
+        return this.chatService.getMessagesByReceiver(token?.mail, sender);
     }
 
     @Get('message/:id')

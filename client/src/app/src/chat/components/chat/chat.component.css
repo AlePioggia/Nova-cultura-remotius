@@ -1,0 +1,56 @@
+.chat-container {
+  width: 90%; /* Ridotta al 80% della larghezza totale */
+  max-width: 1000px; /* Larghezza massima di 600px per dispositivi grandi */
+  height: 80vh; /* Ridotta all'80% dell'altezza della pagina */
+  margin: 10vh auto; /* Centrata verticalmente e orizzontalmente */
+  border: 1px solid #ccc; /* Aggiunto un bordo leggero */
+  border-radius: 10px; /* Angoli arrotondati */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #f7f7f7; /* Aggiunto uno sfondo leggero per contrastare con la pagina */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombra leggera per un effetto "elevato" */
+}
+
+.messages-container {
+  overflow-y: scroll;
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sender,
+.receiver {
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.sender {
+  align-self: flex-start;
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #388e3c;
+}
+
+.receiver {
+  align-self: flex-end;
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #1976d2;
+}
+
+.input-group {
+  margin-top: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dx-button {
+  width: auto;
+}

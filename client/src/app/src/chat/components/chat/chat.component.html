@@ -1,0 +1,23 @@
+<div class="chat-container">
+  <div dx-scroll-view class="messages-container">
+    <div
+      *ngFor="let message of messages"
+      [ngClass]="message.senderMail === currentUser ? 'sender' : 'receiver'"
+    >
+      {{ message.message }}
+    </div>
+  </div>
+
+  <div class="input-group mt-3">
+    <dx-text-box
+      [(value)]="newMessage"
+      placeholder="Type a message..."
+      class="form-control"
+    >
+    </dx-text-box>
+    <div class="input-group-append">
+      <dx-button (onClick)="sendMessage()" text="Send" type="default">
+      </dx-button>
+    </div>
+  </div>
+</div>
