@@ -1,5 +1,5 @@
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   AuthenticationRequest,
@@ -12,6 +12,11 @@ import {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  passwordVisible: boolean = false;
+
+  // Riferimento al dx-text-box
+  @ViewChild('passwordBox') passwordBox;
+
   authenticationRequest: AuthenticationRequest = new AuthenticationRequest(
     '',
     ''
@@ -44,5 +49,19 @@ export class LoginComponent {
 
   setPassword(e: any) {
     this.authenticationRequest.password = e.value;
+  }
+
+  // Definizione del pulsante
+  passwordButton = {
+    icon: 'fa fa-eye',
+    type: 'default',
+    onClick: () => this.togglePasswordVisibility(),
+  };
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+    this.passwordButton.icon = this.passwordVisible
+      ? 'fa fa-eye-slash'
+      : 'fa fa-eye';
   }
 }

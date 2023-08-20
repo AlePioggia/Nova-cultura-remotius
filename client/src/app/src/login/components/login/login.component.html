@@ -6,12 +6,21 @@
     ></dx-text-box>
   </dxi-item>
   <dxi-item dataField="password" [isRequired]="true">
-    <dx-text-box
-      mode="password"
-      placeholder="Password"
-      (onValueChanged)="setPassword($event)"
-    ></dx-text-box>
+    <div class="password-container">
+      <dx-text-box
+        #passwordBox
+        [mode]="passwordVisible ? 'text' : 'password'"
+        placeholder="Password"
+        (onValueChanged)="setPassword($event)"
+      >
+      </dx-text-box>
+      <i
+        class="fa fa-eye password-toggle-icon"
+        (click)="togglePasswordVisibility()"
+      ></i>
+    </div>
   </dxi-item>
+
   <dxi-item>
     <a routerLink="./register">Don't have an account? Register</a>
   </dxi-item>
