@@ -12,6 +12,7 @@ import { HomepageModule } from './src/homepage/homepage.module';
 import { AuthInterceptor } from './auth.interceptor';
 import { ReviewModule } from './src/review/review.module';
 import { WalletModule } from './src/wallet/wallet.module';
+import { DxToastModule } from 'devextreme-angular';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,6 +25,7 @@ import { WalletModule } from './src/wallet/wallet.module';
     HomepageModule,
     ReviewModule,
     WalletModule,
+    DxToastModule,
   ],
   providers: [
     ScreenService,

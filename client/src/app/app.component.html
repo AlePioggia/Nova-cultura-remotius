@@ -1,16 +1,4 @@
-<ng-container *ngIf="isAuthenticated()">
-  <app-side-nav-outer-toolbar title="Nova cultura remotius">
-    <router-outlet></router-outlet>
-    <!-- <app-footer>
-      Copyright © 2011- Inc.
-      <br />
-      All trademarks or registered trademarks are property of their respective
-      owners.
-    </app-footer> -->
-  </app-side-nav-outer-toolbar>
-</ng-container>
-
-<ng-container *ngIf="!isAuthenticated()">
+<ng-container>
   <app-side-nav-outer-toolbar title="Nova cultura remotius">
     <router-outlet></router-outlet>
     <!-- <app-footer>

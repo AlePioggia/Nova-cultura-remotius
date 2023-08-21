@@ -1,3 +1,4 @@
+import { ToastService } from './../../../shared/services/toast.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   ICreateUserRequest,
@@ -7,7 +8,13 @@ import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/app/constants';
 import { IAuthenticationRequest } from 'src/app/interfaces/user.interface';
 import { HelperService } from 'src/app/shared/services/service-helper.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  catchError,
+  throwError,
+} from 'rxjs';
 
 export type Role = {
   id: number;
@@ -18,27 +25,43 @@ export type Role = {
   providedIn: 'root',
 })
 export class AuthenticationService {
+  private loggedInStatus = new BehaviorSubject<boolean>(this.isUserLoggedIn());
+  public isLoggedIn$ = this.loggedInStatus.asObservable();
+
   baseUrl: string = '';
   private _isPippo = new BehaviorSubject<boolean>(false);
 
   isPippo$ = this._isPippo.asObservable();
 
-  constructor(private helperService: HelperService, private http: HttpClient) {
+  constructor(
+    private helperService: HelperService,
+    private http: HttpClient,
+    private toastService: ToastService
+  ) {
     this.baseUrl = BASE_URL + 'users/';
     const isPippo = sessionStorage.getItem('isTeacher') === '1';
     this._isPippo.next(isPippo);
   }
 
   async logIn(authenticationRequest: IAuthenticationRequest) {
-    const response = await this.helperService.post(
-      this.baseUrl + 'sign-user',
-      authenticationRequest
-    );
-    sessionStorage.setItem('access_token', response['access_token']);
-    const data = this.getUser(response['access_token']);
-    const user: ICreateUserRequest = await this.getUserById(data.sub);
-    await sessionStorage.setItem('isTeacher', user.roleId.toString());
-    location.reload();
+    try {
+      const response = await this.helperService.post(
+        this.baseUrl + 'sign-user',
+        authenticationRequest
+      );
+      sessionStorage.setItem('access_token', response['access_token']);
+      const data = this.getUser(response['access_token']);
+      const user: ICreateUserRequest = await this.getUserById(data.sub);
+      await sessionStorage.setItem('isTeacher', user.roleId.toString());
+      this.toastService.showSuccess('Accesso avvenuto con successo!');
+      this.loggedInStatus.next(true);
+      // Aspetta 3 secondi (o il tempo desiderato) prima di ricaricare la pagina
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    } catch (error) {
+      this.toastService.showError('Credenziali errate');
+    }
   }
 
   async getTeachers(): Promise<any> {
@@ -49,7 +72,7 @@ export class AuthenticationService {
     return this.http.get(`${this.baseUrl}students`).toPromise();
   }
 
-  createUser(signInRequest: ICreateUserRequest) {
+  async createUser(signInRequest: ICreateUserRequest) {
     this.helperService.post(this.baseUrl + 'create', signInRequest);
   }
 
@@ -68,6 +91,7 @@ export class AuthenticationService {
 
   logOut() {
     sessionStorage.removeItem('access_token');
+    this.loggedInStatus.next(false);
   }
 
   async isTeacher(): Promise<boolean> {

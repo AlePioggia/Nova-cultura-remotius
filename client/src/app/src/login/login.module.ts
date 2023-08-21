@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import {
@@ -9,6 +8,7 @@ import {
   DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
+  DxToastModule,
   DxValidatorModule,
 } from 'devextreme-angular';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -24,6 +24,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     DxSelectBoxModule,
     DxValidatorModule,
     DxNumberBoxModule,
+    DxToastModule,
   ],
   exports: [LoginComponent, RegistrationComponent],
 })

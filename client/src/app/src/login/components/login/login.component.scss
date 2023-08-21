@@ -20,13 +20,16 @@ dx-form {
 
   dxi-item {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     margin-bottom: 20px;
+    align-items: center;
 
     dx-text-box {
+      flex: 1;
+      margin-right: 5px;
       background-color: $secondary-color;
       border-radius: 4px;
-      width: 300px;
+      width: 270px; // Sottraiamo la dimensione del bottone per renderlo allineato
     }
 
     a {
@@ -34,20 +37,27 @@ dx-form {
       text-decoration: none;
     }
 
-    .password-container {
+    dx-button[type="default"] {
+      width: 30px;
+      height: 30px;
+      margin-left: -40px;
+      z-index: 2;
       position: relative;
-      display: inline-block;
+      background-color: transparent;
+      border: none;
+      border-radius: 4px;
+      padding: 0;
 
-      .password-toggle-icon {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        cursor: pointer;
+      .dx-icon {
+        font-size: 16px;
+      }
+
+      &:hover {
+        background-color: $secondary-color;
       }
     }
 
-    dx-button {
+    dx-button[type="success"] {
       background-color: $success-color;
       border: none;
       color: $primary-color;

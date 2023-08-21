@@ -16,11 +16,9 @@ export class LoginComponent {
 
   // Riferimento al dx-text-box
   @ViewChild('passwordBox') passwordBox;
+  @ViewChild('form') form: any;
 
-  authenticationRequest: AuthenticationRequest = new AuthenticationRequest(
-    '',
-    ''
-  );
+  authenticationRequest: IAuthenticationRequest = new AuthenticationRequest();
 
   submitButtonOptions = {
     text: 'Submit the Form',
@@ -34,21 +32,15 @@ export class LoginComponent {
 
   onFormSubmit(e: any) {
     try {
-      if (this.authenticationRequest) {
+      if (this.form && !this.form.instance.validate().isValid) {
+        return;
+      } else if (this.form && this.form.instance.validate().isValid) {
         this.authenticationService.logIn(this.authenticationRequest);
         this.router.navigate(['/home']);
       }
     } catch (error) {
       throw error;
     }
-  }
-
-  setEmail(e: any) {
-    this.authenticationRequest.email = e.value;
-  }
-
-  setPassword(e: any) {
-    this.authenticationRequest.password = e.value;
   }
 
   // Definizione del pulsante

@@ -1,24 +1,30 @@
-<dx-form #form [(formData)]="authenticationRequest">
+<dx-form #form [formData]="authenticationRequest">
   <dxi-item dataField="email" [isRequired]="true">
-    <dx-text-box
-      placeholder="Email"
-      (onValueChanged)="setEmail($event)"
-    ></dx-text-box>
+    <dx-text-box placeholder="Email" [(value)]="authenticationRequest.email">
+      <dxi-validation-rule
+        type="required"
+        message="Email is required"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="email"
+        message="Invalid email format"
+      ></dxi-validation-rule>
+    </dx-text-box>
   </dxi-item>
+
   <dxi-item dataField="password" [isRequired]="true">
-    <div class="password-container">
-      <dx-text-box
-        #passwordBox
-        [mode]="passwordVisible ? 'text' : 'password'"
-        placeholder="Password"
-        (onValueChanged)="setPassword($event)"
-      >
-      </dx-text-box>
-      <i
-        class="fa fa-eye password-toggle-icon"
-        (click)="togglePasswordVisibility()"
-      ></i>
-    </div>
+    <dx-text-box
+      #passwordBox
+      [mode]="passwordVisible ? 'text' : 'password'"
+      placeholder="Enter your password"
+      [(value)]="authenticationRequest.password"
+    ></dx-text-box>
+    <dx-button
+      icon="fa fa-eye"
+      type="default"
+      [stylingMode]="'text'"
+      (onClick)="togglePasswordVisibility()"
+    ></dx-button>
   </dxi-item>
 
   <dxi-item>
