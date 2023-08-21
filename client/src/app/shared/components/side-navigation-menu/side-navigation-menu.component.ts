@@ -17,6 +17,7 @@ import { studentNavigation, teacherNavigation } from '../../../app-navigation';
 
 import * as events from 'devextreme/events';
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-navigation-menu',
@@ -79,7 +80,8 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -95,6 +97,16 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   onItemClick(event) {
+    const selectedItem = event.itemData;
+    if (selectedItem.path) {
+      const navigationExtras = selectedItem.fromMenu
+        ? { queryParams: { fromMenu: selectedItem.fromMenu } }
+        : {};
+      console.log(navigationExtras);
+      this.router.navigate([selectedItem.path], {
+        queryParams: { fromMenu: 'true' },
+      });
+    }
     this.selectedItemChanged.emit(event);
   }
 

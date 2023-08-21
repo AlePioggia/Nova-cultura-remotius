@@ -8,3 +8,7 @@
   display: flex;
   font-size: 2rem; /* Aumenta ulteriormente la dimensione del font delle stelle */
 }
+
+.container:last-child {
+  margin-bottom: 70px; /* o qualsiasi altro valore che ti sembra adeguato */
+}

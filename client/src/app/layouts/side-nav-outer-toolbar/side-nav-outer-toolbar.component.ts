@@ -73,7 +73,7 @@ export class SideNavOuterToolbarComponent implements OnInit {
       if (event.node.selected) {
         pointerEvent.preventDefault();
       } else {
-        this.router.navigate([path]);
+        this.router.navigate([path], { queryParams: { fromMenu: 'true' } });
         this.scrollView.instance.scrollTo(0);
       }
 

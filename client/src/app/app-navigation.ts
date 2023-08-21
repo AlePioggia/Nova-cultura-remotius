@@ -17,6 +17,11 @@ export const studentNavigation = [
         path: 'lesson/my-lessons-planner',
       },
       {
+        text: 'My reviews',
+        path: 'review/show',
+        fromMenu: 'true',
+      },
+      {
         text: 'Chat',
         path: '',
       },
@@ -41,6 +46,11 @@ export const teacherNavigation = [
       {
         text: 'Wallet',
         path: '/wallet',
+      },
+      {
+        text: 'My reviews',
+        path: 'review/show',
+        fromMenu: 'true',
       },
       {
         text: 'Chat',

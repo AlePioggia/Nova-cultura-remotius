@@ -21,7 +21,7 @@ export class ReviewService {
     return this.http.get(`${this.baseUrl}teacher/${teacherMail}`).toPromise();
   }
 
-  async getByStudent(studentMail: string) {
+  async getByStudent(studentMail: string): Promise<any> {
     return this.http.get(`${this.baseUrl}student/${studentMail}`).toPromise();
   }
 

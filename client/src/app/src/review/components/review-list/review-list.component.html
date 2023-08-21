@@ -30,7 +30,12 @@
             >
             </span>
           </div>
-
+          <p *ngIf="!isTeacher && fromMenu">
+            Riferita a: {{ review.teacherMail }}
+          </p>
+          <p *ngIf="isTeacher && fromMenu">
+            Pubblicata da: {{ review.studentMail }}
+          </p>
           <p class="card-text">{{ review.description }}</p>
         </div>
       </div>

@@ -37,7 +37,7 @@ export class ReviewController {
         return this.reviewsService.update(id, review);
     }
 
-    // @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'))
     @Get('teacher/:teacherMail')
     async findByTeacher(@Param('teacherMail') teacherMail: string) {
         return this.reviewsService.findByTeacher(teacherMail);
