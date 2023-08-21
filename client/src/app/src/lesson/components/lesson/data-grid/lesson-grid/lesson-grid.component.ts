@@ -1,3 +1,4 @@
+import { ToastService } from './../../../../../../shared/services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -18,7 +19,8 @@ export class LessonGridComponent implements OnInit {
   constructor(
     private lessonService: LessonService,
     private authenticationService: AuthenticationService,
-    private routerService: Router
+    private routerService: Router,
+    private toastService: ToastService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -33,16 +35,37 @@ export class LessonGridComponent implements OnInit {
       ...(e.oldData as ILessonSimpleRequest),
       ...(e.newData as ILessonSimpleRequest),
     };
-    await this.lessonService.patchLesson(e.oldData.id, data);
+    try {
+      await this.lessonService.patchLesson(e.oldData.id, data);
+      this.toastService.showSuccess('Lezione aggiornata con successo!');
+    } catch (error) {
+      this.toastService.showError(
+        "Errore nell'aggiornamento della lezione, si prega di riprovare"
+      );
+    }
   }
 
-  rowRemoving(e) {
-    this.lessonService.deleteLesson(e.data.id);
+  async rowRemoving(e) {
+    try {
+      await this.lessonService.deleteLesson(e.data.id);
+      this.toastService.showSuccess('Lezione eliminata con successo!');
+    } catch (error) {
+      this.toastService.showError(
+        "Errore nell'eliminazione della lezione, si prega di riprovare"
+      );
+    }
   }
 
   async rowInserted(e) {
     const data: ILessonRequest = e.data;
-    await this.lessonService.createLesson(data);
+    try {
+      await this.lessonService.createLesson(data);
+      this.toastService.showSuccess(
+        'inserimento della lezione avvenuto con successo'
+      );
+    } catch (error) {
+      this.toastService.showError("errore durante l'inserimento");
+    }
   }
 
   toggleView() {

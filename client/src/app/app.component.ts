@@ -15,15 +15,12 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
-  ) {
-    sessionStorage.setItem('isTeacher', '0');
-  }
+  ) {}
 
   ngOnInit() {
     this.subscription = this.authenticationService.isLoggedIn$.subscribe(
       (isLoggedIn) => {
         if (isLoggedIn) {
-          // Reindirizza l'utente a una pagina dopo l'autenticazione, ad esempio la dashboard
           this.router.navigate(['/home']);
         } else {
           this.router.navigate(['']);

@@ -6,6 +6,7 @@ import {
   ILessonSimpleRequest,
 } from 'src/app/interfaces/lesson.interface';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-teacher-planner',
@@ -19,7 +20,8 @@ export class TeacherPlannerComponent implements OnInit {
   constructor(
     private lessonService: LessonService,
     private authenticationService: AuthenticationService,
-    private routerService: Router
+    private routerService: Router,
+    private toastService: ToastService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -31,7 +33,14 @@ export class TeacherPlannerComponent implements OnInit {
 
   async onLessonAdding(e) {
     const data: ILessonRequest = e.appointmentData;
-    await this.lessonService.createLesson(data);
+    try {
+      await this.lessonService.createLesson(data);
+      this.toastService.showSuccess('inserimento avvenuto con successo!');
+    } catch (error) {
+      this.toastService.showError(
+        "errore nell'inserimento, contattare il servizio clienti"
+      );
+    }
   }
 
   async onLessonUpdating(e) {
@@ -39,11 +48,25 @@ export class TeacherPlannerComponent implements OnInit {
       ...(e.oldData as ILessonSimpleRequest),
       ...(e.newData as ILessonSimpleRequest),
     };
-    await this.lessonService.patchLesson(e.oldData.id, data);
+    try {
+      await this.lessonService.patchLesson(e.oldData.id, data);
+      this.toastService.showSuccess('Lezione aggiornata con successo!');
+    } catch (error) {
+      this.toastService.showError(
+        "Errore nell'aggiornamento della lezione, contattare il servizio clienti"
+      );
+    }
   }
 
   async onLessonDeleting(e) {
-    await this.lessonService.deleteLesson(e.appointmentData.id);
+    try {
+      await this.lessonService.deleteLesson(e.appointmentData.id);
+      this.toastService.showSuccess('Lezione eliminata con successo!');
+    } catch (error) {
+      this.toastService.showError(
+        "Errore nell'eliminazione della lezione, contattare il servizio clienti"
+      );
+    }
   }
 
   onAppointmentFormOpening(e) {

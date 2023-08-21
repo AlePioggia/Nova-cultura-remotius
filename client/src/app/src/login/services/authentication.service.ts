@@ -118,7 +118,8 @@ export class AuthenticationService {
     return sessionStorage.getItem('access_token') !== null;
   }
 
-  isTeacherToken(): boolean {
-    return sessionStorage.getItem('access_token') === '1';
+  async isTeacherToken(): Promise<boolean> {
+    const user: any = await this.getAllUserInformations();
+    return this.isUserLoggedIn ? user.roleId === '1' : false;
   }
 }
