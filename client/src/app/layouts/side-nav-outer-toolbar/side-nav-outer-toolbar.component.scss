@@ -10,10 +10,14 @@
 }
 
 .layout-body {
+  flex-direction: column;
+  display: flex;
   flex: 1;
   min-height: 0;
 }
 
 .content {
+  flex-direction: column;
+  display: flex;
   flex-grow: 1;
 }

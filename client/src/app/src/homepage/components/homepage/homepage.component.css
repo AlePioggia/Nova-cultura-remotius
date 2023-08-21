@@ -1,6 +1,7 @@
 /* Spazio attorno al contenitore principale */
 .container {
   padding: 2rem 0;
+  margin-bottom: 2rem; /* aggiungi questo */
 }
 
 /* Separazione tra la barra di ricerca e il pulsante dei filtri */
@@ -15,7 +16,7 @@
 /* Stile per il div dei filtri */
 div[hidden="false"] {
   border: 1px solid #ddd;
-  padding: 1rem;
+  padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
