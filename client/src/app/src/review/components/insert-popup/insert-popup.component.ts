@@ -5,6 +5,7 @@ import {
 } from 'src/app/interfaces/review.interface';
 import { ReviewService } from '../../services/review.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-insert-popup',
@@ -19,7 +20,8 @@ export class InsertPopupComponent implements OnInit {
   constructor(
     private reviewService: ReviewService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) {
     this.reviewRequest.vote = 1;
     this.route.queryParams.subscribe((params) => {
@@ -44,8 +46,15 @@ export class InsertPopupComponent implements OnInit {
     this.router.navigate(['../home']);
   }
 
-  submitReview() {
-    this.reviewService.createReview(this.reviewRequest);
-    this.hideReviewPopup();
+  async submitReview() {
+    try {
+      await this.reviewService.createReview(this.reviewRequest);
+      this.toastService.showSuccess('Recensione inserita con successo!');
+      this.hideReviewPopup();
+    } catch (error) {
+      this.toastService.showError(
+        "Errore durante l'inserimento della recensione. Si prega di riprovare."
+      );
+    }
   }
 }
