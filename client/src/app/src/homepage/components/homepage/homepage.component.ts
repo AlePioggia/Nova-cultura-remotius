@@ -38,6 +38,21 @@ export class HomepageComponent implements OnInit {
     this.filteredData = [...this.data];
     const reviews = await this.reviewService.getAverageRatings();
     this.reviews = reviews;
+
+    this.orderDataByReview(this.data);
+    this.orderDataByReview(this.filteredData);
+    console.log(this.data);
+  }
+
+  orderDataByReview(data: any) {
+    data.sort((a, b) => {
+      const averageRatingA =
+        this.reviews.find((x) => x.teacherMail === a.mail).averageRating || 0;
+      const averageRatingB =
+        this.reviews.find((x) => x.teacherMail === b.mail).averageRating || 0;
+
+      return averageRatingB - averageRatingA;
+    });
   }
 
   onSearch(query: string) {

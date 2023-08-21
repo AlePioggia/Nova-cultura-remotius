@@ -10,8 +10,8 @@ import { AuthenticationService } from 'src/app/src/login/services/authentication
   styleUrls: ['./review-list.component.css'],
 })
 export class ReviewListComponent implements OnInit {
-  reviews: ReviewResponse[]; // Assuming you have a Review type
-  filteredReviews: ReviewResponse[]; // Displayed reviews
+  reviews: ReviewResponse[];
+  filteredReviews: ReviewResponse[];
   teacherMail: string = '';
   fromMenu: boolean = false;
   isTeacher: boolean;
@@ -63,10 +63,5 @@ export class ReviewListComponent implements OnInit {
         review.title.toLowerCase().includes(searchTerm) ||
         review.description.toLowerCase().includes(searchTerm)
     );
-  }
-
-  getTargetName(itemData: any) {
-    if (this.fromMenu && this.isTeacher) {
-    }
   }
 }
