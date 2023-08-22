@@ -13,13 +13,10 @@ import {
 })
 export class UserComponent {
   teacher = {
-    name: 'Mario Rossi',
-    bio: 'Sono un insegnante appassionato con 10 anni di esperienza',
-    email: 'mario.rossi@gmail.com',
-    subject: 'Matematica',
     imageUrl: 'assets/idiot.jpg',
   };
 
+  isTeacher: boolean;
   user: ICreateUserRequest;
 
   constructor(
@@ -28,9 +25,10 @@ export class UserComponent {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.isTeacher = await this.authenticationService.isTeacher();
     const result = await this.authenticationService.getAllUserInformations();
+    console.log(result);
     this.user = result;
-    console.log(this.user);
   }
 
   addLesson() {

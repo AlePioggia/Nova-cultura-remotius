@@ -9,10 +9,6 @@ export const studentNavigation = [
     icon: 'folder',
     items: [
       {
-        text: 'Wallet',
-        path: '/wallet',
-      },
-      {
         text: 'My lessons',
         path: 'lesson/my-lessons-planner',
       },
@@ -22,8 +18,8 @@ export const studentNavigation = [
         fromMenu: 'true',
       },
       {
-        text: 'Chat',
-        path: '',
+        text: 'Wallet',
+        path: '/wallet',
       },
     ],
   },
@@ -44,17 +40,13 @@ export const teacherNavigation = [
         path: '/lesson',
       },
       {
-        text: 'Wallet',
-        path: '/wallet',
-      },
-      {
         text: 'My reviews',
         path: 'review/show',
         fromMenu: 'true',
       },
       {
-        text: 'Chat',
-        path: '',
+        text: 'Wallet',
+        path: '/wallet',
       },
     ],
   },
