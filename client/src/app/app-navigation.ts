@@ -21,6 +21,10 @@ export const studentNavigation = [
         text: 'Wallet',
         path: '/wallet',
       },
+      {
+        text: 'Reservations',
+        path: '/wallet/reservations',
+      },
     ],
   },
 ];
@@ -47,6 +51,10 @@ export const teacherNavigation = [
       {
         text: 'Wallet',
         path: '/wallet',
+      },
+      {
+        text: 'Reservations',
+        path: '/wallet/reservations',
       },
     ],
   },

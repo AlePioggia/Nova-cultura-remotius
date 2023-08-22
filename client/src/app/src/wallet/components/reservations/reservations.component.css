@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+dx-data-grid {
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}

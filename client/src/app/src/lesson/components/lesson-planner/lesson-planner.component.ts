@@ -36,6 +36,7 @@ export class LessonPlannerComponent implements OnInit {
   }
 
   onAppointmentClick(e: any) {
+    console.log(e.appointmentData);
     const lessonId = e.appointmentData.id;
     confirm(
       'Do you want to book this lesson? You will spend 1 token',
@@ -47,9 +48,11 @@ export class LessonPlannerComponent implements OnInit {
 
   async bookLesson(lessonId: any) {
     try {
-      await this.purchaseService.buyLesson(+lessonId);
+      await this.purchaseService.buyLesson(+lessonId, this.teacherMail);
       await this.walletService.withdraw(1);
       await this.lessonService.bookLesson(lessonId, this.studentMail);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -17,11 +17,12 @@ export class PurchaseService {
     return this.http.post<any>(`${this.baseUrl}create`, purchase).toPromise();
   }
 
-  async buyLesson(lessonId: number) {
+  async buyLesson(lessonId: number, teacherMail: string) {
     const purchase: IPurchase = new Purchase();
     purchase.operationId = 0;
     purchase.amount = 1;
     purchase.lessonId = lessonId;
+    purchase.teacherMail = teacherMail;
     await this.createPurchase(purchase);
   }
 
@@ -39,11 +40,11 @@ export class PurchaseService {
     await this.createPurchase(purchase);
   }
 
-  getPurchases(): Promise<any> {
-    return this.http.get<any>(`${this.baseUrl}`).toPromise();
+  getStudentPurchases(): Promise<any> {
+    return this.http.get<any>(`${this.baseUrl}student`).toPromise();
   }
 
-  getOperationIds() {
-    return { 1: 'buy', 2: 'deposit', 3: 'withdraw' };
+  getTeacherPurchases(): Promise<any> {
+    return this.http.get<any>(`${this.baseUrl}teacher`).toPromise();
   }
 }

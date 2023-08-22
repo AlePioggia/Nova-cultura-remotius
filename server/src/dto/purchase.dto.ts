@@ -4,6 +4,7 @@ export interface ICreatePurchaseDTO {
     operationId: number;
     amount: number;
     lessonId: number;
+    teacherMail: string;
 }
 
 export class CreatePurchaseDTO implements ICreatePurchaseDTO {
@@ -16,4 +17,8 @@ export class CreatePurchaseDTO implements ICreatePurchaseDTO {
     amount: number;
 
     lessonId: number;
+
+    @IsNotEmpty()
+    @IsEmail()
+    teacherMail: string;
 }

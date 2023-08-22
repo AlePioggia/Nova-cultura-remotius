@@ -36,12 +36,14 @@ export class HomepageComponent implements OnInit {
 
     this.data = data;
     this.filteredData = [...this.data];
+
     const reviews = await this.reviewService.getAverageRatings();
     this.reviews = reviews;
 
-    this.orderDataByReview(this.data);
-    this.orderDataByReview(this.filteredData);
-    console.log(this.data);
+    if (!(await this.authenticationService.isTeacher())) {
+      this.orderDataByReview(this.data);
+      this.orderDataByReview(this.filteredData);
+    }
   }
 
   orderDataByReview(data: any) {

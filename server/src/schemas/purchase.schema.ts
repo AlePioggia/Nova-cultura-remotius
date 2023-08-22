@@ -12,6 +12,9 @@ export class Purchase {
     id: string;
 
     @Prop()
+    teacherMail: string;
+
+    @Prop()
     studentMail: string;
 
     @Prop()

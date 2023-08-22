@@ -15,15 +15,28 @@ export class PurchaseService {
                 operationId: dto.operationId,
                 amount: dto.amount,
                 lessonId: dto.lessonId,
+                teacherMail: dto.teacherMail,
             });
         } catch (error) {
             throw error;
         }
     }
 
-    async getPurchases(token: any) {
+    async getStudentPurchases(token: any) {
         try {
-            await this.purchasesRepository.find({ mail: token.mail });
+            return await this.purchasesRepository.find({
+                studentMail: token.mail,
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getTeacherPurchases(token: any) {
+        try {
+            return await this.purchasesRepository.find({
+                teacherMail: token.mail,
+            });
         } catch (error) {
             throw error;
         }

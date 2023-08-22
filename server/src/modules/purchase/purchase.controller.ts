@@ -22,14 +22,20 @@ export class PurchaseController {
         @Headers('authorization') authHeader: string,
     ) {
         const token = jwt.decode(authHeader.split(' ')[1]);
-        console.log(token);
         return this.purchaseService.createPurchase(dto, token);
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Get()
-    async getAll(@Headers('authorization') authHeader: string) {
-        const token = jwt.decode(authHeader.split('')[1]);
-        return this.purchaseService.getPurchases(token);
+    @Get('student')
+    async getByStudent(@Headers('authorization') authHeader: string) {
+        const token = jwt.decode(authHeader.split(' ')[1]);
+        return this.purchaseService.getStudentPurchases(token);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('teacher')
+    async getByTeacher(@Headers('authorization') authHeader: string) {
+        const token = jwt.decode(authHeader.split(' ')[1]);
+        return this.purchaseService.getTeacherPurchases(token);
     }
 }
