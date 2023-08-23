@@ -81,7 +81,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         if (targetSocketId) {
             client
                 .to(targetSocketId)
-                .emit('receiveNotification', { result: notificationContent });
+                .emit('receiveNotification', { result: notification });
         }
     }
 

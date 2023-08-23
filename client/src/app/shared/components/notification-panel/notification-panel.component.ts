@@ -1,3 +1,4 @@
+import { NotificationService } from '../../services/notification.service';
 import { WebsocketService } from './../../../src/chat/services/web-socket.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,14 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class NotificationPanelComponent implements OnInit {
   notifications: any[] = [];
 
-  constructor(private webSocketService: WebsocketService) {}
+  constructor(
+    private webSocketService: WebsocketService,
+    private notificationService: NotificationService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.notifications = await this.notificationService.getNotifications();
     this.webSocketService
       .onNotificationReceived()
       .subscribe((notification: any) => {
-        this.notifications.push(notification);
-        console.log(notification);
+        this.notifications.push(notification.result.notificationContent);
       });
   }
+
+  deleteNotification(notification: any) {
+    console.log(notification);
+    const index = this.notifications.indexOf(notification);
+    if (index > -1) {
+      this.notifications.splice(index, 1);
+    }
+    this.notificationService.deleteNotification(notification.id);
+  }
+
+  handleNotificationClick(notification: any) {}
 }

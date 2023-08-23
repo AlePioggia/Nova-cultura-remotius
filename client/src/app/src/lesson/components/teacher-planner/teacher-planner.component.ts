@@ -7,6 +7,7 @@ import {
 } from 'src/app/interfaces/lesson.interface';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-teacher-planner',
@@ -21,7 +22,8 @@ export class TeacherPlannerComponent implements OnInit {
     private lessonService: LessonService,
     private authenticationService: AuthenticationService,
     private routerService: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private notificationService: NotificationService
   ) {}
 
   async ngOnInit(): Promise<void> {

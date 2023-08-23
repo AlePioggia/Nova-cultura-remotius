@@ -1,8 +1,14 @@
 <div class="notification-panel">
   <h5>Notifiche</h5>
-  <ul>
-    <li *ngFor="let notification of notifications">
+  <div *ngFor="let notification of notifications" class="notification-card">
+    <div
+      (click)="handleNotificationClick(notification)"
+      class="notification-content"
+    >
       {{ notification.notificationContent }}
-    </li>
-  </ul>
+    </div>
+    <button class="delete-button" (click)="deleteNotification(notification)">
+      &#10006;
+    </button>
+  </div>
 </div>

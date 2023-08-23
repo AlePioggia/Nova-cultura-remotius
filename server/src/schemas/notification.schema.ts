@@ -6,6 +6,9 @@ export type NotificationDocument = Notification & Document;
 @Schema()
 export class Notification {
     @Prop()
+    id: string;
+
+    @Prop()
     mail: string;
 
     @Prop()
@@ -15,5 +18,4 @@ export class Notification {
     timeStamp?: Date;
 }
 
-export const NotificationMessageSchema =
-    SchemaFactory.createForClass(Notification);
+export const NotificationSchema = SchemaFactory.createForClass(Notification);

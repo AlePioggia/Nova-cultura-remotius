@@ -18,4 +18,12 @@ export class NotificationService {
     async getNotificationsByMail(mail: string): Promise<Notification[]> {
         return this.notificationRepository.findByMail(mail);
     }
+
+    async deleteOne(id: string) {
+        try {
+            await this.notificationRepository.deleteOne({ id: id });
+        } catch (error) {
+            throw error;
+        }
+    }
 }

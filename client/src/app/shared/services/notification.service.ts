@@ -23,11 +23,15 @@ export class NotificationService {
     this._showNotifications.next(false);
   }
 
-  async getNotifications() {
+  async getNotifications(): Promise<any> {
     return this.http.get(`${this.baseUrl}`).toPromise();
   }
 
   async createNotification(message: string) {
     return this.http.post(`${this.baseUrl}`, message);
+  }
+
+  async deleteNotification(id: string): Promise<any> {
+    this.http.delete(`${this.baseUrl}${id}`).toPromise();
   }
 }
