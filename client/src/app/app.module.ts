@@ -13,8 +13,9 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ReviewModule } from './src/review/review.module';
 import { WalletModule } from './src/wallet/wallet.module';
 import { DxToastModule } from 'devextreme-angular';
+import { NotificationPanelComponent } from './shared/components/notification-panel/notification-panel.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotificationPanelComponent],
   imports: [
     BrowserModule,
     LoginModule,

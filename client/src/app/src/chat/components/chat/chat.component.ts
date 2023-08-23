@@ -53,15 +53,17 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    console.log(this.currentUser, this.otherUser);
-
     const messagePayload = {
       senderMail: this.currentUser,
       receiverMail: this.otherUser,
       message: this.newMessage,
       timestamp: new Date(),
     };
-    this.websocketService.sendMessage('privateMessage', messagePayload); // supponendo che 'privateMessage' sia l'evento utilizzato per inviare messaggi
+    this.websocketService.sendMessage('privateMessage', messagePayload);
+    this.websocketService.sendNotification(
+      this.otherUser,
+      '1 messaggio in arrivo da ' + this.currentUser + '!'
+    );
     this.messages.push(messagePayload);
     this.newMessage = '';
   }

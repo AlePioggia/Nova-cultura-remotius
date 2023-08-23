@@ -10,7 +10,6 @@ export class WebsocketService {
 
   constructor() {
     const token = sessionStorage.getItem('access_token');
-    console.log(token);
     this.socket = io('ws://localhost:3000/chat', {
       query: {
         Authorization: 'Bearer ' + token,
@@ -18,12 +17,10 @@ export class WebsocketService {
     });
   }
 
-  // Metodo per inviare messaggi
   sendMessage(event: string, message: any): void {
     this.socket.emit(event, message);
   }
 
-  // Metodo per ricevere messaggi
   onMessage(event: string): Observable<any> {
     const observable = new Subject<any>();
 
@@ -34,7 +31,23 @@ export class WebsocketService {
     return observable;
   }
 
-  // Metodo per chiudere la connessione WebSocket
+  sendNotification(receiverMail: string, notificationContent: string) {
+    this.socket.emit('sendNotification', {
+      receiverMail: receiverMail,
+      notificationContent: notificationContent,
+    });
+  }
+
+  onNotificationReceived(): Observable<any> {
+    const observable = new Subject<any>();
+
+    this.socket.on('receiveNotification', (notification: any) => {
+      observable.next(notification);
+    });
+
+    return observable;
+  }
+
   closeConnection(): void {
     this.socket.disconnect();
   }

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { DxButtonModule, DxToolbarModule } from 'devextreme-angular';
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
+import { NotificationService } from '../../services/notification-service.service';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,8 @@ export class HeaderComponent implements OnInit {
   title: string;
 
   user = { email: '' };
+
+  isNotificationPanelOpened: boolean = false;
 
   userMenuItems = [
     {
@@ -48,7 +51,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService
   ) {}
 
   async ngOnInit() {
@@ -59,6 +63,16 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu = () => {
     this.menuToggle.emit();
+  };
+
+  toggleNotifications = () => {
+    if (this.isNotificationPanelOpened) {
+      this.notificationService.closeNotifications();
+      this.isNotificationPanelOpened = false;
+    } else {
+      this.notificationService.toggleNotifications();
+      this.isNotificationPanelOpened = true;
+    }
   };
 }
 

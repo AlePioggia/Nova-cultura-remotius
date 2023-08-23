@@ -48,17 +48,33 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     ): Promise<void> {
         const { senderMail, receiverMail, message } = payload;
 
-        // Salvare il messaggio nel database utilizzando il servizio
         const result = await this.chatService.createMessage({
             senderMail: senderMail,
             receiverMail: receiverMail,
             message: message,
-            timeStamp: new Date(), // se vuoi che il timestamp venga registrato quando viene inviato il messaggio
+            timeStamp: new Date(),
         });
 
         const targetSocketId = this.users[receiverMail];
         if (targetSocketId) {
             client.to(targetSocketId).emit('receivePrivateMessage', result);
+        }
+    }
+
+    @SubscribeMessage('sendNotification')
+    async handleNotification(
+        client: Socket,
+        payload: { receiverMail: string; notificationContent: string },
+    ): Promise<void> {
+        const { receiverMail, notificationContent } = payload;
+
+        const targetSocketId = this.users[receiverMail];
+        if (targetSocketId) {
+            console.log('ricevuta la notifica');
+
+            client
+                .to(targetSocketId)
+                .emit('receiveNotification', { notificationContent });
         }
     }
 

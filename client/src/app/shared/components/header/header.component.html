@@ -22,6 +22,12 @@
     <dxi-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
       <div *dxTemplate="let data of 'item'">
         <dx-button
+          icon="bell"
+          stylingMode="text"
+          (onClick)="toggleNotifications()"
+        ></dx-button>
+
+        <dx-button
           class="user-button authorization"
           width="210px"
           height="100%"

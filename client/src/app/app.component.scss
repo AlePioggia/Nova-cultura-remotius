@@ -7,6 +7,6 @@
 }
 
 .content-wrapper {
-  flex: 1; // occupa tutto lo spazio disponibile, spingendo il footer in basso
-  overflow-y: auto; // permette lo scroll se il contenuto è troppo lungo
+  flex: 1;
+  overflow-y: auto;
 }
