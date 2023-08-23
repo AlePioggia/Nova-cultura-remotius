@@ -1,3 +1,4 @@
+import { NotificationModule } from './modules/notification/notification.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { LessonModule } from './modules/lesson/lesson.module';
 import { PassportModule } from '@nestjs/passport';
@@ -9,9 +10,11 @@ import { ConfigModule } from '@nestjs/config';
 import { ReviewModule } from './modules/review/review.module';
 import { WalletModule } from './modules/wallet/wallet.module';
 import { PurchaseModule } from './modules/purchase/purchase.module';
+import { ChatGateway } from './modules/chat/chat.gateway';
 
 @Module({
     imports: [
+        NotificationModule,
         ChatModule,
         LessonModule,
         AuthModule,

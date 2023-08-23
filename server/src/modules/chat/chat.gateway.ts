@@ -10,6 +10,7 @@ import { Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
 import { ChatService } from './chat.service';
 import { ChatMessage } from 'src/schemas/chat-message.schema';
+import { NotificationService } from '../notification/notification.service';
 
 @WebSocketGateway({
     namespace: '/chat',
@@ -20,7 +21,10 @@ import { ChatMessage } from 'src/schemas/chat-message.schema';
     },
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-    constructor(private readonly chatService: ChatService) {}
+    constructor(
+        private readonly chatService: ChatService,
+        private readonly notificationService: NotificationService,
+    ) {}
 
     @WebSocketServer() server;
 
@@ -68,13 +72,16 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     ): Promise<void> {
         const { receiverMail, notificationContent } = payload;
 
+        const notification = await this.notificationService.createNotification(
+            receiverMail,
+            notificationContent,
+        );
+
         const targetSocketId = this.users[receiverMail];
         if (targetSocketId) {
-            console.log('ricevuta la notifica');
-
             client
                 .to(targetSocketId)
-                .emit('receiveNotification', { notificationContent });
+                .emit('receiveNotification', { result: notificationContent });
         }
     }
 

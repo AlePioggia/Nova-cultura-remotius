@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { DxButtonModule, DxToolbarModule } from 'devextreme-angular';
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
-import { NotificationService } from '../../services/notification-service.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-header',

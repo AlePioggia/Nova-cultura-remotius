@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from './src/login/services/authentication.service';
 import { Router } from '@angular/router';
-import { NotificationService } from './shared/services/notification-service.service';
+import { NotificationService } from './shared/services/notification.service';
 
 @Component({
   selector: 'app-root',
