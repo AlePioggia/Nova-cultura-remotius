@@ -18,7 +18,5 @@ export class CreatePurchaseDTO implements ICreatePurchaseDTO {
 
     lessonId: number;
 
-    @IsNotEmpty()
-    @IsEmail()
     teacherMail: string;
 }

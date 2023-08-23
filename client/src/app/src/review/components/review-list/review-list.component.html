@@ -1,42 +1,46 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-12">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Cerca recensioni..."
-        (input)="onSearch($event)"
-      />
+<div class="main-content">
+  <h4 class="mb-4 ml-10">Recensioni</h4>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cerca recensioni..."
+          (input)="onSearch($event)"
+        />
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-12" *ngFor="let review of reviews">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">{{ review.title }}</h5>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12" *ngFor="let review of reviews">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.title }}</h5>
 
-          <!-- Visualizzazione delle stelle -->
-          <div class="mb-3 stars-container">
-            <span
-              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
-              class="fa fa-star"
-              [ngClass]="{
-                'fas selected-star': review.vote >= star,
-                far: review.vote < star
-              }"
-            >
-            </span>
+            <!-- Visualizzazione delle stelle -->
+            <div class="mb-3 stars-container">
+              <span
+                *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                class="fa fa-star"
+                [ngClass]="{
+                  'fas selected-star': review.vote >= star,
+                  far: review.vote < star
+                }"
+              >
+              </span>
+            </div>
+            <p *ngIf="!isTeacher && fromMenu">
+              Riferita a: {{ review.teacherMail }}
+            </p>
+            <p *ngIf="isTeacher && fromMenu">
+              Pubblicata da: {{ review.studentMail }}
+            </p>
+            <p class="card-text">{{ review.description }}</p>
           </div>
-          <p *ngIf="!isTeacher && fromMenu">
-            Riferita a: {{ review.teacherMail }}
-          </p>
-          <p *ngIf="isTeacher && fromMenu">
-            Pubblicata da: {{ review.studentMail }}
-          </p>
-          <p class="card-text">{{ review.description }}</p>
         </div>
       </div>
     </div>

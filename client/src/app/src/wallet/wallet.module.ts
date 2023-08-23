@@ -7,8 +7,10 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxNumberBoxModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import { ReservationsComponent } from './components/reservations/reservations.component';
+import { DxiToolbarItemModule } from 'devextreme-angular/ui/nested';
 
 @NgModule({
   declarations: [WalletFormComponent, ReservationsComponent],
@@ -18,6 +20,8 @@ import { ReservationsComponent } from './components/reservations/reservations.co
     DxButtonModule,
     DxNumberBoxModule,
     DxDataGridModule,
+    DxToolbarModule,
+    DxiToolbarItemModule,
   ],
 })
 export class WalletModule {}

@@ -1,14 +1,27 @@
+.main-content {
+  padding: 20px; /* Questo crea una spaziatura intorno a tutto il contenuto compreso il titolo */
+}
+
 .fa-star {
   color: black;
   margin-right: 5px;
-  font-size: 1.2rem; /* dimensione delle stelle */
+  font-size: 1.2rem;
 }
 
 .stars-container {
   display: flex;
-  font-size: 2rem; /* Aumenta ulteriormente la dimensione del font delle stelle */
+  font-size: 2rem;
 }
 
 .container:last-child {
-  margin-bottom: 70px; /* o qualsiasi altro valore che ti sembra adeguato */
+  margin-bottom: 70px;
+}
+
+h4 {
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  text-align: center; /* Questa proprietà centra il titolo */
 }

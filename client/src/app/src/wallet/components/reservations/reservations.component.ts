@@ -45,6 +45,10 @@ export class ReservationsComponent implements OnInit {
   }
 
   operationIdToName = (data: any) => {
-    return data.operationId === 0 ? 'acquisto' : 'altro';
+    return data.operationId === 0
+      ? 'acquisto'
+      : data.operationId === 1
+      ? 'deposito'
+      : 'ritiro';
   };
 }
