@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center; /* Centra orizzontalmente i contenuti */
+  padding: 20px; /* Aggiunge spazio dai bordi */
+}
+
+dx-scheduler,
+.scheduler-toolbar {
+  max-width: 1200px; /* Definisce una larghezza massima per il contenitore */
+  width: 100%; /* Ogni elemento occuperà il 100% della larghezza disponibile, fino a 1200px */
+}
+
+dx-scheduler {
+  flex: 1;
+  margin-bottom: 100px;
+}
+
+.scheduler-toolbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start; /* Assicura che il pulsante rimanga a destra */
+  width: 100%; /* Estende la toolbar sull'intera larghezza */
+}
+
+.scheduler-toolbar button {
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scheduler-toolbar button:hover {
+  background-color: gray;
+  color: white;
+}

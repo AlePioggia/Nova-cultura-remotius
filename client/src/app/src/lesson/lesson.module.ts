@@ -17,6 +17,7 @@ import {
 import {
   DxiViewModule,
   DxoTextsModule,
+  DxoToolbarModule,
   DxoValidationModule,
 } from 'devextreme-angular/ui/nested';
 import { LessonPlannerComponent } from './components/lesson-planner/lesson-planner.component';
@@ -46,6 +47,7 @@ import { MyLessonsPlannerComponent } from './components/my-lessons-planner/my-le
     DxDataGridModule,
     DxoTextsModule,
     DxSwitchModule,
+    DxoToolbarModule,
   ],
   exports: [LessonComponent],
 })

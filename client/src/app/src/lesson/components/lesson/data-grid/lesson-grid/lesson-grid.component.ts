@@ -71,4 +71,21 @@ export class LessonGridComponent implements OnInit {
   toggleView() {
     this.routerService.navigate(['../lesson/teacher-planner']);
   }
+
+  customizeToolbar(e) {
+    let toolbarItems = e.toolbarOptions.items;
+
+    // Aggiungi un nuovo pulsante alla toolbar
+    toolbarItems.push({
+      widget: 'dxButton',
+      options: {
+        text: 'Visualizza calendario',
+        onClick: this.toggleView.bind(this),
+        elementAttr: {
+          class: 'custom-calendar-button',
+        },
+      },
+      location: 'before',
+    });
+  }
 }

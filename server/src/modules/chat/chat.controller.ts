@@ -9,8 +9,10 @@ import {
     Headers,
     NotFoundException,
     Query,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
-import { ChatService } from './chat.service'; // Modifica il percorso in base alla tua struttura
+import { ChatService } from './chat.service';
 import { ChatMessage } from 'src/schemas/chat-message.schema';
 import * as jwt from 'jsonwebtoken';
 
@@ -23,14 +25,25 @@ export class ChatController {
         @Headers('Authorization') authHeader: string,
         @Body() createChatMessageDto: Partial<ChatMessage>,
     ): Promise<ChatMessage> {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        createChatMessageDto.senderMail = token?.mail;
-        return this.chatService.createMessage(createChatMessageDto);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            createChatMessageDto.senderMail = token?.mail;
+            return await this.chatService.createMessage(createChatMessageDto);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get('messages')
     async getAllMessages(): Promise<ChatMessage[]> {
-        return this.chatService.getAllMessages();
+        try {
+            return await this.chatService.getAllMessages();
+        } catch (error) {
+            throw new HttpException(
+                error.message,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+            );
+        }
     }
 
     @Get('messages/sender')
@@ -38,8 +51,15 @@ export class ChatController {
         @Headers('Authorization') authHeader: string,
         @Query('receiver') receiver: string,
     ): Promise<ChatMessage[]> {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.chatService.getMessagesBySender(token?.mail, receiver);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.chatService.getMessagesBySender(
+                token?.mail,
+                receiver,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get('messages/receiver')
@@ -47,13 +67,34 @@ export class ChatController {
         @Headers('Authorization') authHeader: string,
         @Query('sender') sender: string,
     ): Promise<ChatMessage[]> {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.chatService.getMessagesByReceiver(token?.mail, sender);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.chatService.getMessagesByReceiver(
+                token?.mail,
+                sender,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get('message/:id')
     async getMessageById(@Param('id') id: string): Promise<ChatMessage> {
-        return this.chatService.getMessageById(id);
+        try {
+            const message = await this.chatService.getMessageById(id);
+            if (!message) {
+                throw new NotFoundException('Message not found');
+            }
+            return message;
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                throw error;
+            }
+            throw new HttpException(
+                error.message,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+            );
+        }
     }
 
     @Put('message/:id')
@@ -61,11 +102,22 @@ export class ChatController {
         @Param('id') id: string,
         @Body() updateChatMessageDto: Partial<ChatMessage>,
     ): Promise<ChatMessage> {
-        return this.chatService.updateMessage(id, updateChatMessageDto);
+        try {
+            return await this.chatService.updateMessage(
+                id,
+                updateChatMessageDto,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Delete('message/:id')
     async deleteMessage(@Param('id') id: string): Promise<ChatMessage> {
-        return this.chatService.deleteMessage(id);
+        try {
+            return await this.chatService.deleteMessage(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -3,14 +3,14 @@
     <div class="content-wrapper">
       <router-outlet></router-outlet>
     </div>
+    <div *ngIf="showNotifications" class="col-md-2">
+      <app-notification-panel></app-notification-panel>
+    </div>
     <app-footer>
       Copyright © 2011- Inc.
       <br />
       All trademarks or registered trademarks are property of their respective
       owners.
     </app-footer>
-    <div *ngIf="showNotifications" class="col-md-2">
-      <app-notification-panel></app-notification-panel>
-    </div>
   </app-side-nav-outer-toolbar>
 </ng-container>

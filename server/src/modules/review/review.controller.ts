@@ -1,4 +1,3 @@
-// reviews.controller.ts
 import {
     Body,
     Controller,
@@ -8,6 +7,8 @@ import {
     Put,
     UseGuards,
     Headers,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
 import { CreateReviewDto } from 'src/dto/review.dto';
 import { ReviewService } from './review.service';
@@ -24,8 +25,12 @@ export class ReviewController {
         @Body() createReviewDto: CreateReviewDto,
         @Headers('authorization') authHeader: string,
     ) {
-        const token = jwt.decode(authHeader.split(' ')[1]);
-        return this.reviewsService.create(createReviewDto, token);
+        try {
+            const token = jwt.decode(authHeader.split(' ')[1]);
+            return await this.reviewsService.create(createReviewDto, token);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -34,30 +39,50 @@ export class ReviewController {
         @Param('id') id: string,
         @Body() review: Partial<CreateReviewDto>,
     ) {
-        return this.reviewsService.update(id, review);
+        try {
+            return await this.reviewsService.update(id, review);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('teacher/:teacherMail')
     async findByTeacher(@Param('teacherMail') teacherMail: string) {
-        return this.reviewsService.findByTeacher(teacherMail);
+        try {
+            return await this.reviewsService.findByTeacher(teacherMail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('student/:studentMail')
     async findByStudent(@Param('studentMail') studentMail: string) {
-        return this.reviewsService.findByStudent(studentMail);
+        try {
+            return await this.reviewsService.findByStudent(studentMail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('all')
     async getAllStudentReviews(): Promise<any> {
-        return this.reviewsService.getAll();
+        try {
+            return await this.reviewsService.getAll();
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('average')
     async getAverageRatings(): Promise<any[]> {
-        return this.reviewsService.getAverageRatings();
+        try {
+            return await this.reviewsService.getAverageRatings();
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 }

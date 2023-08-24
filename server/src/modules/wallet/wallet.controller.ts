@@ -6,6 +6,8 @@ import {
     Body,
     Param,
     Headers,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { CreateWalletDTO } from 'src/dto/wallet.dto';
@@ -17,19 +19,31 @@ export class WalletController {
 
     @Get()
     async getWallet(@Headers('authorization') authHeader: string) {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.walletsService.getWalletByMail(token.mail);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.walletsService.getWalletByMail(token.mail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 
     @Post('/')
     async createWallet(@Headers('authorization') authHeader: string) {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.walletsService.createWallet(token.mail);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.walletsService.createWallet(token.mail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Post('/mail')
     async createWalletWithMail(@Body('mail') mail) {
-        return this.walletsService.createWallet(mail);
+        try {
+            return await this.walletsService.createWallet(mail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Post('/deposit')
@@ -37,8 +51,12 @@ export class WalletController {
         @Body('amount') amount: number,
         @Headers('authorization') authHeader: string,
     ) {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.walletsService.deposit(token.mail, amount);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.walletsService.deposit(token.mail, amount);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Post('/withdraw')
@@ -46,7 +64,11 @@ export class WalletController {
         @Body('amount') amount: number,
         @Headers('authorization') authHeader: string,
     ) {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.walletsService.withdraw(token.mail, amount);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.walletsService.withdraw(token.mail, amount);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 }

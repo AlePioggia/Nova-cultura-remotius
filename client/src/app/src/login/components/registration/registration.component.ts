@@ -30,7 +30,6 @@ export class RegistrationComponent {
   onFormSubmit = async (e: any) => {
     if (this.form.instance.validate().isValid) {
       try {
-        console.log(this.createUserRequest);
         await this.authenticationService.createUser(this.createUserRequest);
         await this.walletService.createWalletWithMail(
           this.createUserRequest.mail

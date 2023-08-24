@@ -110,7 +110,23 @@
       [min]="8"
       message="Password must be at least 8 characters long"
     ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="pattern"
+      pattern="^(?=.*[a-z])(?=.*[A-Z]).*$"
+      message="Password must contain both uppercase and lowercase characters"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="pattern"
+      pattern="^(?=.*[0-9]).*$"
+      message="Password must contain at least one number"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="pattern"
+      pattern="^(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]).*$"
+      message="Password must contain at least one special character"
+    ></dxi-validation-rule>
   </dxi-item>
+
   <dxi-item>
     <dx-button
       text="Register"

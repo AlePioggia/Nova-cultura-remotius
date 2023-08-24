@@ -1,0 +1,15 @@
+/* CSS */
+html,
+body {
+  height: 100%; /* Assicuriamoci che l'html e il body occupino l'intera altezza */
+}
+
+.container {
+  min-height: 100vh; /* Questo fa sì che il contenitore abbia almeno l'altezza della viewport */
+  display: flex;
+  flex-direction: column; /* Questo consente di organizzare i figli del contenitore in una colonna */
+}
+
+.card {
+  margin-bottom: auto; /* Questo spinge il card verso l'alto, lasciando lo spazio sotto di esso */
+}

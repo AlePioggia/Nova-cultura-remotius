@@ -10,13 +10,14 @@ import {
     ParseBoolPipe,
     Query,
     Delete,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
 import { ILessonRequestDto, LessonDto } from 'src/dto/lesson.dto';
 import { Lesson } from 'src/schemas/lesson.schema';
 import { LessonService } from './lesson.service';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';
-import { Auth } from 'src/dto/auth.dto';
 
 @Controller('Lessons')
 export class LessonController {
@@ -25,13 +26,24 @@ export class LessonController {
     @UseGuards(AuthGuard('jwt'))
     @Get(':id')
     async getOne(@Param('id') id: string): Promise<Lesson> {
-        return this.lessonService.getLessonById(id);
+        try {
+            return await this.lessonService.getLessonById(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
     async getMany(): Promise<Lesson[]> {
-        return this.lessonService.getLessons();
+        try {
+            return await this.lessonService.getLessons();
+        } catch (error) {
+            throw new HttpException(
+                error.message,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+            );
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -40,17 +52,25 @@ export class LessonController {
         @Param('teacherMail') teacherMail: string,
         @Query('excludeStudent', new ParseBoolPipe()) isApproved: boolean,
     ): Promise<Lesson[]> {
-        return this.lessonService.getLessonsByTeacherMail(
-            teacherMail,
-            isApproved,
-        );
+        try {
+            return await this.lessonService.getLessonsByTeacherMail(
+                teacherMail,
+                isApproved,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('my-lessons/list')
     async getMyLessons(@Headers('authorization') authHeader: string) {
-        const token = jwt.decode(authHeader.split(' ')[1]);
-        return this.lessonService.getLessonsForLoggedInUser(token);
+        try {
+            const token = jwt.decode(authHeader.split(' ')[1]);
+            return await this.lessonService.getLessonsForLoggedInUser(token);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -59,8 +79,12 @@ export class LessonController {
         @Body() dto: LessonDto,
         @Headers('authorization') authHeader: string,
     ) {
-        const token = jwt.decode(authHeader.split(' ')[1]);
-        return this.lessonService.createLesson(dto, token);
+        try {
+            const token = jwt.decode(authHeader.split(' ')[1]);
+            return await this.lessonService.createLesson(dto, token);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -69,18 +93,30 @@ export class LessonController {
         @Param('id') id: string,
         @Body('studentMail') studentMail: string,
     ) {
-        return this.lessonService.bookLesson(id, studentMail);
+        try {
+            return await this.lessonService.bookLesson(id, studentMail);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
     async patchLesson(@Param('id') id: string, @Body() dto: ILessonRequestDto) {
-        return this.lessonService.patchLesson(id, dto);
+        try {
+            return await this.lessonService.patchLesson(id, dto);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     async deleteLesson(@Param('id') id: string) {
-        return await this.lessonService.deleteLesson(id);
+        try {
+            return await this.lessonService.deleteLesson(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 }

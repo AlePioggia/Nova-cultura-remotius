@@ -8,7 +8,10 @@
   (onRowUpdating)="rowUpdating($event)"
   (onRowRemoving)="rowRemoving($event)"
   (onRowInserted)="rowInserted($event)"
+  (onToolbarPreparing)="customizeToolbar($event)"
 >
+  <dxo-paging [enabled]="true" [pageSize]="15"></dxo-paging>
+
   <dxi-column dataField="studentMail" caption="Student Mail"></dxi-column>
   <dxi-column dataField="teacherMail" caption="Teacher Mail"></dxi-column>
   <dxi-column
@@ -47,12 +50,3 @@
     </dxo-form>
   </dxo-editing>
 </dx-data-grid>
-
-<div class="d-flex justify-content-end align-items-center mt-3 mb-3">
-  <dx-button
-    text="Visualizza calendario"
-    width="200px"
-    height="50px"
-    (onClick)="toggleView()"
-  ></dx-button>
-</div>

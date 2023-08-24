@@ -9,6 +9,8 @@ import {
     UseGuards,
     Delete,
     Param,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
 import { Notification } from 'src/schemas/notification.schema';
 import { AuthGuard } from '@nestjs/passport';
@@ -23,11 +25,15 @@ export class NotificationController {
         @Headers('Authorization') authHeader: string,
         @Body('notificationContent') notificationContent: string,
     ) {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.notificationService.createNotification(
-            token?.mail,
-            notificationContent,
-        );
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.notificationService.createNotification(
+                token?.mail,
+                notificationContent,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -35,13 +41,23 @@ export class NotificationController {
     async getNotifications(
         @Headers('Authorization') authHeader: string,
     ): Promise<Notification[]> {
-        const token: any = jwt.decode(authHeader.split(' ')[1]);
-        return this.notificationService.getNotificationsByMail(token?.mail);
+        try {
+            const token: any = jwt.decode(authHeader.split(' ')[1]);
+            return await this.notificationService.getNotificationsByMail(
+                token?.mail,
+            );
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     async deleteLesson(@Param('id') id: string) {
-        return await this.notificationService.deleteOne(id);
+        try {
+            return await this.notificationService.deleteOne(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+        }
     }
 }

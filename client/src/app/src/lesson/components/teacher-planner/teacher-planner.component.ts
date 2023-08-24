@@ -130,4 +130,15 @@ export class TeacherPlannerComponent implements OnInit {
   toggleView() {
     this.routerService.navigate(['../lesson']);
   }
+
+  customizeSchedulerToolbar(e) {
+    e.toolbarOptions.items.push({
+      location: 'before', // usa 'before' per posizionare il pulsante all'inizio
+      widget: 'dxButton',
+      options: {
+        text: 'Visualizza griglia',
+        onClick: () => this.toggleView(), // usa una funzione freccia per conservare il contesto
+      },
+    });
+  }
 }

@@ -1,5 +1,9 @@
 :host {
   padding: 30px;
+  display: flex; /* Aggiunto per abilitare la disposizione flex */
+  flex-direction: column; /* Imposta l'orientamento dei figli come colonna */
+  min-height: 100vh; /* Assicura che il componente occupi almeno l'intera altezza della viewport */
+  justify-content: space-between; /* Distribuisce lo spazio tra il titolo e la griglia dei dati */
 }
 
 dx-data-grid {
@@ -8,6 +12,7 @@ dx-data-grid {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
+  flex-grow: 1; /* Aggiunto per assicurarsi che la griglia dati cresca per occupare lo spazio disponibile */
 }
 
 h4 {
@@ -17,4 +22,5 @@ h4 {
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
   text-align: center;
+  margin-bottom: auto; /* Spinge il titolo verso l'alto, con tutto lo spazio rimanente sotto dx-data-grid */
 }

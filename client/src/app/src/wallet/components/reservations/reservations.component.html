@@ -1,32 +1,34 @@
-<h4 class="mb-4">Prenotazioni</h4>
+<div class="data-container">
+  <h4 class="mb-4">Prenotazioni</h4>
 
-<dx-data-grid
-  [dataSource]="displayData"
-  [showColumnLines]="true"
-  [showRowLines]="true"
-  [showBorders]="true"
-  [allowColumnResizing]="true"
-  [columnAutoWidth]="true"
-  [paging]="{ enabled: true, pageSize: 10 }"
->
-  <dxi-column
-    dataField="operationId"
-    caption="Operation"
-    [calculateDisplayValue]="operationIdToName"
-  ></dxi-column>
-  <dxi-column dataField="amount" caption="Amount"></dxi-column>
-  <dxi-column dataField="teacherMail" caption="Teacher Mail"></dxi-column>
-  <dxi-column dataField="studentMail" caption="Student Mail"></dxi-column>
-  <dxi-column
-    dataField="startTime"
-    caption="Start Time"
-    dataType="datetime"
-  ></dxi-column>
-  <dxi-column
-    dataField="endTime"
-    caption="End Time"
-    dataType="datetime"
-  ></dxi-column>
-  <dxi-column dataField="subject" caption="Subject"></dxi-column>
-  <dxi-column dataField="notes" caption="Notes"></dxi-column>
-</dx-data-grid>
+  <dx-data-grid
+    [dataSource]="displayData"
+    [showColumnLines]="true"
+    [showRowLines]="true"
+    [showBorders]="true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [paging]="{ enabled: true, pageSize: 10 }"
+  >
+    <dxi-column
+      dataField="operationId"
+      caption="Operation"
+      [calculateDisplayValue]="operationIdToName"
+    ></dxi-column>
+    <dxi-column dataField="amount" caption="Amount"></dxi-column>
+    <dxi-column dataField="teacherMail" caption="Teacher Mail"></dxi-column>
+    <dxi-column dataField="studentMail" caption="Student Mail"></dxi-column>
+    <dxi-column
+      dataField="startTime"
+      caption="Start Time"
+      dataType="datetime"
+    ></dxi-column>
+    <dxi-column
+      dataField="endTime"
+      caption="End Time"
+      dataType="datetime"
+    ></dxi-column>
+    <dxi-column dataField="subject" caption="Subject"></dxi-column>
+    <dxi-column dataField="notes" caption="Notes"></dxi-column>
+  </dx-data-grid>
+</div>
