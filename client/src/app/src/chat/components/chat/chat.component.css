@@ -1,20 +1,17 @@
 .chat-container {
-  width: 85%; /* Ridotta al 80% della larghezza totale */
-  max-width: 1000px; /* Larghezza massima di 600px per dispositivi grandi */
-  height: 80vh; /* Ridotta all'80% dell'altezza della pagina */
-  margin: 10vh auto; /* Centrata verticalmente e orizzontalmente */
-  border: 1px solid #ccc; /* Aggiunto un bordo leggero */
-  border-radius: 10px; /* Angoli arrotondati */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background-color: #f7f7f7; /* Aggiunto uno sfondo leggero per contrastare con la pagina */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombra leggera per un effetto "elevato" */
+  width: 85%;
+  max-width: 1000px;
+  height: 80vh;
+  margin: 12vh auto;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .messages-container {
   overflow-y: scroll;
-  flex-grow: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;

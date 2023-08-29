@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { confirm } from 'devextreme/ui/dialog';
 import { WalletService } from 'src/app/src/wallet/services/wallet.service';
 import { PurchaseService } from 'src/app/src/wallet/services/purchase.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { WebsocketService } from 'src/app/src/chat/services/web-socket.service';
 
 @Component({
   selector: 'app-lesson-planner',
@@ -21,7 +23,8 @@ export class LessonPlannerComponent implements OnInit {
     private lessonService: LessonService,
     private route: ActivatedRoute,
     private walletService: WalletService,
-    private purchaseService: PurchaseService
+    private purchaseService: PurchaseService,
+    private webSocketService: WebsocketService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.teacherMail = params['email'];
@@ -42,7 +45,7 @@ export class LessonPlannerComponent implements OnInit {
       'Do you want to book this lesson? You will spend 1 token',
       'Confirmation'
     ).then(async (result) => {
-      result ? await this.bookLesson(lessonId) : alert('peggio per te');
+      result ? await this.bookLesson(lessonId) : null;
     });
   }
 
@@ -51,8 +54,21 @@ export class LessonPlannerComponent implements OnInit {
       await this.purchaseService.buyLesson(+lessonId, this.teacherMail);
       await this.walletService.withdraw(1);
       await this.lessonService.bookLesson(lessonId, this.studentMail);
+      await this.sendMessage();
     } catch (error) {
       throw error;
     }
+  }
+
+  async sendMessage() {
+    await this.webSocketService.sendNotification(
+      this.teacherMail,
+      'Lo studente ' +
+        this.studentMail +
+        ' nella data ' +
+        new Date() +
+        ' ha prenotato la lezione con il professor ' +
+        this.teacherMail
+    );
   }
 }

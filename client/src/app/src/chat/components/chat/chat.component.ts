@@ -1,10 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  Renderer2,
+} from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { IChatMessage } from 'src/app/interfaces/chat-message.interface';
 import { AuthenticationService } from 'src/app/src/login/services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../services/web-socket.service';
+import { DxScrollViewComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-chat',
@@ -17,6 +26,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   currentUser: string;
   otherUser: string;
   private subscription: Subscription;
+  @ViewChild('scrollView', { static: false }) scrollView: DxScrollViewComponent;
 
   constructor(
     private chatService: ChatService,
@@ -50,6 +60,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (a.timeStamp < b.timeStamp) return -1;
       return 0;
     });
+    this.scrollToBottom();
   }
 
   sendMessage() {
@@ -66,6 +77,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     );
     this.messages.push(messagePayload);
     this.newMessage = '';
+    this.scrollToBottom();
   }
 
   subscribeToMessages() {
@@ -75,6 +87,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.messages.push(message);
         this.sortMessages();
       });
+
+    this.scrollToBottom();
   }
 
   sortMessages() {
@@ -82,6 +96,14 @@ export class ChatComponent implements OnInit, OnDestroy {
       (a, b) =>
         new Date(a.timeStamp).getTime() - new Date(b.timeStamp).getTime()
     );
+  }
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      const scrollInstance = this.scrollView.instance;
+      const scrollHeight = scrollInstance.scrollHeight();
+      scrollInstance.scrollTo(scrollHeight);
+    });
   }
 
   ngOnDestroy() {
