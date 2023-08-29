@@ -11,19 +11,23 @@ export const studentNavigation = [
       {
         text: 'My lessons',
         path: 'lesson/my-lessons-planner',
+        icon: 'event',
       },
       {
         text: 'My reviews',
         path: 'review/show',
         fromMenu: 'true',
+        icon: 'rename',
       },
       {
         text: 'Wallet',
         path: '/wallet',
+        icon: 'money',
       },
       {
         text: 'Reservations',
         path: '/wallet/reservations',
+        icon: 'bulletlist',
       },
     ],
   },
@@ -42,19 +46,23 @@ export const teacherNavigation = [
       {
         text: 'Lessons',
         path: '/lesson',
+        icon: 'event',
       },
       {
         text: 'My reviews',
         path: 'review/show',
         fromMenu: 'true',
+        icon: 'rename',
       },
       {
         text: 'Wallet',
         path: '/wallet',
+        icon: 'money',
       },
       {
         text: 'Reservations',
         path: '/wallet/reservations',
+        icon: 'bulletlist',
       },
     ],
   },

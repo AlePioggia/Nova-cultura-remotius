@@ -20,7 +20,7 @@ export class SideNavOuterToolbarComponent implements OnInit {
   scrollView: DxScrollViewComponent;
   selectedRoute = '';
 
-  menuOpened: boolean;
+  menuOpened: boolean = false;
   temporaryMenuOpened;
 
   @Input()

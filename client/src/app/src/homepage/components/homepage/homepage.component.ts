@@ -21,6 +21,7 @@ export class HomepageComponent implements OnInit {
   ratingFilter: number = null;
   @ViewChild(DxPopoverComponent, { static: false }) popover: DxPopoverComponent;
   showFilters = false;
+  isTeacher: boolean = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -28,9 +29,9 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const isTeacher: boolean = await this.isTeacher();
+    this.isTeacher = await this.authenticationService.isTeacher();
 
-    const data = isTeacher
+    const data = this.isTeacher
       ? await this.authenticationService.getStudents()
       : await this.authenticationService.getTeachers();
 
@@ -61,10 +62,6 @@ export class HomepageComponent implements OnInit {
     this.filteredData = this.data.filter((item) =>
       (item.firstName + ' ' + item.lastName).includes(query)
     );
-  }
-
-  async isTeacher(): Promise<boolean> {
-    return this.authenticationService.isTeacher();
   }
 
   onRatingFilter(rating: any) {

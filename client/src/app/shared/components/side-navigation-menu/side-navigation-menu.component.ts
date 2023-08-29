@@ -45,19 +45,7 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     this.menu.instance.selectItem(value);
   }
 
-  _items: any[]; // Make _items a regular property
-  // get items() {
-  //   if (!this._items) {
-  //     this._items = studentNavigation.map((item) => {
-  //       if (item.path && !/^\//.test(item.path)) {
-  //         item.path = `/${item.path}`;
-  //       }
-  //       return { ...item, expanded: !this._compactMode };
-  //     });
-  //   }
-
-  //   return this._items;
-  // }
+  _items: any[];
 
   private _compactMode = false;
   @Input()

@@ -45,7 +45,10 @@
         <span class="font-weight-bold text-uppercase text-secondary">Età</span
         ><br /><span class="text-dark">{{ itemData?.age }}</span>
       </p>
-      <div class="d-flex justify-content-around mt-4" *ngIf="!isTeacher">
+      <div
+        class="button-bar d-flex justify-content-around mt-4"
+        *ngIf="!isTeacher"
+      >
         <dx-button
           text="Prenota"
           type="default"

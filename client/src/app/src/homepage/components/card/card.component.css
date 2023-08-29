@@ -1,6 +1,7 @@
 /* my-card-list.component.css */
+
 .card .card-item {
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   padding: 20px;
   margin-bottom: 20px;
@@ -9,7 +10,7 @@
 }
 
 .card .card-item .text-center {
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   font-size: 18px;
 }
@@ -20,7 +21,23 @@
 }
 
 .card .card-item p {
-  color: #666;
+  color: #444; /* Colore del testo scurito per maggiore contrasto */
+}
+
+.button-bar {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dx-button {
+  background-color: #008080; /* Colore teal per i bottoni */
+  color: #fff; /* Testo bianco */
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+.dx-button:hover {
+  background-color: #006666; /* Teal leggermente più scuro al passaggio del mouse */
 }
 
 .stars-container {
