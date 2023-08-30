@@ -28,7 +28,6 @@ export class ReviewListComponent implements OnInit {
         this.teacherMail = null;
       }
       if (params.hasOwnProperty('fromMenu')) {
-        console.log(params['fromMenu']);
         this.fromMenu = params['fromMenu'] === 'true';
       } else {
         this.fromMenu = false;
@@ -42,8 +41,6 @@ export class ReviewListComponent implements OnInit {
     if (this.fromMenu && !this.isTeacher) {
       const student: any =
         await this.authenticationService.getAllUserInformations();
-      console.log(student);
-      console.log(this.fromMenu);
       this.reviews = await this.reviewService.getByStudent(student?.mail);
     } else {
       if (this.teacherMail) {

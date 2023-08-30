@@ -27,7 +27,6 @@ export class UserComponent {
   async ngOnInit(): Promise<void> {
     this.isTeacher = await this.authenticationService.isTeacher();
     const result = await this.authenticationService.getAllUserInformations();
-    console.log(result);
     this.user = result;
   }
 

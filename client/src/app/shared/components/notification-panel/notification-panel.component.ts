@@ -25,7 +25,6 @@ export class NotificationPanelComponent implements OnInit {
   }
 
   deleteNotification(notification: any) {
-    console.log(notification);
     const index = this.notifications.indexOf(notification);
     if (index > -1) {
       this.notifications.splice(index, 1);

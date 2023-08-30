@@ -90,7 +90,6 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
       const navigationExtras = selectedItem.fromMenu
         ? { queryParams: { fromMenu: selectedItem.fromMenu } }
         : {};
-      console.log(navigationExtras);
       this.router.navigate([selectedItem.path], {
         queryParams: { fromMenu: 'true' },
       });

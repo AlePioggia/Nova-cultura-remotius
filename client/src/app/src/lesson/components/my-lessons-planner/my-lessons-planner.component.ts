@@ -25,8 +25,6 @@ export class MyLessonsPlannerComponent implements OnInit {
 
     this.user = this.authenticationService
       .getAllUserInformations()
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   }
 }

@@ -39,7 +39,6 @@ export class LessonPlannerComponent implements OnInit {
   }
 
   onAppointmentClick(e: any) {
-    console.log(e.appointmentData);
     const lessonId = e.appointmentData.id;
     confirm(
       'Do you want to book this lesson? You will spend 1 token',
