@@ -53,6 +53,7 @@
           text="Prenota"
           type="default"
           [width]="160"
+          class="btn-block"
           [stylingMode]="'contained'"
           (onClick)="makeReservation(itemData)"
         ></dx-button>
@@ -60,6 +61,7 @@
           text="Chiedi info"
           type="default"
           [width]="160"
+          class="btn-block"
           [stylingMode]="'contained'"
           (onClick)="openChat(itemData)"
         ></dx-button>
@@ -67,13 +69,15 @@
           text="Recensisci"
           type="default"
           [width]="160"
+          class="btn-block"
           [stylingMode]="'contained'"
           (onClick)="openPopup(itemData)"
         ></dx-button>
         <dx-button
           text="Mostra recensioni"
           type="default"
-          [width]="200"
+          [width]="160"
+          class="btn-block"
           [stylingMode]="'contained'"
           (onClick)="showReviews(itemData)"
         ></dx-button>

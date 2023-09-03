@@ -15,6 +15,23 @@
   font-size: 18px;
 }
 
+.button-bar {
+  display: flex;
+  flex-direction: horizontal;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media (max-width: 576px) {
+  .dx-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .button-bar {
+    flex-direction: column;
+  }
+}
+
 .card .card-item h5 {
   font-size: 18px;
   margin-bottom: 10px;
