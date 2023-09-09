@@ -33,8 +33,11 @@ export class LessonService {
     this.helperService.post(this.baseUrl + 'create', lessonRequest);
   }
 
-  async getLessonsByTeacherMail(teacherMail: string): Promise<any> {
-    const params = new HttpParams().set('excludeStudent', false);
+  async getLessonsByTeacherMail(
+    teacherMail: string,
+    excludeStudent: boolean = false
+  ): Promise<any> {
+    const params = new HttpParams().set('excludeStudent', excludeStudent);
 
     return this.http
       .get(`${this.baseUrl}email/${teacherMail}`, {

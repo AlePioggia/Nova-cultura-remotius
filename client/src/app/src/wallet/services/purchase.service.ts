@@ -14,10 +14,15 @@ export class PurchaseService {
   }
 
   private async createPurchase(purchase: IPurchase): Promise<any> {
-    return this.http.post<any>(`${this.baseUrl}create`, purchase).toPromise();
+    return this.http
+      .post<any>(
+        `${this.baseUrl}create?lessonId=${purchase.lessonId}&teacherMail=${purchase.teacherMail}`,
+        purchase
+      )
+      .toPromise();
   }
 
-  async buyLesson(lessonId: number, teacherMail: string) {
+  async buyLesson(lessonId: string, teacherMail: string) {
     const purchase: IPurchase = new Purchase();
     purchase.operationId = 0;
     purchase.amount = 1;

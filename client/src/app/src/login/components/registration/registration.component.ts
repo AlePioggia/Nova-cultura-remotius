@@ -8,6 +8,7 @@ import {
   CreateUserRequest,
   ICreateUserRequest,
 } from 'src/app/interfaces/user.interface';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { WalletService } from 'src/app/src/wallet/services/wallet.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class RegistrationComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private walletService: WalletService
+    private walletService: WalletService,
+    private toastService: ToastService
   ) {}
 
   onFormSubmit = async (e: any) => {
@@ -34,7 +36,9 @@ export class RegistrationComponent {
         await this.walletService.createWalletWithMail(
           this.createUserRequest.mail
         );
+        this.toastService.showSuccess('Registrazione avvenuta con successo!');
       } catch (error) {
+        this.toastService.showError('Errore nella registrazione');
         throw error;
       }
     }

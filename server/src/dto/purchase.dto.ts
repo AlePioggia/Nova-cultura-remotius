@@ -3,7 +3,7 @@ import { IsString, IsNotEmpty, IsNumber, IsEmail } from 'class-validator';
 export interface ICreatePurchaseDTO {
     operationId: number;
     amount: number;
-    lessonId: number;
+    lessonId: string;
     teacherMail: string;
 }
 
@@ -16,7 +16,7 @@ export class CreatePurchaseDTO implements ICreatePurchaseDTO {
     @IsNumber()
     amount: number;
 
-    lessonId: number;
+    lessonId: string;
 
     teacherMail: string;
 }

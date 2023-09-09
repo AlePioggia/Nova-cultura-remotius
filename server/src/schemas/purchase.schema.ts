@@ -24,7 +24,7 @@ export class Purchase {
     amount: number;
 
     @Prop()
-    lessonId: number;
+    lessonId: string;
 }
 
 export const PurchaseSchema = SchemaFactory.createForClass(Purchase);

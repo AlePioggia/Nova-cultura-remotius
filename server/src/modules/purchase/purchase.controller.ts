@@ -7,6 +7,7 @@ import {
     Get,
     HttpException,
     HttpStatus,
+    Query,
 } from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -21,11 +22,18 @@ export class PurchaseController {
     @Post('create')
     async createOne(
         @Body() dto: CreatePurchaseDTO,
+        @Query('teacherMail') teacherMail: string,
+        @Query('lessonId') lessonId: string,
         @Headers('authorization') authHeader: string,
     ) {
         try {
             const token = jwt.decode(authHeader.split(' ')[1]);
-            return await this.purchaseService.createPurchase(dto, token);
+            return await this.purchaseService.createPurchase(
+                dto,
+                token,
+                teacherMail,
+                lessonId,
+            );
         } catch (error) {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }

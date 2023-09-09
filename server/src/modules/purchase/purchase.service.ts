@@ -7,15 +7,20 @@ import { v4 as uuidv4 } from 'uuid';
 export class PurchaseService {
     constructor(private readonly purchasesRepository: PurchasesRepository) {}
 
-    async createPurchase(dto: CreatePurchaseDTO, token: any) {
+    async createPurchase(
+        dto: CreatePurchaseDTO,
+        token: any,
+        teacherMail: string,
+        lessonId: string,
+    ) {
         try {
             await this.purchasesRepository.create({
                 id: uuidv4(),
                 studentMail: token?.mail ?? '',
                 operationId: dto.operationId,
                 amount: dto.amount,
-                lessonId: dto.lessonId,
-                teacherMail: dto.teacherMail,
+                lessonId: lessonId,
+                teacherMail: teacherMail,
             });
         } catch (error) {
             throw error;

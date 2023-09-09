@@ -7,6 +7,7 @@ import { WalletService } from 'src/app/src/wallet/services/wallet.service';
 import { PurchaseService } from 'src/app/src/wallet/services/purchase.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { WebsocketService } from 'src/app/src/chat/services/web-socket.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-lesson-planner',
@@ -24,7 +25,8 @@ export class LessonPlannerComponent implements OnInit {
     private route: ActivatedRoute,
     private walletService: WalletService,
     private purchaseService: PurchaseService,
-    private webSocketService: WebsocketService
+    private webSocketService: WebsocketService,
+    private toastService: ToastService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.teacherMail = params['email'];
@@ -34,7 +36,7 @@ export class LessonPlannerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const data: ILessonRequest[] =
-      await this.lessonService.getLessonsByTeacherMail(this.teacherMail);
+      await this.lessonService.getLessonsByTeacherMail(this.teacherMail, true);
     this.lessonsData = data;
   }
 
@@ -50,11 +52,13 @@ export class LessonPlannerComponent implements OnInit {
 
   async bookLesson(lessonId: any) {
     try {
-      await this.purchaseService.buyLesson(+lessonId, this.teacherMail);
+      await this.purchaseService.buyLesson(lessonId, this.teacherMail);
       await this.walletService.withdraw(1);
       await this.lessonService.bookLesson(lessonId, this.studentMail);
+      this.toastService.showSuccess('lezione prenotata con successo!');
       await this.sendMessage();
     } catch (error) {
+      this.toastService.showError('errore nella prenotazione della lezione');
       throw error;
     }
   }
