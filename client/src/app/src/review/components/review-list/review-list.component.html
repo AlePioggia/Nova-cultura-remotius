@@ -1,19 +1,6 @@
 <div class="main-content">
   <h4 class="mb-4 ml-10">Recensioni</h4>
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-12">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Cerca recensioni..."
-          (input)="onSearch($event)"
-        />
-      </div>
-    </div>
-  </div>
-
   <div class="container mt-4">
     <div class="row">
       <div class="col-md-12" *ngFor="let review of reviews">
